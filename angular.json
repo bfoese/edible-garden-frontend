@@ -1,0 +1,464 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "version": 1,
+  "newProjectRoot": "projects",
+  "projects": {
+    "edible-garden-app": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      },
+      "root": "projects/edible-garden-app",
+      "sourceRoot": "projects/edible-garden-app/src",
+      "prefix": "eg",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/edible-garden-app",
+            "index": "projects/edible-garden-app/src/index.html",
+            "main": "projects/edible-garden-app/src/main.ts",
+            "polyfills": "projects/edible-garden-app/src/polyfills.ts",
+            "tsConfig": "projects/edible-garden-app/tsconfig.app.json",
+            "aot": true,
+            "assets": [
+              "projects/edible-garden-app/src/favicon.ico",
+              "projects/edible-garden-app/src/assets/**/*",
+              {
+                "glob": "**/*",
+                "input": "./node_modules/@ant-design/icons-angular/src/inline-svg/",
+                "output": "/assets/"
+              }
+            ],
+            "styles": [
+              "projects/edible-garden-app/src/theme.less",
+              "projects/edible-garden-app/src/styles.scss"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/edible-garden-app/src/environments/environment.ts",
+                  "with": "projects/edible-garden-app/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "edible-garden-app:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "edible-garden-app:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "edible-garden-app:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/edible-garden-app/src/test.ts",
+            "polyfills": "projects/edible-garden-app/src/polyfills.ts",
+            "tsConfig": "projects/edible-garden-app/tsconfig.spec.json",
+            "karmaConfig": "projects/edible-garden-app/karma.conf.js",
+            "assets": [
+              "projects/edible-garden-app/src/favicon.ico",
+              "projects/edible-garden-app/src/assets"
+            ],
+            "styles": ["projects/edible-garden-app/src/styles.scss"],
+            "scripts": []
+          }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "projects/edible-garden-app/**/*.ts",
+              "projects/edible-garden-app/**/*.html"
+            ]
+          }
+        },
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "projects/edible-garden-app/e2e/protractor.conf.js",
+            "devServerTarget": "edible-garden-app:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "edible-garden-app:serve:production"
+            }
+          }
+        }
+      }
+    },
+    "edible-garden-api": {
+      "projectType": "library",
+      "root": "projects/edible-garden-api",
+      "sourceRoot": "projects/edible-garden-api/src",
+      "prefix": "eg",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "tsConfig": "projects/edible-garden-api/tsconfig.lib.json",
+            "project": "projects/edible-garden-api/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/edible-garden-api/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/edible-garden-api/src/test.ts",
+            "tsConfig": "projects/edible-garden-api/tsconfig.spec.json",
+            "karmaConfig": "projects/edible-garden-api/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "projects/edible-garden-api/**/*.ts",
+              "projects/edible-garden-api/**/*.html"
+            ]
+          }
+        }
+      }
+    },
+    "eg-common": {
+      "projectType": "library",
+      "root": "projects/eg-common",
+      "sourceRoot": "projects/eg-common/src",
+      "prefix": "eg",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "tsConfig": "projects/eg-common/tsconfig.lib.json",
+            "project": "projects/eg-common/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/eg-common/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/eg-common/src/test.ts",
+            "tsConfig": "projects/eg-common/tsconfig.spec.json",
+            "karmaConfig": "projects/eg-common/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "projects/eg-common/**/*.ts",
+              "projects/eg-common/**/*.html"
+            ]
+          }
+        }
+      }
+    },
+    "seed-sharing-app": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      },
+      "root": "projects/seed-sharing-app",
+      "sourceRoot": "projects/seed-sharing-app/src",
+      "prefix": "seed",
+      "i18n": {
+        "sourceLocale": "en",
+        "locales": {
+          "de": {
+            "translation": "projects/seed-sharing-app/src/i18n/messages.de.xlf"
+          }
+        }
+      },
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "allowedCommonJsDependencies": [
+              "@bfoese/eg-be-contract"
+            ],
+            "outputPath": "dist/seed-sharing-app",
+            "index": "projects/seed-sharing-app/src/index.html",
+            "main": "projects/seed-sharing-app/src/main.ts",
+            "polyfills": "projects/seed-sharing-app/src/polyfills.ts",
+            "tsConfig": "projects/seed-sharing-app/tsconfig.app.json",
+            "localize": true,
+            "aot": true,
+            "i18nMissingTranslation": "warning",
+            "assets": [
+              "projects/seed-sharing-app/src/favicon.ico",
+              {"glob": "**/*", "input": "projects/seed-sharing-app/src/assets", "output": "/assets/"},
+              "projects/seed-sharing-app/src/manifests",
+              {
+                "glob": "**/*",
+                "input": "./node_modules/@ant-design/icons-angular/src/inline-svg/",
+                "output": "/assets/"
+              }
+            ],
+            "styles": [
+              "./node_modules/leaflet/dist/leaflet.css",
+              "projects/seed-sharing-app/src/theme.less",
+              "projects/seed-sharing-app/src/styles.scss",
+              "./node_modules/@bfoese/eg-ui-fonts/font.scss"
+            ],
+            "stylePreprocessorOptions": {
+              "includePaths": [
+                "projects/seed-sharing-app/src/app/shared/style-configuration/base-configuration",
+                "projects/seed-sharing-app/src/app/shared/style"
+              ]
+            },
+            "scripts": []
+          },
+          "configurations": {
+            "lang-de": {
+              "localize": ["de"]
+            },
+            "lang-en": {
+              "localize": ["en"]
+            },
+            "dev-nginx": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/seed-sharing-app/src/environments/environment.ts",
+                  "with": "projects/seed-sharing-app/src/environments/environment.dev-nginx.ts"
+                }
+              ]
+            },
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/seed-sharing-app/src/environments/environment.ts",
+                  "with": "projects/seed-sharing-app/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "seed-sharing-app:build"
+          },
+          "configurations": {
+            "https": {
+              "ssl": true,
+              "sslCert": "C:\\dev\\certs\\localhost-fullchain.pem",
+              "sslKey": "C:\\dev\\certs\\localhost-key.pem"
+            },
+            "lang-de": {
+              "browserTarget": "seed-sharing-app:build:lang-de",
+              "baseHref": "/de/"
+            },
+            "lang-en": {
+              "browserTarget": "seed-sharing-app:build:lang-en",
+              "baseHref": "/en/"
+            },
+            "dev-nginx": {
+              "browserTarget": "seed-sharing-app:build:dev-nginx,lang-en",
+              "baseHref": "/en/"
+            },
+            "production": {
+              "browserTarget": "seed-sharing-app:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "seed-sharing-app:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/seed-sharing-app/src/test.ts",
+            "polyfills": "projects/seed-sharing-app/src/polyfills.ts",
+            "tsConfig": "projects/seed-sharing-app/tsconfig.spec.json",
+            "karmaConfig": "projects/seed-sharing-app/karma.conf.js",
+            "assets": [
+              "projects/seed-sharing-app/src/favicon.ico",
+              "projects/seed-sharing-app/src/assets"
+            ],
+            "styles": [
+              "projects/seed-sharing-app/src/styles.scss"
+            ],
+            "scripts": []
+          }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "projects/seed-sharing-app/**/*.ts",
+              "projects/seed-sharing-app/**/*.html"
+            ]
+          }
+        },
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "projects/seed-sharing-app/e2e/protractor.conf.js",
+            "devServerTarget": "seed-sharing-app:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "seed-sharing-app:serve:production"
+            }
+          }
+        }
+      }
+    },
+    "eg-ui-dynamic-icons": {
+      "projectType": "library",
+      "root": "projects/eg-ui-dynamic-icons",
+      "sourceRoot": "projects/eg-ui-dynamic-icons/src",
+      "prefix": "eg",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "tsConfig": "projects/eg-ui-dynamic-icons/tsconfig.lib.json",
+            "project": "projects/eg-ui-dynamic-icons/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/eg-ui-dynamic-icons/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/eg-ui-dynamic-icons/src/test.ts",
+            "tsConfig": "projects/eg-ui-dynamic-icons/tsconfig.spec.json",
+            "karmaConfig": "projects/eg-ui-dynamic-icons/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "projects/eg-ui-dynamic-icons/**/*.ts",
+              "projects/eg-ui-dynamic-icons/**/*.html"
+            ]
+          }
+        }
+      }
+    },
+    "eg-ui-components": {
+      "projectType": "library",
+      "root": "projects/eg-ui-components",
+      "sourceRoot": "projects/eg-ui-components/src",
+      "prefix": "eg",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      },
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "tsConfig": "projects/eg-ui-components/tsconfig.lib.json",
+            "project": "projects/eg-ui-components/ng-package.json",
+            "stylePreprocessorOptions": {
+              "includePaths": [
+                "projects/eg-ui-components/src/shared/style"
+              ]
+            }
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/eg-ui-components/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/eg-ui-components/src/test.ts",
+            "tsConfig": "projects/eg-ui-components/tsconfig.spec.json",
+            "karmaConfig": "projects/eg-ui-components/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/eg-ui-components/tsconfig.lib.json",
+              "projects/eg-ui-components/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "defaultProject": "seed-sharing-app"
+}

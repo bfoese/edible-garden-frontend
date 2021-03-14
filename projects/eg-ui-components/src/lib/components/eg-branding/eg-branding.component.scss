@@ -1,0 +1,32 @@
+@import '~@bfoese/eg-ui-core/core';
+
+eg-branding {
+  display: block;
+
+  // TODO create style file in lib
+  //@include reset-a();
+  a {
+    color: unset;
+
+    &:hover {
+      color: unset;
+    }
+  }
+
+  .-egAlternateBrandingFont {
+    font-style: italic;
+  }
+
+  .eg-branding {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    font-weight: 400;
+    font-size: 1em;
+    font-family: 'Signature';
+    &__logo {
+      width: 1.9em;
+      margin: 0 -0.8em 0.3em;
+    }
+  }
+}

@@ -1,0 +1,9 @@
+@import "seed-style";
+
+:host {
+  display: block;
+
+  .phoneCountryCode {
+    min-width: 20em;
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "name": "eg-ui-dynamic-icons",
+  "version": "0.0.1",
+  "peerDependencies": {
+    "@angular/common": "^11.0.5",
+    "@angular/core": "^11.0.5"
+  },
+  "dependencies": {
+    "tslib": "^2.0.0"
+  },
+  "scripts": {
+    "icons:gen": "svg-to-ts"
+  },
+  "svg-to-ts": {
+    "conversionType": "constants",
+    "srcFiles": ["./src/assets/svg/**/*.svg"],
+    "outputDirectory": "./src/lib/gen",
+    "interfaceName": "EgIcon",
+    "typeName": "EgIconType",
+    "prefix": "eg",
+    "svgoConfig": {
+      "plugins": [
+        {
+          "removeDimensions": true
+        },
+        {
+          "cleanupAttrs": true
+        },
+        {
+          "cleanupIDs": false
+        }
+      ]
+    },
+    "fileName": "eg-icon.model",
+    "compileSources": true,
+    "additionalModelOutputPath": "./src/lib/gen/foo",
+    "generateTypeObject": true
+  },
+  "devDependencies": {
+    "svg-to-ts": "^6.0.0"
+  }
+}

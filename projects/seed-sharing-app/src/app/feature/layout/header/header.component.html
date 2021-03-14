@@ -1,0 +1,138 @@
+<div class="header-menubar">
+  <div class="header-menubar__title">
+
+    <eg-branding class="header-menubar__branding"></eg-branding>
+  </div>
+
+  <nav class="header-menubar__nav">
+    <ul>
+      <li>
+        <a
+        [routerLink]="linkOffer"
+          routerLinkActive="router-link-active"
+        >
+         <!-- [routerLink]="[{outlets: {'primary': ['offer'],  'secondary': ['offer-preview']}}]"   [routerLink]="['offer', {outlets: {'secondary': ['offer-preview']}}]"-->
+          <eg-icon
+            class="header-menubar__icon"
+            [name]="EgIconType.action_leaf_add"
+          ></eg-icon>
+        </a>
+      </li>
+
+      <li>
+        <a [routerLink]="linkMap" routerLinkActive="router-link-active">
+          <eg-icon
+            class="header-menubar__icon"
+            [name]="EgIconType.pin_leaf"
+          ></eg-icon>
+        </a>
+      </li>
+
+      <ng-template [ngTemplateOutlet]="tmplSubmenuToggle"></ng-template>
+    </ul>
+  </nav>
+</div>
+<div
+  class="header-sidebar"
+  [ngClass]="[submenuOpen ? '--open' : '--closed' ]"
+  egTransientCssClass
+  [egTransientClass]="'--animate'"
+  [egTracked]="[{'--closed': 'add'}]"
+  [egDuration]="[{'--closed': 1000}]"
+
+>
+  <div class="header-sidebar__content">
+    <nav class="header-sidebar__primary-nav">
+      <ul>
+        <ng-template [ngTemplateOutlet]="tmplSubmenuToggle"></ng-template>
+      </ul>
+    </nav>
+
+    <div class="header-sidebar__illustration">
+      <eg-icon [name]="EgIconType.ill_radish" *ngIf="appLayout === 'layout-portrait'"></eg-icon>
+    </div>
+
+    <nav class="header-sidebar__secondary-nav">
+      <ul>
+        <li>{{authService.secondsTillLogout$ | async}}</li>
+        <li
+          class="header-sidebar__link"
+          (click)="onSecondaryNavEvent()"
+          [routerLink]="[SeedNav.SignIn.full]"
+          routerLinkActive="router-link-active"
+          *ngIf="!authenticatedUserGuard.isSignedIn()"
+        >
+          <a
+            ><eg-icon
+              class="header-menubar__icon"
+              [name]="EgIconType.action_signin"
+            ></eg-icon
+            >Sign in</a
+          >
+        </li>
+
+        <li
+          class="header-sidebar__link"
+          (click)="onSecondaryNavEvent()"
+          [routerLink]="[SeedNav.SignUp.full]"
+          routerLinkActive="router-link-active"
+          *ngIf="!authenticatedUserGuard.isSignedIn()"
+        >
+          <a
+            ><eg-icon
+              class="header-menubar__icon"
+              [name]="EgIconType.action_signup"
+            ></eg-icon
+            >Sign up</a
+          >
+        </li>
+
+        <li
+          class="header-sidebar__link"
+          (click)="onSecondaryNavEvent()"
+          *ngIf="authenticatedUserGuard.canActivateLink() | async"
+          [routerLink]="[SeedNav.AccountSettings.full]"
+          routerLinkActive="router-link-active"
+        >
+          <a
+            ><eg-icon
+              class="header-menubar__icon"
+              [name]="EgIconType.menu_option_profile"
+            ></eg-icon
+            >Profile</a
+          >
+        </li>
+
+        <li
+          class="header-sidebar__link"
+          (click)="onSecondaryNavEvent()"
+          *ngIf="authenticatedUserGuard.canActivateLink() | async"
+        >
+          <a (click)="onSignOut()">
+            <eg-icon
+              class="header-menubar__icon"
+              [name]="EgIconType.action_signout"
+            ></eg-icon
+            >Logout</a
+          >
+        </li>
+      </ul>
+    </nav>
+  </div>
+  <div class="header-sidebar__footer">
+    <seed-locale-switch
+      [ngClass]="{'--mobile-sidebar': appLayout === 'layout-portrait', '--desktop-sidebar': appLayout === 'layout-landscape'}"
+    ></seed-locale-switch>
+  </div>
+</div>
+
+<ng-template #tmplSubmenuToggle>
+  <li (click)="toggleSubmenu()">
+    <a
+      ><eg-icon
+        class="header-menubar__icon"
+        [name]="EgIconType.menu_option_more"
+      ></eg-icon
+    ></a>
+  </li>
+</ng-template>

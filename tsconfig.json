@@ -1,0 +1,102 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "baseUrl": "./",
+    "outDir": "./dist/out-tsc",
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "sourceMap": true,
+    "declaration": false,
+    "downlevelIteration": true,
+    "experimentalDecorators": true,
+    "moduleResolution": "node",
+    "importHelpers": true,
+    "target": "es2015",
+    "module": "es2020",
+    "lib": [
+      "es2018",
+      "dom"
+    ],
+    "paths": {
+      "@eg/edible-garden-api/*": [
+        "projects/edible-garden-api/*",
+        "projects/edible-garden-api"
+      ],
+      "@eg/edible-garden-api": [
+        "dist/edible-garden-api/*",
+        "dist/edible-garden-api"
+      ],
+      "@eg/common/*": [
+        "projects/eg-common/*",
+        "projects/eg-common"
+      ],
+      "@eg/common": [
+        "dist/eg-common/*",
+        "dist/eg-common"
+      ],
+      "@eg-ui-dynamic-icons": [
+        "dist/eg-ui-dynamic-icons/eg-ui-dynamic-icons",
+        "dist/eg-ui-dynamic-icons"
+      ],
+      "@eg-seed/core/*": [
+        "projects/seed-sharing-app/src/app/core/*",
+        "projects/seed-sharing-app/src/app/core/"
+      ],
+      "@eg-seed/core": [
+        "dist/projects/seed-sharing-app/src/app/core/*",
+        "dist/projects/seed-sharing-app/src/app/core/"
+      ],
+      "@eg-seed/feature/*": [
+        "projects/seed-sharing-app/src/app/feature/*",
+        "projects/seed-sharing-app/src/app/feature/"
+      ],
+      "@eg-seed/feature": [
+        "dist/projects/seed-sharing-app/src/app/feature/*",
+        "dist/projects/seed-sharing-app/src/app/feature/"
+      ],
+      "@eg-seed/config/*": [
+        "projects/seed-sharing-app/src/app/config/*",
+        "projects/seed-sharing-app/src/app/config/"
+      ],
+      "@eg-seed/config": [
+        "dist/projects/seed-sharing-app/src/app/config/*",
+        "dist/projects/seed-sharing-app/src/app/config/"
+      ],
+      "@eg-seed/*": [
+        "projects/seed-sharing-app/src/app/*",
+        "projects/seed-sharing-app/src/app/"
+      ],
+      "@eg-seed": [
+        "dist/projects/seed-sharing-app/src/app/*",
+        "dist/projects/seed-sharing-app/src/app/"
+      ],
+      "@eg-seed/shared/*": [
+        "projects/seed-sharing-app/src/app/shared/*",
+        "projects/seed-sharing-app/src/app/shared/"
+      ],
+      "@eg-seed/shared": [
+        "dist/projects/seed-sharing-app/src/app/shared/*",
+        "dist/projects/seed-sharing-app/src/app/shared/"
+      ],
+      "@eg-seed/service/*": [
+        "projects/seed-sharing-app/src/app/service/*",
+        "projects/seed-sharing-app/src/app/service/"
+      ],
+      "@eg-seed/service": [
+        "dist/projects/seed-sharing-app/src/app/service/*",
+        "dist/projects/seed-sharing-app/src/app/service/"
+      ],
+      "eg-ui-components": [
+        "dist/eg-ui-components/eg-ui-components",
+        "dist/eg-ui-components"
+      ]
+    }
+  },
+  "angularCompilerOptions": {
+    "strictInjectionParameters": true,
+    "strictInputAccessModifiers": true,
+    "strictTemplates": true
+  }
+}

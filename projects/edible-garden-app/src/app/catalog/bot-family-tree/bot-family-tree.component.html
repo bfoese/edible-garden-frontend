@@ -1,0 +1,50 @@
+<nz-input-group [nzSuffix]="suffixIcon">
+  <input
+    type="text"
+    nz-input
+    placeholder="Search"
+    ngModel
+    (ngModelChange)="searchValue$.next($event)"
+  />
+</nz-input-group>
+<ng-template #suffixIcon>
+  <i nz-icon nzType="search"></i>
+</ng-template>
+
+<nz-tree-view
+  [nzTreeControl]="treeControl"
+  [nzDataSource]="dataSource"
+  nzNoAnimation
+  [nzBlockNode]="true"
+>
+  <nz-tree-node
+    *nzTreeNodeDef="let node"
+    nzTreeNodePadding
+    nzTreeNodeIndentLine
+  >
+    <nz-tree-node-toggle nzTreeNodeNoopToggle></nz-tree-node-toggle>
+
+    <nz-tree-node-option>
+      <i nz-icon nzType="file" nzTheme="outline"></i>
+      <span
+        [innerHTML]="node.name | egHighlight: searchValue$.getValue()"
+      ></span>
+    </nz-tree-node-option>
+  </nz-tree-node>
+
+  <nz-tree-node
+    *nzTreeNodeDef="let node; when: TreeHelper.hasChild"
+    nzTreeNodePadding
+    nzTreeNodeIndentLine
+  >
+    <nz-tree-node-toggle>
+      <i nz-icon nzType="caret-down" nzTreeNodeToggleRotateIcon></i>
+    </nz-tree-node-toggle>
+    <nz-tree-node-option>
+      <!-- <i nz-icon [nzType]="treeControl.isExpanded(node) ? 'folder-open' : 'folder'" nzTheme="outline"></i> -->
+      <span
+        [innerHTML]="node.name | egHighlight: searchValue$.getValue()"
+      ></span>
+    </nz-tree-node-option>
+  </nz-tree-node>
+</nz-tree-view>

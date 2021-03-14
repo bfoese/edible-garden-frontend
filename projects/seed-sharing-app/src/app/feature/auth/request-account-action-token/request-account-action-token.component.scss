@@ -1,0 +1,33 @@
+@import "seed-style";
+
+// Custom Properties
+// --eg-component-width
+:host {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .seed-account-act-token {
+    &__form,
+    &__alert {
+      width: var(--eg-component-width, 100%);
+      max-width: 100%;
+    }
+
+    &__alert {
+      margin-top: 2em;
+    }
+
+    &__actions {
+      display: flex;
+      justify-content: flex-end;
+      margin-top: 1em;
+    }
+  }
+
+  // do not display required indicator: does not look good and in this form with
+  // one single field it is obvious that the field is required
+  .ant-form-item-required::before {
+    display: none;
+  }
+}

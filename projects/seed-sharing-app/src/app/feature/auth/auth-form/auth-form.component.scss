@@ -1,0 +1,33 @@
+@import 'seed-style';
+
+:host {
+  .seed-auth-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: var(--eg-window-padding-v) var(--eg-window-padding-h);
+    transition: all 0.2s 0.7s;
+
+    &__branding {
+      color: $ssd-green-dark-rgba;
+      @include property-for-breakpoint(font-size, (6.4vw, XS 1.5em, SM 1.8em));
+      @include property-for-breakpoint(margin-top, (0, XS 1em, SM 2em, MD 2em));
+      @include property-for-breakpoint(margin-bottom, (1em, XS 1em, SM 1.5em));
+    }
+
+    &__title {
+      margin-bottom: 0.5em;
+      font-weight: 200;
+
+      @include property-for-breakpoint(font-size, (1.2em, SM 1.4em));
+    }
+
+    &__content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+      --eg-component-width: min(100%, 20em);
+    }
+  }
+}

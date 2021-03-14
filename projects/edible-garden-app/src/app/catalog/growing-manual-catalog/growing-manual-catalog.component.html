@@ -1,0 +1,37 @@
+<cdk-virtual-scroll-viewport [itemSize]="'73'" class="virtual-scroll-container">
+  <nz-list>
+    <nz-list-item
+      class="list-item"
+      *cdkVirtualFor="let item of growingManual$ | async"
+    >
+      <nz-skeleton
+        *ngIf="!item"
+        [nzAvatar]="true"
+        [nzParagraph]="{ rows: 1 }"
+      ></nz-skeleton>
+      <nz-list-item-meta
+        *ngIf="item"
+        [nzTitle]="item.i18nNames['de_DE'] | popularName"
+      >
+        <nz-list-item-meta-description>
+          <i>{{ item.botanicalName }}</i>
+        </nz-list-item-meta-description>
+      </nz-list-item-meta>
+
+      <ul nz-list-item-actions>
+        <nz-list-item-action>
+          <span>Nährstoffe</span>
+          <nz-progress
+            [nzPercent]="item.nutritionDemand | nutritionDemandPercent: 3"
+            nzSteps="3"
+            [nzShowInfo]="false"
+            nzStrokeColor="#1890ff"
+            nzSize="small"
+          ></nz-progress>
+        </nz-list-item-action>
+      </ul>
+
+      <!-- item.nutritionDemand | nutritionDemandRate -->
+    </nz-list-item>
+  </nz-list>
+</cdk-virtual-scroll-viewport>

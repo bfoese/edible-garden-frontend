@@ -1,0 +1,220 @@
+@import 'seed-style';
+
+:host {
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  width: 100%;
+
+  .seed-dual-pane-component {
+    --eg-fixed-width: 1600px;
+    --eg-fixed-height: 100%;
+    //--eg-aside-header-height: 20em;
+    --eg-aside-footer-height: 12em;
+    --eg-aside-panel-overflow: hidden;
+    --eg-curtain-background-image:
+      linear-gradient(
+        -45deg,
+        #{$ssd-green-dark-rgba} 0%,
+        #{$ssd-green-medium-rgba} 100%
+    );
+
+    @include property-for-breakpoint(--eg-aside-footer-height, (12.5em));
+    @include property-for-breakpoint(
+      --eg-aside-header-height,
+      (10.5em, XS 11em, SM 12em)
+    );
+  }
+
+  .seed-auth-aside {
+    display: grid;
+    width: 100%;
+    height: 100%;
+
+    @include property-for-breakpoint(
+      grid-template-columns,
+      (1fr, XS '2.5fr 1fr', MD 1fr)
+    );
+    @include property-for-breakpoint(
+      grid-template-rows,
+      (unset, MD 'auto 1fr')
+    );
+    @include property-for-breakpoint(
+      padding,
+      (
+        'var(--eg-window-padding-v) var(--eg-window-padding-h)',
+        MD 'var(--eg-window-padding-v) 0'
+      )
+    );
+
+    &__content {
+      display: flex;
+      flex-direction: column;
+      grid-row: 1/1;
+      grid-column: 1/1;
+      color: $ssd-green-light-rgba;
+
+      @include property-for-breakpoint(
+        margin,
+        (0, MD '3em 3em 3em min(20%, 5vw)')
+      );
+
+      a {
+        color: $yellow-light-rgba;
+        border-color: $yellow-light-rgba;
+      }
+
+      h3 {
+        color: $yellow-light-rgba;
+        font-size: 1.8em;
+        font-family: 'Signature';
+        word-spacing: -0.2em;
+        @include property-for-breakpoint(
+          font-size,
+          (1.4em, SM 1.6em, MD 1.8em)
+        );
+        @include property-for-breakpoint(margin-bottom, (0.2em));
+
+        &::first-letter {
+          font-style: italic;
+        }
+      }
+
+      p {
+        max-width: 28em;
+        color: var(--eg-outlet-primary-bg);
+        font-size: 0.9em;
+
+        &:last-of-type {
+          @include property-for-breakpoint(margin-bottom, (1em, MD 1.5em));
+        }
+      }
+    }
+
+    &__image {
+      position: relative;
+      width: auto;
+      min-width: 0;
+
+      @include property-for-breakpoint(display, (none, XS flex));
+      @include property-for-breakpoint(grid-column, ('2/2', MD '1/1'));
+      @include property-for-breakpoint(grid-row, ('1/1', MD '2/2'));
+      @include property-for-breakpoint(min-height, (0, MD 200px));
+      @include property-for-breakpoint(max-height, (unset, MD min(60%, 380px)));
+
+      eg-icon {
+
+        width: auto;
+        color: black;
+        &::ng-deep {
+
+          svg {
+            width: auto;
+          }
+
+          .eg-ill-fillable {
+            fill: $yellow-light-rgba;
+          }
+        }
+      }
+    }
+  }
+
+  .seed-auth-aside-one {
+    .seed-auth-aside {
+      &__content {
+        @include property-for-breakpoint(
+          align-items,
+          (flex-start, SM center, MD center)
+        );
+        @include property-for-breakpoint(
+          justify-content,
+          (flex-end, MD center)
+        );
+
+        p {
+          @include property-for-breakpoint(
+            text-align,
+            (left, SM center, MD center)
+          );
+        }
+      }
+
+      &__image {
+        @include property-for-breakpoint(
+          justify-content,
+          (XS flex-start, MD flex-start)
+        );
+        @include property-for-breakpoint(top, (XS -0.5em, SM -2em, MD 0));
+        @include property-for-breakpoint(left, (XS 0.5em, SM 3em, MD 3em));
+
+        eg-icon {
+          @include property-for-breakpoint(
+            transform,
+            (scaleX(-1), MD scaleX(1))
+          );
+        }
+      }
+    }
+  }
+
+  .seed-auth-aside-two {
+    .seed-auth-aside {
+      &__content {
+        @include property-for-breakpoint(align-items, (flex-start, MD center));
+        @include property-for-breakpoint(
+          justify-content,
+          (flex-start, MD center)
+        );
+
+        p {
+          @include property-for-breakpoint(text-align, (left, MD center));
+        }
+      }
+
+      &__image {
+        @include property-for-breakpoint(
+          justify-content,
+          (XS flex-start, MD flex-end)
+        );
+        @include property-for-breakpoint(top, (XS 0.5em, SM 2em, MD 0));
+        @include property-for-breakpoint(left, (XS 0.5em, SM 3em, MD -3em));
+
+        eg-icon {
+          transform: scaleX(-1);
+        }
+      }
+    }
+  }
+
+  .seed-auth-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: var(--eg-window-padding-v) var(--eg-window-padding-h);
+    transition: all 0.2s 0.7s;
+
+    &::ng-deep {
+      .ant-input,
+      .ant-input-affix-wrapper {
+        background-color: rgba(231, 229, 217, 0.7);
+
+        &:hover {
+          background-color: rgba(231, 229, 217, 0.7);
+        }
+
+        &::placeholder {
+          color: rgba(0, 0, 0, 0.3);
+        }
+
+        border-color: transparent;
+      }
+
+      .ant-input-affix-wrapper {
+        .ant-input {
+          background-color: transparent;
+        }
+      }
+    }
+  }
+}

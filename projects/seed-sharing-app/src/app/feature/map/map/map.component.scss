@@ -1,0 +1,15 @@
+@import "seed-style";
+
+:host {
+  @include grow-vertical-parent;
+  @include grow-vertical-child;
+
+  .seed-map {
+    @include grow-vertical-parent;
+    @include grow-vertical-child;
+  }
+
+  .leaflet-control-attribution {
+    display: none;
+  }
+}

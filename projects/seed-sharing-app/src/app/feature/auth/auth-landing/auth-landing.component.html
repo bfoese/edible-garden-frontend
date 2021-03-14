@@ -1,0 +1,65 @@
+<eg-dual-pane-curtain-layout [stateOneActive]="focusSignin$" class="seed-dual-pane-component"
+  [stateOneContentTmpl]="stateOneContent" [stateTwoContentTmpl]="stateTwoContent" [asideOneContentTmpl]="stateOneAside"
+  [asideTwoContentTmpl]="stateTwoAside">
+</eg-dual-pane-curtain-layout>
+
+<ng-template #stateOneContent>
+  <div class="seed-auth-content">
+    <ng-container #lazyChildOne></ng-container>
+  </div>
+</ng-template>
+
+<ng-template #stateTwoContent>
+  <div class="seed-auth-content">
+    <ng-container #lazyChildTwo></ng-container>
+  </div>
+</ng-template>
+
+<ng-template #stateOneAside>
+  <aside class="seed-auth-aside seed-auth-aside-one">
+    <div class="seed-auth-aside__content">
+      <ng-container *ngTemplateOutlet="signinAside">
+      </ng-container>
+    </div>
+    <div class="seed-auth-aside__image">
+      <eg-icon [name]="EgIconType.ill_cucumber_branch" class="ill__cucumber-branch"></eg-icon>
+    </div>
+  </aside>
+</ng-template>
+
+<ng-template #stateTwoAside>
+  <aside class="seed-auth-aside seed-auth-aside-two">
+    <div class="seed-auth-aside__content">
+      <ng-container *ngTemplateOutlet="signupAside">
+      </ng-container>
+    </div>
+
+    <div class="seed-auth-aside__image">
+      <eg-icon [name]="EgIconType.ill_cucumber_branch" class="ill__cucumber-branch"></eg-icon>
+    </div>
+  </aside>
+</ng-template>
+
+<ng-template #signinAside>
+  <h3 i18n="title">New here?</h3>
+  <p class="--eg-bp-max__xs" aria-hidden="true" i18n="xs desc">
+    Join {{egProduct.brandName}} to share seeds in your neighborhood and
+    preserve the botanical heritage one seed at time.
+  </p>
+  <p class="--eg-bp-min__sm" i18n="sm desc">
+    Join {{egProduct.brandName}} and start sharing seeds in your
+    neighborhood. Together we can preserve the botanical heritage of our
+    environment one seed at time.
+  </p>
+
+  <a [routerLink]="['/' + SeedNav.SignUp.full]" i18n="link-label"
+    class="ant-btn ant-btn-background-ghost">Sign up</a>
+</ng-template>
+
+
+<ng-template #signupAside>
+  <h3 i18n="title">One of us?</h3>
+  <p i18n="desc xs">Follow this path if you already have an account.</p>
+  <a [routerLink]="['/' + SeedNav.SignIn.full]" i18n="link-label"
+    class="ant-btn ant-btn-background-ghost">Sign in</a>
+</ng-template>

@@ -1,0 +1,138 @@
+@mixin ul-horizontal {
+  display: flex;
+  flex-direction: row;
+}
+
+@mixin grow-vertical-parent() {
+  display: flex;
+  flex-direction: column;
+}
+
+@mixin grow-vertical-child() {
+  flex-grow: 1;
+  align-items: stretch;
+}
+
+@mixin anim-increase-height($heightStart, $heightEnd, $duration) {
+  --inc-height-start: #{$heightStart};
+  --inc-height-end: #{$heightEnd};
+
+  animation: increase-height $duration forwards;
+}
+
+@mixin scrollbar-style($trackColor, $thumbColor, $width, $thumbRadius) {
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: $trackColor $thumbColor;
+  }
+
+  /* Works on Chrome, Edge, and Safari */
+  *::-webkit-scrollbar {
+    width: $width;
+  }
+
+  *::-webkit-scrollbar-track {
+    background: $trackColor;
+  }
+
+  *::-webkit-scrollbar-thumb {
+    background-color: $thumbColor;
+    border-radius: $thumbRadius;
+  }
+}
+
+// Overrides the blue highlight color that is rendered to indicate fields that
+// have been filled with autocomplete form values
+
+@mixin form-autofill-hightlight($hightlightColor) {
+  input:-internal-autofill-selected,
+  input:focus:-internal-autofill-selected,
+  input:active:-internal-autofill-selected {
+    -webkit-box-shadow: 0 0 0 1000px $hightlightColor inset;
+  }
+}
+
+@mixin reset-a() {
+  a {
+    color: unset;
+
+    &:hover {
+      color: unset;
+    }
+  }
+}
+
+// TODO solution for CSS only classes to be able to use custom properties. problem here is that '#' needs to be url encoded with '%23' and there is no way to do this with plain CSS. Maybe other way to include the SVG
+@mixin corner-convex($color, $scaleX, $scaleY) {
+  background-image: url('data:image/svg+xml;charset=UTF-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" transform="scale(#{$scaleX},#{$scaleY})"><path fill="#{str-replace('' + $color, '#', '%23')}" d="M 0 100 Q 100 100 100 0 L 100 100 Z"/></svg>');
+}
+
+@mixin corner-convex-y-top-right($border-radius, $color, $z-index: inherit) {
+  position: relative;
+  &::before {
+    position: absolute;
+    top: 0;
+    right: calc(-1 * #{$border-radius});
+    width: $border-radius;
+    height: $border-radius;
+    z-index: $z-index;
+    content: '';
+    @include corner-convex($color, -1, -1);
+  }
+}
+
+@mixin corner-convex-y-bottom-right($border-radius, $color, $z-index: inherit) {
+  position: relative;
+  &::after {
+    position: absolute;
+    bottom: 0;
+    right: calc(-1 * #{$border-radius});
+    width: $border-radius;
+    height: $border-radius;
+    z-index: $z-index;
+    content: '';
+    @include corner-convex($color, -1, 1);
+  }
+}
+
+@mixin corner-convex-x-bottom-left($border-radius, $color, $z-index: inherit) {
+  position: relative;
+  &::before {
+    position: absolute;
+    left: 0;
+    bottom: calc(-1 * #{$border-radius});
+    width: $border-radius;
+    height: $border-radius;
+    z-index: $z-index;
+    content: '';
+    @include corner-convex($color, -1, -1);
+  }
+}
+
+@mixin corner-convex-x-bottom-right($border-radius, $color, $z-index: inherit) {
+  position: relative;
+  &::after {
+    position: absolute;
+    right: 0;
+    bottom: calc(-1 * #{$border-radius});
+    width: $border-radius;
+    height: $border-radius;
+    z-index: $z-index;
+    content: '';
+    @include corner-convex($color, 1, -1);
+  }
+}
+
+@mixin corner-convex-x-top-right($border-radius, $color, $z-index: inherit) {
+  position: relative;
+  &::after {
+    position: absolute;
+    right: 0;
+    top: calc(-1 * #{$border-radius});
+    width: $border-radius;
+    height: $border-radius;
+    z-index: $z-index;
+    content: '';
+    @include corner-convex($color, 1, 1);
+  }
+}

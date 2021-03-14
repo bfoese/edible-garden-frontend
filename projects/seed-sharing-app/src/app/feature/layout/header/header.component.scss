@@ -1,0 +1,52 @@
+@import 'seed-style';
+
+:host {
+  display: flex;
+  align-items: center;
+  color: $white;
+
+  .header-menubar {
+    z-index: 405; // leaflet map has 400
+    display: flex;
+    flex-grow: 1;
+    align-items: center;
+    background-color: $--header-menubar-bg;
+
+    &__title {
+      color: $--header-menubar-title-color;
+    }
+
+    a {
+      color: $--header-menubar-link-color;
+    }
+
+    &__icon {
+      width: auto;
+      height: 1.2em;
+
+      &::ng-deep {
+        svg {
+          width: auto;
+        }
+      }
+    }
+  }
+
+  .header-sidebar {
+    &__secondary-nav {
+      display: flex;
+      flex-direction: column;
+    }
+
+    &__link {
+      a {
+        display: flex;
+        align-items: center;
+      }
+
+      eg-icon {
+        width: 1.2em;
+      }
+    }
+  }
+}

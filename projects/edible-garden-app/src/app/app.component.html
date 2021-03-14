@@ -1,0 +1,34 @@
+<nz-layout>
+  <nz-sider
+    nzCollapsible
+    [(nzCollapsed)]="isSidebarCollapsed"
+    [nzTrigger]="null"
+    [nzCollapsedWidth]="0"
+  >
+    <ul nz-menu nzTheme="dark" nzMode="inline">
+      <li nz-menu-item>
+        <a [routerLink]="AppNav.GROWING_MANUAL_CATALOG">Growing Manuals</a>
+      </li>
+      <li nz-menu-item>
+        <a [routerLink]="AppNav.BOTANICAL_FAMILY_TREE">Family Tree</a>
+      </li>
+      <li nz-menu-item><a [routerLink]="AppNav.APP_SETTINGS">Settings</a></li>
+      <li nz-menu-item><a [routerLink]="AppNav.APP_ABOUT">About</a></li>
+    </ul>
+  </nz-sider>
+
+  <nz-layout>
+    <nz-header>
+      <i
+        class="trigger"
+        nz-icon
+        [nzType]="isSidebarCollapsed ? 'menu-unfold' : 'menu-fold'"
+        (click)="toggleSidebar()"
+      ></i>
+    </nz-header>
+    <nz-content>
+      <router-outlet></router-outlet>
+    </nz-content>
+    <nz-footer>Footer</nz-footer>
+  </nz-layout>
+</nz-layout>

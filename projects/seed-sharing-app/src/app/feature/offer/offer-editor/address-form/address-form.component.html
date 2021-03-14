@@ -1,0 +1,57 @@
+<ng-container [formGroup]="form">
+  <nz-form-item>
+    <nz-form-label>Street</nz-form-label>
+    <nz-form-control [nzErrorTip]="tmplFormFieldErrors">
+        <input
+          type="text"
+          nz-input
+          formControlName="line1"
+          placeholder="Street"
+          autocomplete="street-address"
+        />
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-label nzRequired>Postal Code</nz-form-label>
+    <nz-form-control [nzErrorTip]="tmplFormFieldErrors">
+        <input
+          type="text"
+          nz-input
+          formControlName="postalCode"
+          placeholder="Postal Code"
+          autocomplete="postal-code"
+        />
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-label nzRequired>City</nz-form-label>
+    <nz-form-control [nzErrorTip]="tmplFormFieldErrors">
+        <input
+          type="text"
+          nz-input
+          formControlName="city"
+          placeholder="Village/ Town/ City"
+          autocomplete="address-level2"
+        />
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-label nzRequired>Country Code</nz-form-label>
+    <nz-form-control [nzErrorTip]="tmplFormFieldErrors">
+        <input
+          type="text"
+          nz-input
+          formControlName="countryCode"
+          placeholder="Country"
+          autocomplete="country"
+        />
+    </nz-form-control>
+  </nz-form-item>
+</ng-container>
+
+<ng-template #tmplFormFieldErrors let-control>
+  <seed-form-errors [control]="control"></seed-form-errors>
+</ng-template>

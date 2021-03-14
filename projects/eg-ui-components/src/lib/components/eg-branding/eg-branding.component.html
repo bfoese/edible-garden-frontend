@@ -1,0 +1,23 @@
+<ng-container *ngIf="linkBaseHref">
+  <a href="./">
+    <ng-template [ngTemplateOutlet]="brandingTmpl"></ng-template>
+  </a>
+</ng-container>
+<ng-container *ngIf="!linkBaseHref">
+  <ng-template [ngTemplateOutlet]="brandingTmpl"></ng-template>
+</ng-container>
+
+<ng-template #brandingTmpl>
+  <div class="eg-branding">
+    <div class="eg-branding__brand">
+      <span [outerHTML]="brandName | egAlternateBrandingFont:['first', 'last']"></span>
+    </div>
+    <span style="display: none">&nbsp;</span>
+    <div class="eg-branding__logo" aria-hidden="true">
+      <eg-icon [name]="EgIconType.seed_leaf"></eg-icon>
+    </div>
+    <div class="eg-branding__product">
+      <span [outerHTML]="productName | egAlternateBrandingFont:['first', 'last']"></span>
+    </div>
+  </div>
+</ng-template>

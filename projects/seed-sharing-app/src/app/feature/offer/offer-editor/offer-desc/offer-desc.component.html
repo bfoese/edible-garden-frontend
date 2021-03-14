@@ -1,0 +1,16 @@
+<ng-container [formGroup]="form">
+  <nz-form-item>
+    <nz-form-label>Description</nz-form-label>
+    <nz-form-control [nzErrorTip]="tmplFormFieldErrors">
+        <textarea
+          nz-input
+          formControlName="description"
+          placeholder="Description"
+          [nzAutosize]="{ minRows: 3, maxRows: 5 }"
+        ></textarea>
+    </nz-form-control>
+  </nz-form-item>
+</ng-container>
+<ng-template #tmplFormFieldErrors let-control>
+  <seed-form-errors [control]="control"></seed-form-errors>
+</ng-template>

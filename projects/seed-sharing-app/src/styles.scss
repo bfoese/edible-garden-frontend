@@ -1,0 +1,51 @@
+@import 'seed-style';
+
+html,
+body,
+seed-root {
+  min-height: 100%;
+}
+
+html,
+body {
+  font-size: 14px;
+  line-height: 1.5;
+
+  @include property-for-breakpoint(font-size, (14px, LG 16px));
+}
+
+seed-root {
+  @include scrollbar-style(
+    var(--eg-scrollbar-track),
+    $--eg-scrollbar-thumb,
+    var(--eg-scrollbar-width),
+    var(--eg-scrollbar-width)
+  );
+
+  @include form-autofill-hightlight($--eg-form-autofill-highlight-color);
+}
+
+::ng-deep {
+  .ant-popover-inner {
+    border-radius: 0.5em;
+  }
+}
+
+// ANT Overrides
+
+.ant-form-item-explain {
+  // form field error messages
+  padding: 0 2.2em;
+  font-size: 0.9em;
+}
+
+.ant-input-affix-wrapper .ant-input {
+  // inputs with suffix/prefix elements
+  // prevents cut off placeholders
+  border-radius: 0;
+}
+
+.ant-alert-description {
+  // compiled to 9em; I guess ANT can't handle font-sizes in em in combination with unitless line-hight right now for some edge cases
+  line-height: 1.5;
+}

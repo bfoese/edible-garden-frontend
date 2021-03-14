@@ -1,0 +1,49 @@
+@import 'seed-style';
+
+// Custom Properties
+// --eg-component-width
+:host {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .seed-signup {
+    &__form,
+    &__alert,
+    &__social {
+      width: var(--eg-component-width, 100%);
+      max-width: 100%;
+    }
+
+    &__alert {
+      @include breakpoint(SM) {
+        @include grid-nogap(12, 9);
+
+        justify-content: flex-end;
+      }
+    }
+
+    &__actions {
+      display: flex;
+      justify-content: flex-end;
+      margin-top: 1em;
+    }
+  }
+
+  .seed-signup__alert + .seed-signup__form,
+  .seed-signup__form + .seed-signup__alert {
+    margin-top: 2em;
+  }
+
+  nz-form-item {
+    @include grid-for-breakpoint(((null, XS), (12)), ((SM), (9, 12)));
+  }
+}
+
+ul.seed-signup__password-rules {
+  padding-inline-start: 1em;
+
+  li {
+    list-style: disc;
+  }
+}

@@ -1,0 +1,196 @@
+@import 'seed-style';
+
+:host-context(.--layout-portrait) {
+  flex-direction: column;
+
+  .header-menubar {
+    z-index: 1500;
+    flex-direction: row;
+    width: 100vw;
+    height: 3em;
+    padding-right: var(--eg-window-padding-h);
+    padding-left: var(--eg-window-padding-h);
+
+    @include corner-convex-x-bottom-left(var(--eg-panel-border-radius), $--header-menubar-bg, 500);
+    @include corner-convex-x-bottom-right(var(--eg-panel-border-radius), $--header-menubar-bg, 500);
+
+    &__title {
+      display: flex;
+      flex-direction: row;
+      align-content: center;
+      height: 100%;
+      margin-right: auto;
+
+      @include property-for-breakpoint(font-size, (14px, SM 15px, MD 16px));
+    }
+
+    &__branding {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    &__icon {
+      height: 1.2em;
+    }
+
+    &__nav {
+      @include ul-horizontal;
+
+      align-items: center;
+
+      ul {
+        display: flex;
+        flex-direction: row;
+      }
+
+      li + li {
+        margin-left: 1.8em;
+      }
+    }
+  }
+
+  .header-sidebar {
+    $sidebar-footer-height: 6em;
+    $sidebar-content-height: calc(100vh - #{$sidebar-footer-height});
+
+    position: absolute;
+    top: 0;
+    z-index: 1501;
+    display: block;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+
+    &.--open {
+      .header-sidebar__content {
+        @include anim-increase-height(0, $sidebar-content-height, 1.2s);
+      }
+
+      .header-sidebar__secondary-nav {
+        animation: sidebar-opacity-fade-in 0.8s forwards;
+      }
+
+      .header-sidebar__footer {
+        @include anim-increase-height(0, $sidebar-footer-height, 1.5s);
+
+        seed-locale-switch {
+          animation: sidebar-opacity-fade-in 0.8s forwards;
+        }
+      }
+    }
+
+    &.--closed {
+      $close-animation-duration: 600ms;
+
+      position: absolute;
+      top: -100vh;
+      transition-delay: $close-animation-duration;
+      transition-duration: 0;
+      transition-property: position, top;
+
+      .header-sidebar {
+        &__footer,
+        &__content {
+          opacity: 0;
+          transition-delay: 0;
+          transition-duration: $close-animation-duration;
+          transition-property: opacity;
+        }
+
+        &__footer {
+          height: #{$sidebar-footer-height};
+        }
+
+        &__content {
+          height: $sidebar-content-height;
+        }
+      }
+    }
+
+    &__content {
+      position: relative;
+      z-index: 1;
+      background-color: $--header-menubar-bg;
+
+      a {
+        color: $--header-menubar-link-color;
+      }
+    }
+
+    &__primary-nav {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      height: 3em;
+      margin-bottom: 1em;
+      padding-right: var(--eg-window-padding-h);
+      padding-left: var(--eg-window-padding-h);
+    }
+
+    &__secondary-nav {
+      width: 100%;
+      opacity: 0;
+
+      @include property-for-breakpoint(padding, ('2em 3.5em'));
+    }
+
+    &__link {
+      font-weight: 300;
+      line-height: 1.8;
+      @include property-for-breakpoint(font-size, (1.6em, MD 1.6em));
+
+      eg-icon {
+        order: 2;
+        margin-left: 0.5em;
+      }
+
+      a {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+      }
+    }
+
+    &__illustration {
+      position: absolute;
+      bottom: 2.5em;
+      left: 2.5em;
+
+      --illustration-height: 50vh;
+      --illustration-ratio: 2.67;
+
+      eg-icon {
+        position: absolute;
+        bottom: 0;
+        width: calc(var(--illustration-height) / var(--illustration-ratio));
+        height: var(--illustration-height);
+        color: $ssd-green-light-rgba;
+      }
+    }
+
+    .header-sidebar__footer {
+      @include corner-convex-x-top-right(var(--eg-panel-border-radius),  $--header-submenu-bg);
+      z-index: 2;
+      display: flex;
+      align-items: flex-start;
+      justify-content: flex-end;
+      width: 100vw;
+      padding: 0 var(--eg-window-padding-h) var(--eg-window-padding-v) var(--eg-window-padding-h);
+      background: $--header-submenu-bg;
+    }
+  }
+  @keyframes sidebar-opacity-fade-in {
+    0% {
+      opacity: 0;
+    }
+
+    30% {
+      opacity: 0;
+    }
+
+    100% {
+      opacity: 1;
+    }
+  }
+}

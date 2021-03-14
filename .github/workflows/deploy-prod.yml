@@ -1,0 +1,39 @@
+# This is a basic workflow that is manually triggered
+
+name: Deploy main branch to prod
+
+# Controls when the action will run. Workflow runs when manually triggered using the UI
+# or API.
+on:
+  push:
+    branches:
+      - main
+  # workflow_dispatch:
+  #   inputs:
+  #     branch:
+  #       description: 'Branch to deploy'
+  #       default: "main"
+  #       required: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: akhileshns/heroku-deploy@v3.10.9
+        with:
+          #branch: ${{ github.event.inputs.branch }}
+          branch: main
+          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+          heroku_app_name: ${{secrets.HEROKU_APP_NAME}}
+          heroku_email: ${{secrets.HEROKU_EMAIL}}
+          dontuseforce: false
+          usedocker: true
+          remote_branch: master # name of herokus remote branch
+          docker_heroku_process_type: web
+          region: eu
+          docker_build_args: |
+            GH_PKG_TOKEN
+        env:
+          GH_PKG_TOKEN: ${{secrets.GH_PKG_TOKEN}}
+

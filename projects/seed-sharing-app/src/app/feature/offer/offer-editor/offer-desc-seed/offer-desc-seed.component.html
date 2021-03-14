@@ -1,0 +1,61 @@
+<ng-container [formGroup]="form">
+  <nz-form-item>
+    <nz-form-label nzRequired="true" nzFor="propagationPart"
+      >What do you offer?</nz-form-label
+    >
+    <nz-form-control [nzErrorTip]="tmplFormFieldErrors">
+      <nz-select formControlName="propagationPart">
+        <nz-option nzValue="seeds" nzLabel="Seeds"></nz-option>
+        <nz-option
+          nzValue="rhizomeTuberBulb"
+          nzLabel="Tubers/ Bulbs/ Rhizome"
+        ></nz-option>
+        <nz-option nzValue="seedling" nzLabel="Seedling"></nz-option>
+        <nz-option nzValue="cuttling" nzLabel="Cuttling"></nz-option>
+      </nz-select>
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-label nzFor="seedPropagationQuality"
+      >Propagation Quality:</nz-form-label
+    >
+    <nz-form-control [nzErrorTip]="tmplFormFieldErrors">
+        <nz-radio-group formControlName="seedPropagationQuality" nzButtonStyle="solid">
+          <label nz-radio-button nzValue="trueToSeed">True to seed</label>
+          <label nz-radio-button nzValue="f1Hybrid">F1-Hybrid</label>
+          <label nz-radio-button nzValue="unknown">I don't know</label>
+        </nz-radio-group>
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-label
+      nzFor="growingEthics"
+      nzTooltipTitle="Do you use synthetic industrial products as fertilizers, herbicides or pesticides during cultivation?"
+      >Cultivation conditions</nz-form-label
+    >
+    <nz-form-control [nzErrorTip]="tmplFormFieldErrors">
+        <nz-radio-group formControlName="growingEthics" nzButtonStyle="solid">
+          <label nz-radio-button nzValue="organic">Organic</label>
+          <label nz-radio-button nzValue="conventional">Conventional</label>
+        </nz-radio-group>
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-label>Name of the species</nz-form-label>
+    <nz-form-control [nzErrorTip]="tmplFormFieldErrors">
+        <input
+          type="text"
+          nz-input
+          formControlName="speciesName"
+          placeholder="speciesName"
+        />
+    </nz-form-control>
+  </nz-form-item>
+</ng-container>
+
+<ng-template #tmplFormFieldErrors let-control>
+  <seed-form-errors [control]="control"></seed-form-errors>
+</ng-template>

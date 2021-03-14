@@ -1,0 +1,85 @@
+<seed-auth-form [titleTmpl]="titleTmpl" [formTmpl]="signinTmpl"></seed-auth-form>
+
+<ng-template #titleTmpl i18n="title">Sign in</ng-template>
+
+<ng-template #signinTmpl>
+  <form nz-form [formGroup]="loginForm" class="seed-signin__form" (ngSubmit)="submitForm()">
+    <nz-form-item>
+      <nz-form-control [nzErrorTip]="tmplFormFieldErrors">
+        <nz-input-group [nzPrefix]="tmplUsernameIcon">
+          <input type="text" nz-input formControlName="username" i18n-placeholder="placeholder"
+            placeholder="Username or email" autocomplete="username" aria-label="Username" i18n-aria-label="label" />
+        </nz-input-group>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-control [nzErrorTip]="tmplFormFieldErrors">
+        <nz-input-group [nzPrefix]="tmplPasswordIcon">
+          <input type="password" nz-input formControlName="password" i18n-placeholder="placeholder"
+            placeholder="Password" autocomplete="current-password" aria-label="Password" i18n-aria-label="label" />
+        </nz-input-group>
+        <seed-form-errors [control]="loginForm" [styled]="true"></seed-form-errors>
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-row class="seed-signin__actions">
+      <div nz-col class="password-reminder">
+        <a [routerLink]="['/' + SeedNav.RequestResetPassword.full]" i18n="checkbox">Forgot Password?</a>
+      </div>
+      <button nz-col nz-button [disabled]="!loginForm.valid" [nzType]="'primary'" i18n="button">
+        Sign in
+      </button>
+    </nz-row>
+  </form>
+
+  <seed-social-signin-signup class="seed-signin__social"></seed-social-signin-signup>
+
+  <ng-template #tmplFormFieldErrors let-control>
+    <seed-form-errors [control]="control"></seed-form-errors>
+  </ng-template>
+
+  <nz-alert *ngIf="showHint === 'EmailVerificationLinkSent'" class="seed-signin__alert" nzType="success"
+    i18n-nzDescription="alert-msg"
+    nzDescription="We've sent you an email to verify your address. Please follow the instructions provided in there before you try to sign in.">
+  </nz-alert>
+
+  <nz-alert *ngIf="showHint === 'EmailVerificationSuccess'" class="seed-signin__alert" nzType="success"
+    i18n-nzMessage="alert-title" nzMessage="Email address verified" i18n-nzDescription="alert-msg"
+    nzDescription="Your email address was successfully verified. You can now sign in with your credentials.">
+  </nz-alert>
+
+  <nz-alert *ngIf="showHint === 'EmailVerificationError'" class="seed-signin__alert" nzType="error"
+    i18n-nzMessage="alert-title" nzMessage="Email address verification failed" i18n-nzDescription="alert-msg"
+    nzDescription="Your email address could not be verified.">
+  </nz-alert>
+
+  <nz-alert *ngIf="showHint === 'PasswordChanged'" class="seed-signin__alert" nzType="success"
+    i18n-nzMessage="alert-title" nzMessage="Password changed" i18n-nzDescription="alert-msg"
+    nzDescription="You can now signin with your new password.">
+  </nz-alert>
+
+  <nz-alert *ngIf="showHint === 'InactiveAccountError'" class="seed-signin__alert" nzType="error"
+    i18n-nzMessage="alert-title" nzMessage="Account activation required"
+    nzDescription="Your account is inactive. Please contact the team.">
+  </nz-alert>
+
+  <nz-alert *ngIf="showHint === 'EmailVerificationRequired'" class="seed-signin__alert" nzType="error"
+    i18n-nzMessage="alert-title" nzMessage="Email verification required" [nzDescription]="tmplVerifyEmailErrorDesc">
+  </nz-alert>
+
+</ng-template>
+
+<ng-template #tmplVerifyEmailErrorDesc>
+  <p i18n>
+    Your email address is not verified yet. We've sent you an email with instructions to verify your address.
+  </p>
+  <p>
+    <ng-container i18n>If you do not have that email anymore,</ng-container>&nbsp;
+    <a [routerLink]="[
+          SeedNav.VerifyEmail.full
+      ]" i18n="link-label">request a new one</a>.
+  </p>
+</ng-template>
+
+<ng-template #tmplUsernameIcon><eg-icon [name]="EgIconType.username_outline" class="-input"></eg-icon></ng-template>
+<ng-template #tmplPasswordIcon><eg-icon [name]="EgIconType.password_outline" class="-input"></eg-icon></ng-template>

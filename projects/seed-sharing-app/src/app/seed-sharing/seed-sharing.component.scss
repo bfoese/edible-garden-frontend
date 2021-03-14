@@ -1,0 +1,82 @@
+@import "seed-style";
+
+:host {
+  display: flex;
+  max-width: 100vw;
+  height: 100vh;
+  overflow-y: hidden;
+
+  .seed-cmp {
+    &__content {
+      display: flex;
+      height: 100%;
+
+      @include grow-vertical-child;
+      @include grow-vertical-parent;
+
+      & > as-split {
+        ::ng-deep {
+          .as-split-gutter {
+            background: transparent;
+            padding: var(--seed-splitpanel-gutter-padding);
+
+          }
+          .as-split-gutter-icon {
+            background-color: var(--eg-outlet-secondary-bg);
+            border-radius: var(--seed-splitpanel-border-radius);
+          }
+
+          .as-split-area:not(.as-hidden) {
+            @include grow-vertical-child;
+            @include grow-vertical-parent;
+          }
+        }
+      }
+    }
+
+    &__outlet {
+      @include grow-vertical-child;
+      @include grow-vertical-parent;
+      overflow-y: auto;
+
+      &.-outlet-secondary {
+        background: var(--eg-outlet-secondary-bg);
+        width: 100%;
+        height: 100%;
+      }
+    }
+  }
+}
+
+:host-context(.--layout-landscape) {
+  --seed-splitpanel-border-radius: var(--eg-panel-border-radius) 0 0 var(--eg-panel-border-radius);
+  --seed-splitpanel-gutter-padding: 0 0 0 calc(var(--eg-scrollbar-width) + var(--eg-split-panel-scrollbar-margin));
+
+  flex-direction: row;
+
+  .seed-cmp {
+    &__content {
+      flex-direction: row;
+    }
+    &__outlet {
+      &.-outlet-main {
+        flex-grow: 2;
+      }
+      &.-outlet-secondary {
+        flex-grow: 1.5;
+      }
+    }
+  }
+}
+
+:host-context(.--layout-portrait) {
+  --seed-splitpanel-border-radius: var(--eg-panel-border-radius) var(--eg-panel-border-radius) 0 0;
+  flex-direction: column;
+  .seed-cmp {
+    &__content {
+      flex-direction: column;
+      max-width: 100vw;
+    }
+
+  }
+}

@@ -1,0 +1,20 @@
+<div class="eg-dual-pane-curtain-layout">
+    <div class="eg-dual-pane-curtain-layout__content">
+        <div class="eg-dual-pane-curtain-layout__content__panel -panel-one" [ngClass]="{'-active': isStateOne}">
+            <ng-container *ngTemplateOutlet="stateOneContentTmpl"></ng-container>
+        </div>
+        <div class="eg-dual-pane-curtain-layout__content__panel -panel-two" [ngClass]="{'-active': !isStateOne}">
+            <ng-container *ngTemplateOutlet="stateTwoContentTmpl"></ng-container>
+        </div>
+    </div>
+
+    <div class="eg-dual-pane-curtain-layout__aside">
+        <div class="eg-dual-pane-curtain-layout__aside__panel -aside-one" [ngClass]="{'-active': isStateOne}">
+            <ng-container *ngTemplateOutlet="asideOneContentTmpl"></ng-container>
+        </div>
+
+        <div class="eg-dual-pane-curtain-layout__aside__panel -aside-two" [ngClass]="{'-active': !isStateOne}">
+            <ng-container *ngTemplateOutlet="asideTwoContentTmpl"></ng-container>
+        </div>
+    </div>
+</div>

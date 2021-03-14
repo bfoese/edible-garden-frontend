@@ -1,0 +1,31 @@
+<span class="locale-switch__label" i18n="label|@@locale-switch.label"
+  >Language:</span
+>
+<fieldset class="locale-switch__input">
+  <a
+    class="locale-switch__option"
+    (click)="onPreferredLocaleChanged(locale); $event.stopPropagation();"
+    [lang]="locale"
+    [hreflang]="locale"
+    role="navigation"
+    *ngFor="let locale of getAvailableLocales()"
+    [ngClass]="{ '--checked': locale === currentLocale }"
+  >
+    <input
+      class="locale-switch__option-input"
+      (click)="$event.stopPropagation();"
+      [id]="locale"
+      type="radio"
+      [value]="locale"
+      name="localeSwitch"
+      [ngModel]="currentLocale"
+      [ngClass]="{ '--checked': locale === currentLocale }"
+    />
+    <label class="locale-switch__option-label" [ngClass]="{ '--checked': locale === currentLocale }" [for]="locale">{{ locale.toUpperCase() }}</label>
+
+    <eg-icon
+      class="locale-switch__icon"
+      [name]="EgIconType.raindrop"
+    ></eg-icon>
+  </a>
+</fieldset>

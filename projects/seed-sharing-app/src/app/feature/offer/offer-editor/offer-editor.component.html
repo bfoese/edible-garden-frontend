@@ -1,0 +1,37 @@
+<form
+  nz-form
+  [formGroup]="offerForm"
+  (ngSubmit)="onSubmit()"
+  [nzLayout]="formLayout"
+>
+  <fieldset>
+    <legend>Beschreibung</legend>
+    <seed-offer-desc-seed></seed-offer-desc-seed>
+    <seed-offer-desc formControlName="offerDesc"></seed-offer-desc>
+  </fieldset>
+
+  <fieldset>
+    <legend>Kontakt</legend>
+    <seed-offer-contact formControlName="offerContact"></seed-offer-contact>
+  </fieldset>
+
+  <fieldset>
+    <legend>Ort</legend>
+    <seed-address-form formControlName="offerAddress"></seed-address-form>
+  </fieldset>
+  <button
+    type="submit"
+    nz-col
+    nz-button
+    [disabled]="offerForm.invalid"
+    [nzType]="'primary'"
+  >
+    Submit
+  </button>
+</form>
+
+<!-- <seed-offer-contact></seed-offer-contact>
+<seed-offer-location></seed-offer-location>
+
+<seed-offer-price></seed-offer-price>
+<seed-offer-type></seed-offer-type> -->

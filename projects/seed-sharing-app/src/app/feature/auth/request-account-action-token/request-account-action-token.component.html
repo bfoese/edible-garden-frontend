@@ -1,0 +1,87 @@
+<seed-auth-form [titleTmpl]="titleTmpl" [formTmpl]="accountActionTmpl"></seed-auth-form>
+
+<ng-template #titleTmpl>
+  <ng-container [ngSwitch]="action$ |async">
+    <ng-container *ngSwitchCase="RequestAccountActionTokenType.ResetPassword" i18n="title">Reset your password
+    </ng-container>
+    <ng-container *ngSwitchCase="RequestAccountActionTokenType.VerifyEmail" i18n="title">Verify email</ng-container>
+  </ng-container>
+</ng-template>
+
+<ng-template #accountActionTmpl>
+
+  <form nz-form [formGroup]="form" (ngSubmit)="submitForm()" nzLayout="vertical" class="seed-account-act-token__form">
+    <nz-form-item>
+      <nz-form-label>
+        <ng-container *ngTemplateOutlet="tmplInputLabel"></ng-container>
+      </nz-form-label>
+      <nz-form-control [nzErrorTip]="tmplFormFieldErrors">
+        <nz-input-group [nzPrefix]="tmplEmailIcon">
+          <input type="email" nz-input formControlName="email" placeholder="E-Mail" i18n-placeholder="placeholder"
+            autocomplete="email" />
+        </nz-input-group>
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-row class="seed-account-act-token__actions">
+      <button nz-col nz-button [disabled]="!form.valid" [nzType]="'primary'">
+        <ng-container *ngTemplateOutlet="tmplSubmitBtnLabel"></ng-container>
+      </button>
+    </nz-row>
+  </form>
+
+  <div class="seed-account-act-token__alert" *ngIf="showInvalidTokenError">
+    <ng-container [ngSwitch]="action$ |async">
+      <ng-container *ngSwitchCase="RequestAccountActionTokenType.ResetPassword">
+        <nz-alert nzType="error" i18n-nzMessage="alert-title" nzMessage="Password reset failed"
+          i18n-nzDescription="alert-msg"
+          nzDescription="We couldn't reset your password: your password reset link expired. Please request a new passwort reset link.">
+        </nz-alert>
+      </ng-container>
+      <ng-container *ngSwitchCase="RequestAccountActionTokenType.VerifyEmail">
+        <nz-alert nzType="error" i18n-nzMessage="alert-title" nzMessage="Email verification failed"
+          i18n-nzDescription="alert-msg"
+          nzDescription="We couldn't verify your email address: your link expired. Please request a new verify email link.">
+        </nz-alert>
+      </ng-container>
+    </ng-container>
+  </div>
+
+  <nz-alert *ngIf="showEmailSentHint" class="seed-account-act-token__alert" nzType="success"
+    i18n-nzMessage="alert-title" nzMessage="We sent you an email" i18n-nzDescription="alert-msg"
+    nzDescription="We just sent the requested email to you. In case you did not receive an email from us, we could not find an account belonging to the provided email address.">
+  </nz-alert>
+</ng-template>
+
+<ng-template #tmplFormFieldErrors let-control>
+  <seed-form-errors [control]="control"></seed-form-errors>
+</ng-template>
+
+<ng-template #tmplCardTitle>
+  <ng-container [ngSwitch]="action$ |async">
+    <ng-container *ngSwitchCase="RequestAccountActionTokenType.ResetPassword" i18n="card-title">Reset your password
+    </ng-container>
+    <ng-container *ngSwitchCase="RequestAccountActionTokenType.VerifyEmail" i18n="card-title">Receive verify email
+      address link</ng-container>
+  </ng-container>
+</ng-template>
+
+<ng-template #tmplInputLabel>
+  <ng-container [ngSwitch]="action$ |async">
+    <ng-container *ngSwitchCase="RequestAccountActionTokenType.ResetPassword" i18n="label">Enter your users account
+      verified email address and we will send you a
+      password reset link.</ng-container>
+    <ng-container *ngSwitchCase="RequestAccountActionTokenType.VerifyEmail" i18n="label">Enter your users account email
+      address and we will send you a link to
+      verify that address.
+    </ng-container>
+  </ng-container>
+</ng-template>
+<ng-template #tmplSubmitBtnLabel>
+  <ng-container [ngSwitch]="action$ |async">
+    <ng-container *ngSwitchCase="RequestAccountActionTokenType.ResetPassword" i18n="button">Request email</ng-container>
+    <ng-container *ngSwitchCase="RequestAccountActionTokenType.VerifyEmail" i18n="button">Request email</ng-container>
+  </ng-container>
+</ng-template>
+
+<ng-template #tmplEmailIcon><eg-icon [name]="EgIconType.email_outline" class="-input"></eg-icon></ng-template>

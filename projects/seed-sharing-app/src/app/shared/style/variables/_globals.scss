@@ -1,0 +1,69 @@
+// Custom Properties only
+@import '~@bfoese/eg-ui-core/core';
+
+
+// others
+$orange-medium-rgba: rgba(239, 145, 83, 1);
+$orange-dark-rgba: rgba(219, 116, 47, 1);
+$yellow-medium-rgba: rgba(239, 190, 95, 1);
+$yellow-light-rgba: rgba(252, 228, 180, 1);
+
+$p5-beige-medium-rgba: rgba(216, 177, 145, 1);
+
+$p5-beige-lightest-rgba: rgba(254, 249, 240, 1);
+
+$p5-yellow-medium-rgba: rgba(241, 203, 156, 1);
+
+$p5-blush-light-rgba: rgba(244, 210, 185, 1);
+
+$p5-grey-light-rgba: rgba(241, 241, 240);
+
+// color scheme
+
+$ssd-purple-medium-rgba: rgba(149, 83, 84, 1);
+$ssd-purple-dark-rgba: rgba(132, 68, 68, 1);
+$ssd-green-dark-rgba: rgba(120, 124, 111, 1);
+$ssd-green-medium-rgba: rgba(195, 193, 172, 1);
+$ssd-green-light-rgba: rgba(231, 229, 217, 1);
+$seed-blush-medium-rgba: rgba(225, 194, 176, 1);
+$ssd-beige-light-rgba: rgba(241, 233, 214, 1);
+//
+
+
+$--header-menubar-bg: $ssd-green-dark-rgba;
+$--header-menubar-title-color: $ssd-green-light-rgba;
+$--header-menubar-link-color: $ssd-green-light-rgba;
+// $header-submenu-background: $-sand-rgba;
+$--header-submenu-bg: scale-color($seed-blush-medium-rgba, $lightness: 10%);
+
+
+$--eg-scrollbar-thumb: scale-color($ssd-green-dark-rgba, $lightness: 50%);
+
+
+$--eg-form-autofill-highlight-color: scale-color(
+  $p5-yellow-medium-rgba,
+  $lightness: 80%
+);
+
+:root {
+  --eg-scrollbar-track: transparent;
+  --eg-scrollbar-width: 8px;
+  --eg-split-panel-scrollbar-margin: 0.5em;
+
+  @include property-for-breakpoint(
+    --eg-window-padding-h,
+    (1em, XS 1.5em, SM 1.7em, XL 2em)
+  );
+  @include property-for-breakpoint(
+    --eg-window-padding-v,
+    (1em, XS 1.5em, SM 1.7em, XL 2em)
+  );
+
+  @include property-for-breakpoint(
+    --eg-panel-border-radius,
+    (1.2em, XS 1.5em, MD 2em)
+  );
+
+  --eg-outlet-primary-bg: #f6ece7;
+  --eg-outlet-secondary-bg: rgba(254, 249, 240, 1);
+}

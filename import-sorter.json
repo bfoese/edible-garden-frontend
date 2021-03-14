@@ -1,0 +1,22 @@
+{
+  "importSorter.importStringConfiguration.hasSemicolon": true,
+  "importSorter.importStringConfiguration.tabSize": 2,
+  "importSorter.importStringConfiguration.trailingComma": "none",
+  "importSorter.sortConfiguration.customOrderingRules.rules": [
+    {
+      "type": "importMember",
+      "regex": "^$",
+      "orderLevel": 10
+    },
+    {
+      "regex": "^[.]",
+      "orderLevel": 22
+    }
+  ],
+  "importSorter.generalConfiguration.exclude": ["zone.js/dist/zone-testing"],
+  "importSorter.importStringConfiguration.maximumNumberOfImportExpressionsPerLine.type": "newLineEachExpressionAfterCountLimitExceptIfOnlyOne",
+  "importSorter.importStringConfiguration.maximumNumberOfImportExpressionsPerLine.count": 80,
+  "importSorter.generalConfiguration.sortOnBeforeSave": true,
+  "importSorter.sortConfiguration.removeUnusedImports": true,
+  "importSorter.sortConfiguration.removeUnusedDefaultImports": true
+}

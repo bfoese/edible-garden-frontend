@@ -1,0 +1,63 @@
+@import 'variables/globals';
+
+@import 'configuration';
+
+@import 'variables/variables';
+@import 'animations/animations';
+@import 'mixins/mixins';
+
+@import 'reset';
+
+// display none, until minimum BP reached
+.--eg-bp-min {
+  &__sm {
+    @include breakpoint-max(XS) {
+      display: none;
+    }
+  }
+
+  &__md {
+    @include breakpoint-max(SM) {
+      display: none;
+    }
+  }
+
+  &__lg {
+    @include breakpoint-max(MD) {
+      display: none;
+    }
+  }
+
+  &__xl {
+    @include breakpoint-max(LG) {
+      display: none;
+    }
+  }
+}
+
+// visible until (including) given BP
+.--eg-bp-max {
+  &__xs {
+    @include breakpoint(SM) {
+      display: none;
+    }
+  }
+
+  &__sm {
+    @include breakpoint(MD) {
+      display: none;
+    }
+  }
+
+  &__md {
+    @include breakpoint(LG) {
+      display: none;
+    }
+  }
+
+  &__lg {
+    @include breakpoint(XL) {
+      display: none;
+    }
+  }
+}

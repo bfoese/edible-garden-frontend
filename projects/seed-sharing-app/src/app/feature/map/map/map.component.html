@@ -1,0 +1,10 @@
+<div
+  class="seed-map"
+  *ngIf="options"
+  leaflet
+  [leafletOptions]="options"
+  [leafletLayers]="layers"
+  [leafletLayersControl]="layersControl"
+>
+  <div *ngIf="showLayer" [leafletLayer]="layer"></div>
+</div>

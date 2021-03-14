@@ -1,0 +1,19 @@
+<seed-header></seed-header>
+<div class="seed-cmp__content">
+    <as-split class="seed-cmp__split-pane" [useTransition]="true" unit="percent" [direction]="appLayoutType === 'layout-landscape' ? 'horizontal' : 'vertical'" [gutterSize]="splitPaneGutterSize">
+        <as-split-area [size]="60" [minSize]="200" [order]="1">
+
+            <section class="seed-cmp__outlet -outlet-main">
+                <router-outlet></router-outlet>
+            </section>
+
+
+        </as-split-area>
+        <as-split-area [size]="40" [order]="2" [visible]="isSecondaryOutletActive">
+            <section class="seed-cmp__outlet -outlet-secondary">
+                <router-outlet name="secondary" (activate)="onSecondaryOutletActivated($event)"
+                    (deactivate)="onSecondaryOutletDeactivated($event)"></router-outlet>
+            </section>
+        </as-split-area>
+    </as-split>
+</div>

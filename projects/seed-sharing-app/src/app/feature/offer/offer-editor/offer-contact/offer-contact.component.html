@@ -1,0 +1,55 @@
+<ng-container [formGroup]="form">
+  <nz-form-item>
+    <nz-form-label>Name</nz-form-label>
+    <nz-form-control [nzErrorTip]="tmplFormFieldErrors">
+        <input
+          type="text"
+          nz-input
+          formControlName="name"
+          placeholder="Name"
+          autocomplete="username"
+        />
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-label nzRequired>Email</nz-form-label>
+    <nz-form-control [nzErrorTip]="tmplFormFieldErrors">
+        <input
+          type="text"
+          nz-input
+          formControlName="email"
+          placeholder="Email"
+          autocomplete="email"
+        />
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-label>Phone</nz-form-label>
+    <nz-form-control [nzErrorTip]="tmplFormFieldErrors">
+        <nz-select formControlName="phoneCountryCode"
+        nzShowSearch
+        nzPlaceHolder="Country"
+        autocomplete="tel-country-code" class="phoneCountryCode"
+        [nzFilterOption]="nzFilterOption"
+      (nzOnSearch)="search($event)"
+        >
+        <nz-option [nzLabel]="'Country'" [nzValue]="undefined"></nz-option>
+          <nz-option *ngFor="let phoneCountryCode of filteredData" [nzLabel]="phoneCountryCode | egPhoneCountryCode:['nativeName']" [nzValue]="phoneCountryCode"></nz-option>
+        </nz-select>
+        <input
+          type="text"
+          nz-input
+          formControlName="phone"
+          placeholder="Phone"
+          autocomplete="tel-national"
+        />
+
+    </nz-form-control>
+  </nz-form-item>
+</ng-container>
+
+<ng-template #tmplFormFieldErrors let-control>
+  <seed-form-errors [control]="control"></seed-form-errors>
+</ng-template>

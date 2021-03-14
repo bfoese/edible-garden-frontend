@@ -1,0 +1,9 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+:host-context(.--empty) {
+  display: none;
+}

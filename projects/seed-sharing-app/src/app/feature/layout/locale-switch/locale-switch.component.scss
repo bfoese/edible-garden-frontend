@@ -1,0 +1,101 @@
+@import 'seed-style';
+
+:host {
+  $--eg-drop-offset-y: 50%;
+
+  input[type='radio'] {
+    display: none;
+  }
+
+  fieldset {
+    display: flex;
+    flex-direction: row;
+    min-width: auto;
+    padding-top: $--eg-drop-offset-y;
+
+    a {
+      color: unset;
+
+      label {
+        cursor: pointer;
+      }
+    }
+
+    .locale-switch__option-label {
+      display: flex;
+      flex-grow: 1;
+      justify-content: center;
+    }
+  }
+
+  .locale-switch {
+    &__option {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 1.8em;
+
+      + .locale-switch__option {
+        margin-left: 0.2em;
+      }
+
+      &.--checked {
+        margin-top: -$--eg-drop-offset-y;
+        color: $ssd-purple-medium-rgba;
+        transition: margin-top 0.5s ease-in, color 0.5s ease-in-out;
+      }
+
+      &:not(.--checked) {
+        margin-top: 0;
+        color: $ssd-beige-light-rgba;
+        transition: margin-top 0.5s ease-in-out, color 0.5s ease-in-out;
+
+        &::before {
+          height: 50%;
+          content: '';
+        }
+      }
+    }
+
+    &__option-label {
+      position: absolute;
+      top: 41%;
+      z-index: 3;
+      font-size: 0.8em;
+
+      &.--checked {
+        color: $ssd-beige-light-rgba;
+      }
+
+      &:not(.--checked) {
+        color: $ssd-purple-medium-rgba;
+      }
+    }
+  }
+
+  .--checked.locale-switch__option:hover {
+    &::ng-deep {
+      svg {
+        #raindrop-outline {
+          color: $ssd-purple-medium-rgba;
+        }
+      }
+    }
+  }
+
+  :not(.--checked).locale-switch__option:hover {
+    &::ng-deep {
+      svg {
+        #raindrop-outline {
+          color: $ssd-purple-medium-rgba;
+          transition: color 0.5s ease-in-out;
+        }
+      }
+    }
+  }
+
+  .locale-switch__label {
+    display: none;
+  }
+}

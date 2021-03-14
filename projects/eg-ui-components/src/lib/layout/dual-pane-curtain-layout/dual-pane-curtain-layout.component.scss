@@ -1,0 +1,213 @@
+@import '~@bfoese/eg-ui-core/core';
+
+// Custom Properties used by this component
+//
+// --eg-fixed-width: 1300px;
+// --eg-fixed-height: 600px;
+// --eg-aside-header-height: 20em;
+// --eg-aside-footer-height: 12em;
+// --eg-aside-panel-overflow: hidden;
+// --eg-curtain-background-image: linear-gradient(...);
+
+:host {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+
+  .eg-dual-pane-curtain-layout {
+      position: relative;
+      overflow: hidden;
+
+      @include property-for-breakpoint(
+        width,
+        (100%, XL #{var(--eg-fixed-width, 100%)})
+      );
+      @include property-for-breakpoint(
+        height,
+        (100%, XL #{var(--eg-fixed-height, 100%)})
+      );
+      @include property-for-breakpoint(margin, ('0', XL '0 auto'));
+
+      &::before {
+        position: absolute;
+        z-index: 6;
+        background-image: var(--eg-curtain-background-image);
+        border-radius: 50%;
+        content: '';
+
+        @include property-for-breakpoint(width, (1500px, MD 2000px));
+        @include property-for-breakpoint(height, (1500px, MD 2000px));
+
+        @include property-for-breakpoint(
+          transition,
+          ('2s ease-in-out', MD 'all 1.6s ease-out')
+        );
+      }
+  }
+
+  .eg-dual-pane-curtain-layout__content {
+    position: absolute;
+    display: grid;
+    grid-template-rows: 1fr;
+    grid-template-columns: 1fr;
+
+    @include property-for-breakpoint(width, (100%, MD 50%));
+    @include property-for-breakpoint(
+      height,
+      (calc(100% - #{var(--eg-aside-footer-height, 20%)}), MD 100%)
+    );
+
+    @include property-for-breakpoint(
+      transition,
+      ('1s 0.8s ease-in-out', MD 'all 0.5s 0.7s')
+    );
+
+    &__panel {
+      grid-row: 1;
+      grid-column: 1;
+      overflow-y: auto;
+      transition: all 0.9s ease-in-out 0.5s;
+
+      &:not(.-active) {
+        z-index: 0;
+        opacity: 0;
+        pointer-events: none;
+      }
+
+      &.-active {
+        z-index: 1;
+        opacity: 1;
+        pointer-events: all;
+      }
+    }
+  }
+
+  .eg-dual-pane-curtain-layout__aside {
+    position: absolute; // only needed for z-index to be applied
+    top: 0;
+    left: 0;
+    display: grid;
+    width: 100%;
+    height: 100%;
+
+    @include property-for-breakpoint(
+      grid-template-columns,
+      (1fr, MD '1fr 1fr')
+    );
+    @include property-for-breakpoint(
+      grid-template-rows,
+      (
+        'var(--eg-aside-header-height, 30%) auto var(--eg-aside-footer-height, 20%)',
+        MD 1fr
+      )
+    );
+
+    &__panel {
+      overflow: var(--eg-aside-panel-overflow);
+      transition: transform 0.9s ease-in-out;
+      @include property-for-breakpoint(
+        transform,
+        (translateY(0), MD translateX(0))
+      );
+      @include property-for-breakpoint(transition-delay, (0.8s, MD 0.6s));
+
+      &.-aside-one {
+        @include property-for-breakpoint(grid-column, (1, MD 2));
+        @include property-for-breakpoint(grid-row, (3, MD 1));
+
+        &:not(.-active) {
+          @include property-for-breakpoint(
+            transform,
+            (
+              translateY(var(--eg-aside-footer-height, 20%)),
+              MD translateX(100%)
+            )
+          );
+        }
+      }
+
+      &.-aside-two {
+        @include property-for-breakpoint(grid-column, (1, MD 1));
+        @include property-for-breakpoint(grid-row, (1, MD 1));
+
+        &:not(.-active) {
+          @include property-for-breakpoint(
+            transform,
+            (
+              translateY(calc(-1 * var(--eg-aside-header-height, 30%))),
+              MD translateX(-100%)
+            )
+          );
+        }
+      }
+
+      &:not(.-active) {
+        pointer-events: none;
+      }
+
+      &.-active {
+        z-index: 7;
+        pointer-events: all;
+      }
+    }
+  }
+}
+
+:host-context(.-state-one) {
+  .eg-dual-pane-curtain-layout {
+    &::before {
+      @include property-for-breakpoint(top, (initial, MD -10%));
+      @include property-for-breakpoint(right, (initial, MD 52%));
+      @include property-for-breakpoint(left, (30%, MD unset));
+
+      @include property-for-breakpoint(
+        bottom,
+        ('var(--eg-aside-footer-height, 20%)', MD unset)
+      );
+      @include property-for-breakpoint(
+        transform,
+        ('translate(-50%, 100%)', MD 'translate(100%, -50%)')
+      );
+    }
+
+    &__content {
+      top: 0;
+      left: 0;
+    }
+
+    &__aside {
+      &__panel {
+        display: flex;
+        align-items: flex-end;
+      }
+    }
+  }
+}
+
+:host-context(.-state-two) {
+  .eg-dual-pane-curtain-layout {
+    &::before {
+      @include property-for-breakpoint(top, (initial, MD -10%));
+      @include property-for-breakpoint(right, (initial, MD 48%));
+      @include property-for-breakpoint(left, (30%, MD unset));
+      @include property-for-breakpoint(
+        bottom,
+        ('calc(100% - #{var(--eg-aside-header-height, 30%)})', MD unset)
+      );
+      @include property-for-breakpoint(
+        transform,
+        ('translate(-50%, 0)', MD 'translate(0, -50%)')
+      );
+    }
+
+    &__content {
+      @include property-for-breakpoint(
+        top,
+        (var(--eg-aside-header-height, 30%), MD 0)
+      );
+      @include property-for-breakpoint(left, (0, MD 50%));
+    }
+  }
+}

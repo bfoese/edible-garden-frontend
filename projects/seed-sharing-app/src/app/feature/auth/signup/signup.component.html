@@ -1,0 +1,84 @@
+<seed-auth-form [titleTmpl]="titleTmpl" [formTmpl]="signupTmpl"></seed-auth-form>
+
+<ng-template #titleTmpl i18n="title">Sign up</ng-template>
+
+<ng-template #signupTmpl>
+
+  <div class="seed-signup__alert" *ngIf="showInvalidActivationTokenError">
+    <nz-alert nzType="error" i18n-nzMessage="alert-title" nzMessage="Account activation failed"
+      i18n-nzDescription="alert-msg"
+      nzDescription="Your user account could not be activated: the activation token expired. Please sign up again to receive a new activation token.">
+    </nz-alert>
+  </div>
+
+  <form nz-form [formGroup]="registrationForm" (ngSubmit)="submitForm()" [nzLayout]="formLayout"
+    class="seed-signup__form">
+    <nz-form-item>
+      <nz-form-control [nzErrorTip]="tmplFormFieldErrors">
+        <nz-input-group [nzPrefix]="tmplUsernameIcon">
+          <input type="text" nz-input formControlName="username" i18n-placeholder="placeholder" placeholder="Username"
+            autocomplete="username" aria-label="Username" i18n-aria-label="label" />
+        </nz-input-group>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-control nzHasFeedback [nzErrorTip]="tmplFormFieldErrors">
+        <nz-input-group [nzPrefix]="tmplEmailIcon">
+          <input nz-input formControlName="email" i18n-placeholder="placeholder" placeholder="Email" type="email"
+            autocomplete="email" aria-label="Email" i18n-aria-label="label" />
+        </nz-input-group>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-control nzHasFeedback [nzErrorTip]="tmplFormFieldErrors">
+        <nz-input-group [nzPrefix]="tmplPasswordIcon" [nzSuffix]="tmplPasswordRequirements">
+          <input nz-input type="password" formControlName="password" i18n-placeholder="placeholder"
+            placeholder="Password" autocomplete="new-password" aria-label="Password" i18n-aria-label="label" />
+        </nz-input-group>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-control nzHasFeedback [nzErrorTip]="tmplFormFieldErrors">
+        <nz-input-group [nzPrefix]="tmplPasswordIcon">
+          <input nz-input type="password" formControlName="confirmPassword" i18n-placeholder="placeholder"
+            placeholder="Confirm Password" autocomplete="new-password" aria-label="Confirm Password"
+            i18n-aria-label="label" />
+        </nz-input-group>
+      </nz-form-control>
+    </nz-form-item>
+    <div class="seed-signup__actions">
+      <button nz-button nzType="primary" [nzLoading]="submitFormInProgress" [disabled]="!registrationForm.valid"
+        i18n="button">
+        Sign up
+      </button>
+    </div>
+
+    <ng-template #tmplPasswordRequirements><eg-icon class="-input" [name]="EgIconType.info_comment_outline" nz-popover
+      [nzPopoverTitle]="passwordRulesTitle" [nzPopoverContent]="passwordRulesContent" nzPopoverTrigger="click"></eg-icon>
+    </ng-template>
+    <ng-template #passwordRulesTitle i18n="popup-title">Password Requirements</ng-template>
+
+    <ng-template #passwordRulesContent>
+      <ul class="seed-signup__password-rules">
+        <li i18n="popup-bullet">min. length: 8</li>
+        <li i18n="popup-bullet">at least one upper case letter</li>
+        <li i18n="popup-bullet">at least one lower case letter</li>
+        <li i18n="popup-bullet">at least one number</li>
+        <li i18n="popup-bullet">no whitespace allowed</li>
+        <li i18n="popup-bullet">special characters allowed</li>
+      </ul>
+    </ng-template>
+  </form>
+
+  <seed-social-signin-signup [isForSignup]="true" class="seed-signup__social"></seed-social-signin-signup>
+
+</ng-template>
+
+<ng-template #tmplFormFieldErrors let-control>
+  <seed-form-errors [control]="control"></seed-form-errors>
+</ng-template>
+
+
+<ng-template #tmplUsernameIcon><eg-icon [name]="EgIconType.username_outline" class="-input"></eg-icon></ng-template>
+<ng-template #tmplEmailIcon><eg-icon [name]="EgIconType.email_outline" class="-input"></eg-icon></ng-template>
+<ng-template #tmplPasswordIcon><eg-icon [name]="EgIconType.password_outline" class="-input"></eg-icon></ng-template>

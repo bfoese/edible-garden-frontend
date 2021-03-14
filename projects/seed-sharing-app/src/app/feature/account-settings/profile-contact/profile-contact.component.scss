@@ -1,0 +1,38 @@
+:host {
+  display: flex;
+  flex-direction: row;
+  @mixin clip-path($clip) {
+    -webkit-clip-path: url($clip);
+    -moz-clip-path: url($clip);
+    -ms-clip-path: url($clip);
+    clip-path: url($clip);
+  }
+
+  .profile-contact {
+    &__data-view {
+      border-radius: 0 0 20px 0;
+      order: 0;
+    }
+
+    &__map-view {
+      border-radius: 20px 0 0 0;
+      order: 1;
+      border: 1px salmon;
+      width: 226.8px;
+      height: 236px;
+
+      button {
+        display: none;
+      }
+    }
+    &__map-canvas {
+      border: 1px salmon;
+      height: 250px;
+      //width: 250px;
+    }
+  }
+
+  .profile-contact__map-canvas {
+    //@include clip-path(#chopChop);
+  }
+}

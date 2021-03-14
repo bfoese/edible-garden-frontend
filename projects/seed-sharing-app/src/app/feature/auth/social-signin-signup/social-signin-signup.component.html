@@ -1,0 +1,12 @@
+<nz-divider i18n-nzText="label" nzText="OR" nzOrientation="center" class="seed-social-signin__divider"></nz-divider>
+
+<dl class="seed-social-signin__platforms">
+  <dt i18n="label" *ngIf="!isForSignup">Sign in with social platforms</dt>
+  <dt i18n="label" *ngIf="isForSignup">Sign up with social platforms</dt>
+  <dd>
+    <button class="seed-social-signin__btn" (click)="signinWithGoogle()" aria-label="Signin with Google"
+      i18n-aria-label="label">
+      <eg-icon [name]="EgIconType.social_signin_google"></eg-icon>
+    </button>
+  </dd>
+</dl>

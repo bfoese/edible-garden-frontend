@@ -1,0 +1,9 @@
+@keyframes increase-height {
+  0% {
+    height: var(--inc-height-start);
+  }
+
+  100% {
+    height: var(--inc-height-end);
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "plugins": [
+    "stylelint-scss"
+  ],
+  "extends": [
+    "stylelint-config-standard",
+    "stylelint-config-rational-order"
+  ],
+  "rules": {
+    "no-eol-whitespace": [true, { "ignore": ["empty-lines"] }],
+    "indentation": [2, { "ignore": ["inside-parens"]}],
+    "selector-type-no-unknown": [true, { "ignore": ["custom-elements"]}],
+    "selector-pseudo-element-no-unknown": [true, { "ignorePseudoElements": ["ng-deep"]}],
+    "no-descending-specificity": null,
+    "at-rule-empty-line-before": ["always", {
+      "except": ["inside-block"], "ignoreAtRules": ["if", "else", "include", "import"]}
+    ],
+    "block-closing-brace-newline-after": ["always", { "ignoreAtRules": ["if", "else"]}],
+    "scss/at-if-closing-brace-newline-after": "always-last-in-chain",
+    "scss/at-if-closing-brace-space-after": "always-intermediate",
+    "scss/at-if-no-null": true,
+    "scss/at-else-closing-brace-newline-after": "always-last-in-chain",
+    "scss/at-else-closing-brace-space-after": "always-intermediate",
+    "scss/at-else-empty-line-before": "never",
+    "scss/at-else-if-parentheses-space-before": "always",
+    "at-rule-no-unknown": null,
+    "scss/at-rule-no-unknown": true,
+    "scss/selector-no-redundant-nesting-selector": true,
+    "scss/at-each-key-value-single-line": true,
+    "scss/at-function-parentheses-space-before": "never",
+    "scss/at-mixin-argumentless-call-parentheses": "never",
+    "scss/at-mixin-parentheses-space-before": "never",
+    "value-keyword-case": ["lower", {"ignoreKeywords": ["SSD"] }]
+  }
+}

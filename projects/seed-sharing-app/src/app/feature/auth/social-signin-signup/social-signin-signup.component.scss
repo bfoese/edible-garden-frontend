@@ -1,0 +1,48 @@
+@import 'seed-style';
+
+:host {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+
+  .seed-social-signin {
+    &__btn {
+      width: 2.5em;
+      height: 2.5em;
+      padding: 0.5em;
+      background: none;
+      border: 1px solid $ssd-green-light-rgba;
+      border-radius: 50%;
+
+      &:hover {
+        background-color: white;
+        cursor: pointer;
+      }
+
+      + .seed-social-signin__btn {
+        margin-left: 1em;
+      }
+    }
+
+    &__divider {
+      font-weight: 200;
+    }
+
+    &__platforms {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: center;
+
+      dt {
+        width: 100%;
+        margin-bottom: 0.6em;
+        text-align: center;
+      }
+
+      dd + dd {
+        margin-left: 1em;
+      }
+    }
+  }
+}

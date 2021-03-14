@@ -1,0 +1,123 @@
+@import "seed-style";
+
+:host-context(.--layout-landscape) {
+  $sidebar-width: 12em;
+
+  flex-direction: row;
+
+  .header-menubar {
+    flex-direction: column-reverse;
+    height: 100vh;
+
+    @include property-for-breakpoint(width, (2.5em, MD 4em, XL 4.5em));
+    @include property-for-breakpoint(padding, ("1em 0", MD "2em 0"));
+    @include corner-convex-y-top-right(var(--eg-panel-border-radius), $--header-menubar-bg, inherit);
+    @include corner-convex-y-bottom-right(var(--eg-panel-border-radius), $--header-menubar-bg, inherit);
+
+    eg-branding {
+      transform: rotate(-90deg) translateX(calc(50% - 1em));
+    }
+
+    &__title {
+      @include property-for-breakpoint(font-size, (16px, MD 20px, XL 25px));
+    }
+
+    &__nav {
+      flex-grow: 1;
+      align-items: center;
+
+      ul {
+        display: flex;
+        flex-direction: column-reverse;
+      }
+
+      li {
+        position: relative;
+      }
+
+      li + li {
+        @include property-for-breakpoint(margin-bottom, (1em, MD 1.8em, XL 2em));
+      }
+
+      .label {
+        display: none;
+      }
+    }
+
+    &__icon {
+      @include property-for-breakpoint(height, (1.2em, MD 1.4em));
+    }
+  }
+
+  .header-sidebar {
+    display: flex;
+    flex-direction: column;
+    width: $sidebar-width;
+    height: 100%;
+    padding: 2em 1.4em 1.2em 2em;
+    background-color: $--header-submenu-bg;
+
+    @include corner-convex-y-top-right(var(--eg-panel-border-radius), $--header-submenu-bg, 401); // leaflet map has 400 must be on top
+    @include corner-convex-y-bottom-right(var(--eg-panel-border-radius), $--header-submenu-bg, 401); // leaflet map has 400 must be on top
+
+    &.--closed {
+      margin-left: -$sidebar-width;
+    }
+
+    &.--closed.--animate {
+      // eg-animate was necessary because on screen rotation the sidebar
+      // animation from opened to closed was visible even though the sidebar was
+      // not open before rotation
+      transition: margin-left 1s ease-in-out;
+    }
+
+    &.--open {
+      margin-left: 0;
+      transition: margin-left 1s ease-in-out;
+
+      .header-sidebar__content {
+        display: flex;
+      }
+    }
+
+    &__content {
+      flex-grow: 1;
+      padding-top: 6em;
+    }
+
+    &__footer {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 2em;
+    }
+
+    &__primary-nav {
+      display: none;
+    }
+
+    &__link {
+      font-weight: 300;
+
+      @include property-for-breakpoint(font-size, (1.2em, MD 1.2em, LG 1.4em));
+      @include breakpoint(LG) {
+        line-height: 1.8;
+      }
+
+      eg-icon {
+        margin-right: 0.3em;
+      }
+
+      &.router-link-active {
+        &::after {
+          position: absolute;
+          right: 0;
+          width: 1.5px;
+          height: 1.6em;
+          background-color: $--header-submenu-bg;
+          content: "";
+        }
+      }
+    }
+  }
+}

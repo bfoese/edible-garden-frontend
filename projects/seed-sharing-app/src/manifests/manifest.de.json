@@ -1,0 +1,21 @@
+{
+  "short_name": "Krautland",
+  "name": "Krautland",
+  "lang": "de",
+  "start_url": "/de/index.html",
+  "icons": [
+    {
+      "src": "/de/assets/favicon/favicon.ico",
+      "sizes": "32x32",
+      "type": "image/x-icon"
+    },
+    {
+      "src": "/de/assets/favicon/favicon_192.ico",
+      "sizes": "192x192",
+      "type": "image/x-icon"
+
+    }
+  ],
+  "display": "standalone",
+  "orientation": "natural"
+}

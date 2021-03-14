@@ -1,0 +1,22 @@
+<nz-divider>Units</nz-divider>
+
+<span nz-typography>Length</span>
+
+<nz-radio-group ngModel="preferredLengthUnit" nzButtonStyle="solid">
+  <label
+    *ngFor="let lengthUnit of getLengthUnits()"
+    nz-radio-button
+    [nzValue]="lengthUnit"
+    >{{lengthUnit}}</label
+  >
+</nz-radio-group>
+
+<span nz-typography>Temperature</span>
+<nz-radio-group ngModel="preferredTemperatureUnit" nzButtonStyle="solid">
+  <label
+    *ngFor="let temperatureUnit of getTemperatureUnits()"
+    nz-radio-button
+    [nzValue]="temperatureUnit"
+    >{{temperatureUnit}}</label
+  >
+</nz-radio-group>
