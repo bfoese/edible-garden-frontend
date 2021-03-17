@@ -1,16 +1,16 @@
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { RouterModule } from '@angular/router';
+import { SeedRouteData } from '@eg-seed/core/routing/seed-route-data.interface';
+import { SeedRoutes } from '@eg-seed/core/routing/seed-route.interface';
 
 import { AuthenticatedUserGuard } from '../core/auth/authenticated-user.guard';
 import SeedNav from '../service/navigation/seed-nav.constants';
 import { SeedSharingComponent } from './seed-sharing.component';
 
-const routes: Routes = [
-
+const routes: SeedRoutes = [
   {
     path: '',
     redirectTo: SeedNav.SeedSharing.relative
-
   },
   {
     path: SeedNav.SeedSharing.relative, // auxiliary routes must be children to a parent route with path not being ''!!!
@@ -31,7 +31,10 @@ const routes: Routes = [
           import('../feature/offer/offer-editor/offer-editor.module').then(
             (m) => m.OfferEditorModule
           ),
-        canActivate: [AuthenticatedUserGuard]
+        canActivate: [AuthenticatedUserGuard],
+        data: {
+          hideHeader: ['layout-portrait']
+        } as SeedRouteData
       },
       {
         path: SeedNav.AccountSettings.relative,
@@ -39,7 +42,10 @@ const routes: Routes = [
           import('../feature/account-settings/account-settings.module').then(
             (m) => m.AccountSettingsModule
           ),
-        canActivate: [AuthenticatedUserGuard]
+        canActivate: [AuthenticatedUserGuard],
+        data: {
+          hideHeader: ['layout-portrait']
+        } as SeedRouteData
       },
       {
         path: SeedNav.OfferPreview.relative,
@@ -48,10 +54,13 @@ const routes: Routes = [
             (m) => m.OfferPreviewModule
           ),
         outlet: 'secondary',
-         canActivate: [AuthenticatedUserGuard]
-      },
+        canActivate: [AuthenticatedUserGuard],
+        data: {
+          hideHeader: ['layout-portrait']
+        } as SeedRouteData
+      }
     ]
-  },
+  }
 ];
 
 @NgModule({

@@ -1,32 +1,32 @@
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { RouterModule } from '@angular/router';
 
+import { SeedRoutes } from './core/routing/seed-route.interface';
 import SeedNav from './service/navigation/seed-nav.constants';
 
-const routes: Routes = [
-
+const routes: SeedRoutes = [
   {
     path: '',
     loadChildren: () =>
       import('./seed-sharing/seed-sharing.module').then(
         (m) => m.SeedSharingModule
-      ),
+      )
   },
   {
     path: SeedNav.Authentication.relative,
     loadChildren: () =>
       import('./feature/auth/auth.module').then((m) => m.AuthModule)
   },
-  // {
-  //   path: '**',
-  //   redirectTo: SeedNav.SeedSharing.full
-  // }
+  {
+    path: '**',
+    redirectTo: SeedNav.SeedSharing.full
+  }
 ];
 
 @NgModule({
   imports: [
     RouterModule.forRoot(routes, {
-      enableTracing: false,
+      enableTracing: false
       //onSameUrlNavigation: 'reload'
     })
   ],

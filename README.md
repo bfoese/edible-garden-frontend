@@ -134,6 +134,8 @@ graphic tool, you can apply a scale transformation to the paths:
     />
   </clipPath>
 </svg>
+
+<seed-map style="clip-path: url(#mapClipPath)"></seed-map>
 ```
 
 One problem left at this point: The SVG is being stretched to the size of the

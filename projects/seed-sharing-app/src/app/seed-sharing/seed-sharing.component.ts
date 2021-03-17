@@ -15,11 +15,13 @@ import { combineLatest, Subscription } from 'rxjs';
 import { AuthenticatedUserGuard } from '../core/auth/authenticated-user.guard';
 import { AppLayoutService } from '../core/ui/app-layout.service';
 import SeedNav from '../service/navigation/seed-nav.constants';
+import { HeaderService } from './header.service';
 
 @Component({
   selector: 'seed-sharing',
   templateUrl: './seed-sharing.component.html',
-  styleUrls: ['./seed-sharing.component.scss']
+  styleUrls: ['./seed-sharing.component.scss'],
+  providers: [HeaderService]
 })
 export class SeedSharingComponent implements OnInit, OnDestroy {
   public SeedNav = SeedNav;
@@ -38,7 +40,8 @@ export class SeedSharingComponent implements OnInit, OnDestroy {
     private appLayoutService: AppLayoutService,
     private breakpointService: BreakpointService,
     public authService: EgAuthFacadeService,
-    private readonly hostElemRef: ElementRef
+    private readonly hostElemRef: ElementRef,
+    public readonly headerService: HeaderService
   ) {}
 
   ngOnInit(): void {
