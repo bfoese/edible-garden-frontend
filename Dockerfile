@@ -5,6 +5,7 @@ WORKDIR /usr/src/app
 COPY package*.json ./
 
 ARG GH_PKG_TOKEN
+ARG NG_BUILD_CONFIG
 
 # Creates npmrc file on the fly to enable download of private packages from
 # github package registry. npmrc file will be removed afterwards to not end up
@@ -19,7 +20,8 @@ RUN echo "//npm.pkg.github.com/:_authToken=${GH_PKG_TOKEN}" > .npmrc && \
 
 # Copy the rest of the files
 COPY . ./
-RUN node_modules/.bin/ng build --prod && npm prune --production
+# If --prod is present, Angular will apply it first
+RUN node_modules/.bin/ng build --configuration=${NG_BUILD_CONFIG} --prod && npm prune --production
 
 
 # Create a second stage to make this a multi stage build: only the final build
@@ -47,4 +49,8 @@ COPY projects/seed-sharing-app/src/static/html /usr/share/nginx/html
 # with the replaced variable. In order to override the file, the return value
 # must be written into that file, which is done with 'textContent > filePath'.
 # 'deamon off' tells nginx to stay in the foreground
-CMD /bin/bash -c "envsubst '\$PORT' < /etc/nginx/conf.d/default.conf > /etc/nginx/conf.d/default.conf" && nginx -g 'daemon off;'
+
+# NGINX >=1.19 has also a built in solution for replacing variables:, which
+# would be better if list of variables grows:
+# https://stackoverflow.com/questions/56649582/substitute-environment-variables-in-nginx-config-from-docker-compose
+CMD /bin/bash -c "envsubst '\$PORT,\$NGINX_PROXY_PASS' < /etc/nginx/conf.d/default.conf > /etc/nginx/conf.d/default.conf" && nginx -g 'daemon off;'

@@ -269,6 +269,32 @@
                 }
               ]
             },
+            "qa": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/seed-sharing-app/src/environments/environment.ts",
+                  "with": "projects/seed-sharing-app/src/environments/environment.qa.ts"
+                }
+              ],
+              "outputHashing": "all",
+              "sourceMap": false,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
+                }
+              ]
+            },
             "production": {
               "fileReplacements": [
                 {
@@ -301,13 +327,14 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "seed-sharing-app:build"
+            "browserTarget": "seed-sharing-app:build",
+            "ssl": true,
+            "sslCert": "C:\\dev\\certs\\localhost-fullchain.pem",
+            "sslKey": "C:\\dev\\certs\\localhost-key.pem"
           },
           "configurations": {
-            "https": {
-              "ssl": true,
-              "sslCert": "C:\\dev\\certs\\localhost-fullchain.pem",
-              "sslKey": "C:\\dev\\certs\\localhost-key.pem"
+            "http": {
+              "ssl": false
             },
             "lang-de": {
               "browserTarget": "seed-sharing-app:build:lang-de",
@@ -321,8 +348,11 @@
               "browserTarget": "seed-sharing-app:build:dev-nginx,lang-en",
               "baseHref": "/en/"
             },
+            "qa": {
+              "browserTarget": "seed-sharing-app:build:qa,lang-en"
+            },
             "production": {
-              "browserTarget": "seed-sharing-app:build:production"
+              "browserTarget": "seed-sharing-app:build:production,lang-de"
             }
           }
         },

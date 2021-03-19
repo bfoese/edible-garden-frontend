@@ -1,11 +1,6 @@
-# This is a basic workflow that is manually triggered
+name: Image to GH registry
 
-name: Build and push docker image to GH registry
-
-# Controls when the action will run. Workflow runs when manually triggered using the UI
-# or API.
 on:
-  # push:
   #   branches:
   #     - main
   #   tags:
@@ -13,12 +8,20 @@ on:
   workflow_dispatch:
     inputs:
       branch:
-        description: 'Branch to deploy'
-        default: "main"
+        description: 'Branch for image'
+        default: "prod"
+        required: true
+      buildConfig:
+        description: 'NG_BUILD_CONFIG for image (comma separated string for ng build --configuration)'
+        default: "production"
+        required: true
+      name:
+        description: 'Image name'
+        default: "seed-sharing"
         required: true
 
 env:
-  IMAGE_NAME: seedsharing
+  IMAGE_NAME: ${{ github.event.inputs.name }}
 
 jobs:
   build_push_image:
@@ -28,8 +31,10 @@ jobs:
     steps:
       - name: "Build:checkout"
         uses: actions/checkout@v2
+        with:
+          ref: ${{ github.event.inputs.branch }}
       - name: Build image
-        run: docker build . --file Dockerfile --tag image --build-arg GH_PKG_TOKEN=${{ secrets.GH_PKG_TOKEN }}
+        run: docker build . --file Dockerfile --tag image --build-arg GH_PKG_TOKEN=${{ secrets.GH_PKG_TOKEN }} --build-arg NG_BUILD_CONFIG=${{ github.event.inputs.buildConfig }} --no-cache
 
       - name: Log into registry
         run: echo "${{ secrets.GH_PKG_TOKEN }}" | docker login ghcr.io -u ${{ github.repository_owner }} --password-stdin

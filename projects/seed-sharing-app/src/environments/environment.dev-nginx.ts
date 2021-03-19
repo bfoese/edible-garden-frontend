@@ -2,6 +2,8 @@
 // `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
+import { SeedEnvironment } from './seed-environment';
+
 export const environment = {
   production: false,
   apiRootUrlEdibleGarden: '',
@@ -11,7 +13,7 @@ export const environment = {
     default: 'en',
     available: ['en', 'de']
   }
-};
+} as SeedEnvironment;
 
 /*
  * For easier debugging in development mode, you can import the following file

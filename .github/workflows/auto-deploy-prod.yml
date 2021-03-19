@@ -1,0 +1,38 @@
+name: Auto deploy PROD
+on:
+  push:
+    branches:
+      - prod
+  pull_request:
+    branches:
+      - prod
+
+env:
+  BRANCH: prod
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          ref: prod # Couldn't use $BRANCH here!?
+      # akhileshns/heroku-deploy@v3.12.12
+      - uses: akhileshns/heroku-deploy@79ef2ae4ff9b897010907016b268fd0f88561820
+        with:
+          branch: $BRANCH
+          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+          heroku_app_name: ${{secrets.PROD_HEROKU_APP_NAME}}
+          heroku_email: ${{secrets.HEROKU_EMAIL}}
+          dontuseforce: false
+          usedocker: true
+          docker_heroku_process_type: web
+          region: eu
+          docker_build_args: |
+            GH_PKG_TOKEN
+            NG_BUILD_CONFIG
+        env:
+          NG_BUILD_CONFIG: production
+          GH_PKG_TOKEN: ${{secrets.GH_PKG_TOKEN}}
+          HD_NGINX_PROXY_PASS: ${{secrets.PROD_NGINX_PROXY_PASS}}
+
