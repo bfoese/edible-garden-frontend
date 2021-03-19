@@ -110,10 +110,38 @@
           }
         },
         "e2e": {
-          "builder": "@angular-devkit/build-angular:protractor",
+          "builder": "@briebug/cypress-schematic:cypress",
           "options": {
-            "protractorConfig": "projects/edible-garden-app/e2e/protractor.conf.js",
-            "devServerTarget": "edible-garden-app:serve"
+            "devServerTarget": "edible-garden-app:serve",
+            "watch": true,
+            "headless": false,
+            "configFile": "projects/edible-garden-app/cypress.json"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "edible-garden-app:serve:production"
+            }
+          }
+        },
+        "cypress-run": {
+          "builder": "@briebug/cypress-schematic:cypress",
+          "options": {
+            "devServerTarget": "edible-garden-app:serve",
+            "configFile": "projects/edible-garden-app/cypress.json"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "edible-garden-app:serve:production"
+            }
+          }
+        },
+        "cypress-open": {
+          "builder": "@briebug/cypress-schematic:cypress",
+          "options": {
+            "devServerTarget": "edible-garden-app:serve",
+            "watch": true,
+            "headless": false,
+            "configFile": "projects/edible-garden-app/cypress.json"
           },
           "configurations": {
             "production": {
@@ -157,6 +185,46 @@
               "projects/edible-garden-api/**/*.html"
             ]
           }
+        },
+        "cypress-run": {
+          "builder": "@briebug/cypress-schematic:cypress",
+          "options": {
+            "devServerTarget": "edible-garden-api:serve",
+            "configFile": "projects/edible-garden-api/cypress.json"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "edible-garden-api:serve:production"
+            }
+          }
+        },
+        "cypress-open": {
+          "builder": "@briebug/cypress-schematic:cypress",
+          "options": {
+            "devServerTarget": "edible-garden-api:serve",
+            "watch": true,
+            "headless": false,
+            "configFile": "projects/edible-garden-api/cypress.json"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "edible-garden-api:serve:production"
+            }
+          }
+        },
+        "e2e": {
+          "builder": "@briebug/cypress-schematic:cypress",
+          "options": {
+            "devServerTarget": "edible-garden-api:serve",
+            "watch": true,
+            "headless": false,
+            "configFile": "projects/edible-garden-api/cypress.json"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "edible-garden-api:serve:production"
+            }
+          }
         }
       }
     },
@@ -193,6 +261,46 @@
               "projects/eg-common/**/*.ts",
               "projects/eg-common/**/*.html"
             ]
+          }
+        },
+        "cypress-run": {
+          "builder": "@briebug/cypress-schematic:cypress",
+          "options": {
+            "devServerTarget": "eg-common:serve",
+            "configFile": "projects/eg-common/cypress.json"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "eg-common:serve:production"
+            }
+          }
+        },
+        "cypress-open": {
+          "builder": "@briebug/cypress-schematic:cypress",
+          "options": {
+            "devServerTarget": "eg-common:serve",
+            "watch": true,
+            "headless": false,
+            "configFile": "projects/eg-common/cypress.json"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "eg-common:serve:production"
+            }
+          }
+        },
+        "e2e": {
+          "builder": "@briebug/cypress-schematic:cypress",
+          "options": {
+            "devServerTarget": "eg-common:serve",
+            "watch": true,
+            "headless": false,
+            "configFile": "projects/eg-common/cypress.json"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "eg-common:serve:production"
+            }
           }
         }
       }
@@ -232,7 +340,11 @@
             "i18nMissingTranslation": "warning",
             "assets": [
               "projects/seed-sharing-app/src/favicon.ico",
-              {"glob": "**/*", "input": "projects/seed-sharing-app/src/assets", "output": "/assets/"},
+              {
+                "glob": "**/*",
+                "input": "projects/seed-sharing-app/src/assets",
+                "output": "/assets/"
+              },
               "projects/seed-sharing-app/src/manifests",
               {
                 "glob": "**/*",
@@ -404,10 +516,38 @@
           }
         },
         "e2e": {
-          "builder": "@angular-devkit/build-angular:protractor",
+          "builder": "@briebug/cypress-schematic:cypress",
           "options": {
-            "protractorConfig": "projects/seed-sharing-app/e2e/protractor.conf.js",
-            "devServerTarget": "seed-sharing-app:serve"
+            "devServerTarget": "seed-sharing-app:serve",
+            "watch": true,
+            "headless": false,
+            "configFile": "projects/seed-sharing-app/cypress.json"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "seed-sharing-app:serve:production"
+            }
+          }
+        },
+        "cypress-run": {
+          "builder": "@briebug/cypress-schematic:cypress",
+          "options": {
+            "devServerTarget": "seed-sharing-app:serve",
+            "configFile": "projects/seed-sharing-app/cypress.json"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "seed-sharing-app:serve:production"
+            }
+          }
+        },
+        "cypress-open": {
+          "builder": "@briebug/cypress-schematic:cypress",
+          "options": {
+            "devServerTarget": "seed-sharing-app:serve",
+            "watch": true,
+            "headless": false,
+            "configFile": "projects/seed-sharing-app/cypress.json"
           },
           "configurations": {
             "production": {
@@ -450,6 +590,46 @@
               "projects/eg-ui-dynamic-icons/**/*.ts",
               "projects/eg-ui-dynamic-icons/**/*.html"
             ]
+          }
+        },
+        "cypress-run": {
+          "builder": "@briebug/cypress-schematic:cypress",
+          "options": {
+            "devServerTarget": "eg-ui-dynamic-icons:serve",
+            "configFile": "projects/eg-ui-dynamic-icons/cypress.json"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "eg-ui-dynamic-icons:serve:production"
+            }
+          }
+        },
+        "cypress-open": {
+          "builder": "@briebug/cypress-schematic:cypress",
+          "options": {
+            "devServerTarget": "eg-ui-dynamic-icons:serve",
+            "watch": true,
+            "headless": false,
+            "configFile": "projects/eg-ui-dynamic-icons/cypress.json"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "eg-ui-dynamic-icons:serve:production"
+            }
+          }
+        },
+        "e2e": {
+          "builder": "@briebug/cypress-schematic:cypress",
+          "options": {
+            "devServerTarget": "eg-ui-dynamic-icons:serve",
+            "watch": true,
+            "headless": false,
+            "configFile": "projects/eg-ui-dynamic-icons/cypress.json"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "eg-ui-dynamic-icons:serve:production"
+            }
           }
         }
       }
@@ -495,11 +675,52 @@
           "options": {
             "tsConfig": [
               "projects/eg-ui-components/tsconfig.lib.json",
-              "projects/eg-ui-components/tsconfig.spec.json"
+              "projects/eg-ui-components/tsconfig.spec.json",
+              "projects/eg-ui-components/cypress/tsconfig.json"
             ],
             "exclude": [
               "**/node_modules/**"
             ]
+          }
+        },
+        "cypress-run": {
+          "builder": "@briebug/cypress-schematic:cypress",
+          "options": {
+            "devServerTarget": "eg-ui-components:serve",
+            "configFile": "projects/eg-ui-components/cypress.json"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "eg-ui-components:serve:production"
+            }
+          }
+        },
+        "cypress-open": {
+          "builder": "@briebug/cypress-schematic:cypress",
+          "options": {
+            "devServerTarget": "eg-ui-components:serve",
+            "watch": true,
+            "headless": false,
+            "configFile": "projects/eg-ui-components/cypress.json"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "eg-ui-components:serve:production"
+            }
+          }
+        },
+        "e2e": {
+          "builder": "@briebug/cypress-schematic:cypress",
+          "options": {
+            "devServerTarget": "eg-ui-components:serve",
+            "watch": true,
+            "headless": false,
+            "configFile": "projects/eg-ui-components/cypress.json"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "eg-ui-components:serve:production"
+            }
           }
         }
       }

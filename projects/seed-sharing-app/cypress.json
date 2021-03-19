@@ -1,0 +1,9 @@
+{
+  "integrationFolder": "projects/seed-sharing-app/cypress/integration",
+  "supportFile": "projects/seed-sharing-app/cypress/support/index.ts",
+  "videosFolder": "projects/seed-sharing-app/cypress/videos",
+  "screenshotsFolder": "projects/seed-sharing-app/cypress/screenshots",
+  "pluginsFile": "projects/seed-sharing-app/cypress/plugins/index.js",
+  "fixturesFolder": "projects/seed-sharing-app/cypress/fixtures",
+  "baseUrl": "https://localhost:4200"
+}

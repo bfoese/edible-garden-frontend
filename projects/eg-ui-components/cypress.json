@@ -1,0 +1,9 @@
+{
+  "integrationFolder": "projects/eg-ui-components/cypress/integration",
+  "supportFile": "projects/eg-ui-components/cypress/support/index.ts",
+  "videosFolder": "projects/eg-ui-components/cypress/videos",
+  "screenshotsFolder": "projects/eg-ui-components/cypress/screenshots",
+  "pluginsFile": "projects/eg-ui-components/cypress/plugins/index.js",
+  "fixturesFolder": "projects/eg-ui-components/cypress/fixtures",
+  "baseUrl": "http://localhost:4200"
+}
