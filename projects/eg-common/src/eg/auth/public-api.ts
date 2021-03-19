@@ -1,5 +1,4 @@
 export * from './lib/eg-api-auth-service.token';
-export * from './lib/eg-auth-backend-feedback.guard';
 export * from './lib/eg-auth-facade.service';
 export * from './lib/eg-auth.config';
 export * from './lib/eg-auth.interceptor';

@@ -18,7 +18,7 @@ export class EgIconRegistry {
 
   public getIcon(iconName: string): string | undefined {
     if (!this.registry.has(iconName)) {
-      console.warn(`EgIcon not found in registry: ${iconName}`);
+      console.debug(`EgIcon not found in registry: ${iconName}`);
     }
     return this.registry.get(iconName);
   }

@@ -6,6 +6,8 @@ import { environment } from './environments/environment';
 
 if (environment.production) {
   enableProdMode();
+  // prevent printing console as recommended by Lighthouse review
+  window.console.debug = () => {};
 }
 
 platformBrowserDynamic()

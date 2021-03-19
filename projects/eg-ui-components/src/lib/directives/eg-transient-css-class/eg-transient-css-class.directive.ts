@@ -63,7 +63,7 @@ export class EgTransientCssClassDirective implements OnInit, OnDestroy {
   @HostBinding('class') get classes(): string {
     if (this.hasTransientClass) {
       if (!this.egTransientClass) {
-        console.warn(
+        console.debug(
           '[EgTransientCssClassDirective] no transient class name defined. Action skipped. You must define [egTransientClass]'
         );
       }
@@ -166,7 +166,7 @@ export class EgTransientCssClassDirective implements OnInit, OnDestroy {
    */
   private addAnimationTagAndRemoveOnTimeout(key: string) {
     if (!this.egDuration) {
-      console.warn(
+      console.debug(
         '[EgTransientCssClassDirective] no custom duration defined, fallback to default duration. You should define [egDuration]'
       );
     }

@@ -27,7 +27,7 @@ export class EgAuthModule {
     SingletonInjectorRuntimeGuard.guardSingletonInjector(parentModule);
     const egAuthHeaderUris = this.egAuthConfig.authHeaderUris;
     if (!egAuthHeaderUris || egAuthHeaderUris.length === 0) {
-      console.warn('[EgAuthModule] Incomplete module configuration: \'authHeaderUris\' is not defined. You shoud define it to indicate which outgoing requests must be enhanced with the authorization header. Without configuation of this property the authorization header will not be attached to any outgoing request.');
+      console.debug('[EgAuthModule] Incomplete module configuration: \'authHeaderUris\' is not defined. You shoud define it to indicate which outgoing requests must be enhanced with the authorization header. Without configuation of this property the authorization header will not be attached to any outgoing request.');
     }
   }
 

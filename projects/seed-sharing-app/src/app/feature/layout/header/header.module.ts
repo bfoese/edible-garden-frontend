@@ -4,10 +4,6 @@ import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { EgI18nModule } from '@eg/common/src/eg/i18n';
 
-import { NzAvatarModule } from 'ng-zorro-antd/avatar';
-import { NzButtonModule } from 'ng-zorro-antd/button';
-import { NzDividerModule } from 'ng-zorro-antd/divider';
-import { NzPopoverModule } from 'ng-zorro-antd/popover';
 import { EgBrandingModule } from 'projects/eg-ui-components/src/lib/components/eg-branding';
 import { EgTransientCssClassModule } from 'projects/eg-ui-components/src/lib/directives/eg-transient-css-class';
 import {
@@ -32,10 +28,6 @@ import { TimePipe } from './time.pipe';
   imports: [
     CommonModule,
     RouterModule,
-    NzAvatarModule,
-    NzPopoverModule,
-    NzDividerModule,
-    NzButtonModule,
     FormsModule,
     EgI18nModule,
     LocaleSwitchModule,

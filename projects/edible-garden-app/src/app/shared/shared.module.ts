@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 
-import { EgHighlightPipe } from '../../../../seed-sharing-app/src/app/feature/offer-editor/offer-contact/eg-phone-country-code.pipe';
+import { EgHighlightPipe } from './pipe/highlight.pipe';
 import { NutritionDemandPercentPipe } from './pipe/nutrition-demand-percent.pipe';
 import { PopularNamePipe } from './pipe/popular-name.pipe';
 

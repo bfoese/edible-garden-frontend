@@ -1,12 +1,11 @@
 import { Injectable, Optional, SkipSelf } from '@angular/core';
 import { SingletonInjectorRuntimeGuard } from '@eg/common/src/lib/ng/guards/singleton-injector-runtime-guard';
-import { AuthenticationService } from '@eg/edible-garden-api/src/public-api';
 
-import { environment } from 'projects/seed-sharing-app/src/environments/environment';
 import { fromEvent, Observable, Observer, Subscription } from 'rxjs';
 import { filter, finalize, map } from 'rxjs/operators';
 
 import { EgAuthFacadeService } from './eg-auth-facade.service';
+import { EgAuthConfig } from './eg-auth.config';
 import { EgThirdPartySigninWindowMsg } from './eg-third-party-signin-window-msg';
 import { EgThirdPartySigninConstants } from './eg-third-party-signin.constants';
 
@@ -26,6 +25,7 @@ export class EgThirdPartySigninService {
 
   constructor(
     private readonly egAuthFacadeService: EgAuthFacadeService,
+    private readonly egAuthConfig: EgAuthConfig,
     @Optional() @SkipSelf() parent?: EgThirdPartySigninService
   ) {
     SingletonInjectorRuntimeGuard.guardSingletonInjector(parent);
@@ -60,8 +60,6 @@ export class EgThirdPartySigninService {
    * sucessfull and the user is not authenticated yet.
    */
   public signInWithGoogle(): Observable<boolean> {
-    const googleSigninUrl = `${environment.apiRootUrlEdibleGarden}${AuthenticationService.AuthenticationControllerSigninWithGooglePath}`;
-
     // window message listener to listen for signup process finshed message from the guard
     const windowMsgs$ = fromEvent<any>(window, 'message');
 
@@ -112,7 +110,7 @@ export class EgThirdPartySigninService {
     // Open a new window to start the process and prevent CORS exceptions. Window will contain the Google consent dialog.
     this.thirdPartyAuthWindow =
       window.open(
-        googleSigninUrl,
+        this.egAuthConfig.googleSigninUri,
         EgThirdPartySigninConstants.WINDOW_NAME_ThirdPartySignin,
         // Choose small window to fit also for mobile. Google consent dialog is responsive.
         'location=1,status=1,scrollbars=1, width=320,height=500'

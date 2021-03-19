@@ -8,7 +8,7 @@
     [lang]="locale"
     [hreflang]="locale"
     role="navigation"
-    *ngFor="let locale of getAvailableLocales()"
+    *ngFor="let locale of availableLocales"
     [ngClass]="{ '--checked': locale === currentLocale }"
   >
     <input

@@ -7,8 +7,9 @@ import { Injectable } from '@angular/core';
 @Injectable({
   providedIn: 'root',
 })
-export class EgAuthConfig {
+export class EgAuthConfig implements EgAuthConfigParams {
   authHeaderUris: string[] = [];
+  googleSigninUri: string = '';
 }
 
 
@@ -21,4 +22,5 @@ export interface EgAuthConfigParams {
    * reasons.
    */
   authHeaderUris: string[];
+  googleSigninUri: string;
 }

@@ -11,6 +11,7 @@ import {
 } from '@eg/edible-garden-api/src/public-api';
 
 import { de_DE, NZ_I18N } from 'ng-zorro-antd/i18n';
+import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzLayoutModule } from 'ng-zorro-antd/layout';
 import { NzMenuModule } from 'ng-zorro-antd/menu';
 
@@ -33,6 +34,7 @@ registerLocaleData(de);
     EdibleGardenApiModule.forRoot({
       rootUrl: environment.apiRootUrlEdibleGarden
     } as ApiConfigurationParams),
+    NzIconModule
   ],
   providers: [{ provide: NZ_I18N, useValue: de_DE }],
   bootstrap: [AppComponent]

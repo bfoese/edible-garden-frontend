@@ -3,9 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MapModule } from '@eg-seed/feature/map/map/map.module';
 
-import { NzAvatarModule } from 'ng-zorro-antd/avatar';
 import { NzButtonModule } from 'ng-zorro-antd/button';
-import { NzCardModule } from 'ng-zorro-antd/card';
 import { NzListModule } from 'ng-zorro-antd/list';
 import {
   egCornerBranch,
@@ -26,10 +24,7 @@ import { ProfileContactComponent } from './profile-contact/profile-contact.compo
     NzListModule,
     FormsModule,
     NzButtonModule,
-    NzAvatarModule,
     EgIconModule,
-    NzCardModule,
-    NzAvatarModule,
     MapModule
   ]
 })

@@ -16,6 +16,7 @@ export class LocaleSwitchComponent {
   EgIconType = EgIconType;
 
   public currentLocale: string | undefined;
+  public availableLocales: string[];
 
 
   public constructor(
@@ -23,6 +24,7 @@ export class LocaleSwitchComponent {
     private localeSwitchService: LocaleSwitchService
   ) {
     this.currentLocale = this.i18nService.getCurrentLocale();
+    this.availableLocales = this.i18nService.getAvailableLocales();
   }
 
   public onPreferredLocaleChanged(preferredLocale: string): void {
@@ -36,9 +38,5 @@ export class LocaleSwitchComponent {
     setTimeout(() => {
       this.localeSwitchService.changePreferredLocale(preferredLocale)
     }, 500);
-  }
-
-  public getAvailableLocales(): string[] {
-    return this.i18nService.getAvailableLocales();
   }
 }

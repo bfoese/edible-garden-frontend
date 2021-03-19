@@ -77,11 +77,11 @@ export class AntdI18nService {
         antLocale.startsWith(language)
       );
       if (fallbackLocale) {
-        console.warn(
+        console.debug(
           `NZ locale ${locale} does not exist. Use fallback value: ${fallbackLocale}`
         );
       } else {
-        console.warn(
+        console.debug(
           `NZ locale ${locale} does not exist. No fallback defined. Check and update list of available locales!`
         );
       }
