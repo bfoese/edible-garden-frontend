@@ -4,20 +4,22 @@ on:
   push:
     branches:
       - main
+      - 'feat-*'
   pull_request:
     branches:
       - main
 
 env:
-  BRANCH: main
+  # Extracting the branch name:
+  # For GITHUB_REF=refs/heads/feature-branch-1
+  # ${GITHUB_REF##*/} will be 'feature-branch-1'
+  BRANCH: ${GITHUB_REF##*/}
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-        with:
-          ref: main # Couldn't use $BRANCH here!?
       # akhileshns/heroku-deploy@v3.12.12
       - uses: akhileshns/heroku-deploy@79ef2ae4ff9b897010907016b268fd0f88561820
         with:

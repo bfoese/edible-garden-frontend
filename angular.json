@@ -96,7 +96,9 @@
               "projects/edible-garden-app/src/favicon.ico",
               "projects/edible-garden-app/src/assets"
             ],
-            "styles": ["projects/edible-garden-app/src/styles.scss"],
+            "styles": [
+              "projects/edible-garden-app/src/styles.scss"
+            ],
             "scripts": []
           }
         },
@@ -483,6 +485,16 @@
             }
           }
         },
+        "serve-e2e": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "seed-sharing-app:build:lang-en",
+            "ssl": true,
+            "sslCert": "C:\\dev\\certs\\localhost-fullchain.pem",
+            "sslKey": "C:\\dev\\certs\\localhost-key.pem",
+            "baseHref": "/en/"
+          }
+        },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
@@ -518,10 +530,10 @@
         "e2e": {
           "builder": "@briebug/cypress-schematic:cypress",
           "options": {
-            "devServerTarget": "seed-sharing-app:serve",
             "watch": true,
             "headless": false,
-            "configFile": "projects/seed-sharing-app/cypress.json"
+            "configFile": "projects/seed-sharing-app/cypress.json",
+            "baseUrl": "https://my-base-url.com"
           },
           "configurations": {
             "production": {
@@ -532,29 +544,25 @@
         "cypress-run": {
           "builder": "@briebug/cypress-schematic:cypress",
           "options": {
-            "devServerTarget": "seed-sharing-app:serve",
             "configFile": "projects/seed-sharing-app/cypress.json"
           },
           "configurations": {
-            "production": {
-              "devServerTarget": "seed-sharing-app:serve:production"
+            "qa": {
             }
           }
         },
         "cypress-open": {
           "builder": "@briebug/cypress-schematic:cypress",
           "options": {
-            "devServerTarget": "seed-sharing-app:serve",
             "watch": true,
             "headless": false,
             "configFile": "projects/seed-sharing-app/cypress.json"
           },
           "configurations": {
-            "production": {
-              "devServerTarget": "seed-sharing-app:serve:production"
+            "qa": {
             }
           }
-        }
+        },
       }
     },
     "eg-ui-dynamic-icons": {

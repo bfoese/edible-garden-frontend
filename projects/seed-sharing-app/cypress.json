@@ -5,5 +5,12 @@
   "screenshotsFolder": "projects/seed-sharing-app/cypress/screenshots",
   "pluginsFile": "projects/seed-sharing-app/cypress/plugins/index.js",
   "fixturesFolder": "projects/seed-sharing-app/cypress/fixtures",
-  "baseUrl": "https://localhost:4200"
+  "reporter": "cypress-multi-reporters",
+  "reporterOptions": {
+    "configFile": "projects/seed-sharing-app/cypress/reporter-config.json"
+  },
+  "baseUrl": "https://localhost:4200/en",
+  "env": {
+    "locale": "en"
+  }
 }

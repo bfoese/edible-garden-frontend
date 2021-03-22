@@ -35,13 +35,13 @@
       <ng-container *ngSwitchCase="RequestAccountActionTokenType.ResetPassword">
         <nz-alert nzType="error" i18n-nzMessage="alert-title" nzMessage="Password reset failed"
           i18n-nzDescription="alert-msg"
-          nzDescription="We couldn't reset your password: your password reset link expired. Please request a new passwort reset link.">
+          nzDescription="We couldn't reset your password: your password reset link expired. Please request a new passwort reset link." role="alert">
         </nz-alert>
       </ng-container>
       <ng-container *ngSwitchCase="RequestAccountActionTokenType.VerifyEmail">
         <nz-alert nzType="error" i18n-nzMessage="alert-title" nzMessage="Email verification failed"
           i18n-nzDescription="alert-msg"
-          nzDescription="We couldn't verify your email address: your link expired. Please request a new verify email link.">
+          nzDescription="We couldn't verify your email address: your link expired. Please request a new verify email link." role="alert">
         </nz-alert>
       </ng-container>
     </ng-container>
@@ -49,7 +49,7 @@
 
   <nz-alert *ngIf="showEmailSentHint" class="seed-account-act-token__alert" nzType="success"
     i18n-nzMessage="alert-title" nzMessage="We sent you an email" i18n-nzDescription="alert-msg"
-    nzDescription="We just sent the requested email to you. In case you did not receive an email from us, we could not find an account belonging to the provided email address.">
+    nzDescription="We just sent the requested email to you. In case you did not receive an email from us, we could not find an account belonging to the provided email address." role="alert">
   </nz-alert>
 </ng-template>
 

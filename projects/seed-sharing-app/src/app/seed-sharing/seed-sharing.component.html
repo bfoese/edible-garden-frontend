@@ -1,5 +1,5 @@
 <seed-header *ngIf="!(headerService.hideHeader$ | async)"></seed-header>
-<div class="seed-cmp__content">
+<main class="seed-cmp__content">
     <as-split class="seed-cmp__split-pane" [useTransition]="true" unit="percent" [direction]="appLayoutType === 'layout-landscape' ? 'horizontal' : 'vertical'" [gutterSize]="splitPaneGutterSize">
         <as-split-area [size]="60" [minSize]="200" [order]="1">
 
@@ -15,4 +15,4 @@
             </section>
         </as-split-area>
     </as-split>
-</div>
+</main>

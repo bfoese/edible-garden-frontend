@@ -41,3 +41,27 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite("visit", (originalFn, url, options) => { ... })
+
+declare namespace Cypress {
+  interface Chainable<Subject = any> {
+    verifySuccessfulSigninAndSignout(): typeof verifySuccessfulSigninAndSignout;
+  }
+}
+
+function verifySuccessfulSigninAndSignout(): void {
+
+    cy.url().should('include','/sharing/map');
+    cy.get('nav[aria-label="Main"]').within(($headerNav) => {
+      cy.get('a[aria-label="Toggle sidebar"]').click();
+    });
+
+    cy.get('nav[aria-label="Sidebar"]').within(($sidebar) => {
+      cy.contains('Profile').should('be.visible');
+      cy.get('Sign in').should('not.exist');
+      cy.contains('Logout').should('be.visible').click();
+      cy.contains('Sign in').should('be.visible');
+      cy.get('Logout').should('not.exist');
+    });
+}
+
+Cypress.Commands.add("verifySuccessfulSigninAndSignout", verifySuccessfulSigninAndSignout);
