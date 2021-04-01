@@ -244,7 +244,7 @@
               "./node_modules/leaflet/dist/leaflet.css",
               "projects/seed-sharing-app/src/theme.less",
               "projects/seed-sharing-app/src/styles.scss",
-              "./node_modules/@bfoese/eg-ui-fonts/font.scss"
+              "./node_modules/@bfoese/eg-ui-fonts/dist/_eg-ui-fonts.styles.scss"
             ],
             "stylePreprocessorOptions": {
               "includePaths": [
@@ -286,7 +286,7 @@
               },
               "outputHashing": "all",
               "sourceMap": false,
-              "namedChunks": false,
+              "namedChunks": true,
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
