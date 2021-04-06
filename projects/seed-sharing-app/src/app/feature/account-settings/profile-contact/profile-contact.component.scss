@@ -10,24 +10,25 @@
 
   .profile-contact {
     &__data-view {
-      border-radius: 0 0 20px 0;
       order: 0;
+      border-radius: 0 0 20px 0;
     }
 
     &__map-view {
-      border-radius: 20px 0 0 0;
       order: 1;
-      border: 1px salmon;
       width: 226.8px;
       height: 236px;
+      border: 1px salmon;
+      border-radius: 20px 0 0 0;
 
       button {
         display: none;
       }
     }
+
     &__map-canvas {
-      border: 1px salmon;
       height: 250px;
+      border: 1px salmon;
       //width: 250px;
     }
   }

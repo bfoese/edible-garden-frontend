@@ -1,9 +1,8 @@
-@import 'seed-style';
+@import 'seed-mixins';
 
 :host {
   display: flex;
   align-items: center;
-  color: $white;
 
   .header-menubar {
     z-index: 405; // leaflet map has 400

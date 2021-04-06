@@ -1,4 +1,4 @@
-@import 'seed-style';
+@import 'seed-mixins';
 
 :host-context(.--layout-portrait) {
   flex-direction: column;
@@ -171,6 +171,7 @@
 
     .header-sidebar__footer {
       @include corner-convex-x-top-right(var(--eg-panel-border-radius),  $--header-submenu-bg);
+
       z-index: 2;
       display: flex;
       align-items: flex-start;

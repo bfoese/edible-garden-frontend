@@ -1,0 +1,9 @@
+@mixin reset-a() {
+  a {
+    color: unset;
+
+    &:hover {
+      color: unset;
+    }
+  }
+}

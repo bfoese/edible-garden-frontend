@@ -1,0 +1,31 @@
+@mixin scrollbar-style($trackColor, $thumbColor, $width, $thumbRadius) {
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: $trackColor $thumbColor;
+  }
+
+  /* Works on Chrome, Edge, and Safari */
+  *::-webkit-scrollbar {
+    width: $width;
+  }
+
+  *::-webkit-scrollbar-track {
+    background: $trackColor;
+  }
+
+  *::-webkit-scrollbar-thumb {
+    background-color: $thumbColor;
+    border-radius: $thumbRadius;
+  }
+}
+
+// Overrides the blue highlight color that is rendered to indicate fields that
+// have been filled with autocomplete form values
+
+@mixin form-autofill-hightlight($hightlightColor) {
+  input:-internal-autofill-selected,
+  input:focus:-internal-autofill-selected,
+  input:active:-internal-autofill-selected {
+    -webkit-box-shadow: 0 0 0 1000px $hightlightColor inset;
+  }
+}

@@ -1,4 +1,4 @@
-@import 'seed-style';
+@import 'seed-mixins';
 
 :host {
   display: flex;
@@ -103,11 +103,10 @@
       @include property-for-breakpoint(max-height, (unset, MD min(60%, 380px)));
 
       eg-icon {
-
         width: auto;
         color: black;
-        &::ng-deep {
 
+        &::ng-deep {
           svg {
             width: auto;
           }

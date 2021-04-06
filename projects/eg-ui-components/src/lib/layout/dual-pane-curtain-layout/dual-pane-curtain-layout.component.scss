@@ -1,4 +1,4 @@
-@import '~@bfoese/eg-ui-core/core';
+@import '~@bfoese/eg-ui-core-breakpoint/core-breakpoint';
 
 // Custom Properties used by this component
 //
@@ -17,34 +17,34 @@
   height: 100%;
 
   .eg-dual-pane-curtain-layout {
-      position: relative;
-      overflow: hidden;
+    position: relative;
+    overflow: hidden;
 
-      @include property-for-breakpoint(
+    @include property-for-breakpoint(
         width,
         (100%, XL #{var(--eg-fixed-width, 100%)})
       );
-      @include property-for-breakpoint(
+    @include property-for-breakpoint(
         height,
         (100%, XL #{var(--eg-fixed-height, 100%)})
       );
-      @include property-for-breakpoint(margin, ('0', XL '0 auto'));
+    @include property-for-breakpoint(margin, ('0', XL '0 auto'));
 
-      &::before {
-        position: absolute;
-        z-index: 6;
-        background-image: var(--eg-curtain-background-image);
-        border-radius: 50%;
-        content: '';
+    &::before {
+      position: absolute;
+      z-index: 6;
+      background-image: var(--eg-curtain-background-image);
+      border-radius: 50%;
+      content: '';
 
-        @include property-for-breakpoint(width, (1500px, MD 2000px));
-        @include property-for-breakpoint(height, (1500px, MD 2000px));
+      @include property-for-breakpoint(width, (1500px, MD 2000px));
+      @include property-for-breakpoint(height, (1500px, MD 2000px));
 
-        @include property-for-breakpoint(
+      @include property-for-breakpoint(
           transition,
           ('2s ease-in-out', MD 'all 1.6s ease-out')
         );
-      }
+    }
   }
 
   .eg-dual-pane-curtain-layout__content {

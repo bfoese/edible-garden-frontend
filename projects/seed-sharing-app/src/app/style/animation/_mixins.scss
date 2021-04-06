@@ -1,0 +1,6 @@
+@mixin anim-increase-height($heightStart, $heightEnd, $duration) {
+  --inc-height-start: #{$heightStart};
+  --inc-height-end: #{$heightEnd};
+
+  animation: increase-height $duration forwards;
+}

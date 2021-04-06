@@ -1,11 +1,11 @@
-@import 'seed-style';
+@import 'seed-mixins';
 
 :host {
   @include property-for-breakpoint(margin, (24px));
 
   &::ng-deep {
     nz-form-item {
-      @include grid-for-breakpoint(((null, XS), (12)), ((SM), (9, 12)));
+      //@include grid-for-breakpoint(((null, XS), (12)), ((SM), (9, 12)));
     }
   }
 }

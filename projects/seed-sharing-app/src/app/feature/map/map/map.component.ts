@@ -1,7 +1,9 @@
 import 'node_modules/leaflet.tilelayer.colorfilter/src/leaflet-tilelayer-colorfilter.js';
 
+import { DOCUMENT } from '@angular/common';
 import { Component, Inject, OnInit } from '@angular/core';
 import { EG_PRODUCT, EgProduct } from '@eg/common/src/eg/injectors/eg-product';
+import { StyleUtil } from '@eg/common/src/lib/ng/utils/style';
 
 import * as L from 'leaflet';
 
@@ -18,9 +20,13 @@ export type TileLayerWithColorFilter = L.TileLayer & ColorFilter;
   styleUrls: ['./map.component.scss']
 })
 export class MapComponent implements OnInit {
-
-  public constructor(@Inject(EG_PRODUCT) private readonly egProduct: EgProduct) {
+  public constructor(
+    @Inject(EG_PRODUCT) private readonly egProduct: EgProduct,
+    @Inject(DOCUMENT) private document: Document
+  ) {
+    StyleUtil.loadStyleBundle(document, 'leaflet', 'leaflet.css');
   }
+
   /**
    * Changes to leafletOptions are ignored after they are initially set. This is
    * because these options are passed into the map constructor, so they can't be

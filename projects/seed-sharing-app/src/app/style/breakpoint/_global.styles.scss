@@ -1,15 +1,5 @@
-@import 'variables/globals';
-
-@import 'configuration';
-
-@import 'variables/variables';
-@import 'animations/animations';
-@import 'mixins/mixins';
-
-@import 'reset';
-
 // display none, until minimum BP reached
-.--eg-bp-min {
+.-eg-bp-min {
   &__sm {
     @include breakpoint-max(XS) {
       display: none;
@@ -36,7 +26,7 @@
 }
 
 // visible until (including) given BP
-.--eg-bp-max {
+.-eg-bp-max {
   &__xs {
     @include breakpoint(SM) {
       display: none;

@@ -344,20 +344,24 @@
               "projects/seed-sharing-app/src/manifests",
               {
                 "glob": "**/*",
-                "input": "./node_modules/@ant-design/icons-angular/src/inline-svg/",
-                "output": "/assets/"
+                "input": "./node_modules/@bfoese/eg-ui-fonts/dist/assets",
+                "output": "/assets"
               }
             ],
             "styles": [
-              "./node_modules/leaflet/dist/leaflet.css",
+              "projects/seed-sharing-app/src/app/style/reset/_global.styles.scss",
+              {
+                "input": "./node_modules/leaflet/dist/leaflet.css",
+                "bundleName": "leaflet",
+                "inject": false
+              },
               "projects/seed-sharing-app/src/theme.less",
               "projects/seed-sharing-app/src/styles.scss",
               "./node_modules/@bfoese/eg-ui-fonts/dist/_eg-ui-fonts.styles.scss"
             ],
             "stylePreprocessorOptions": {
               "includePaths": [
-                "projects/seed-sharing-app/src/app/shared/style-configuration/base-configuration",
-                "projects/seed-sharing-app/src/app/shared/style"
+                "projects/seed-sharing-app/src/app/style"
               ]
             },
             "scripts": []
