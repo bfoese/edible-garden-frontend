@@ -13,7 +13,9 @@ import { SingletonInjectorRuntimeGuard } from '@eg/common/src/lib/ng/guards/sing
 import { AuthenticationService } from '@eg/edible-garden-api/src/public-api';
 
 import { UserService } from './auth/user.service';
+import { HTTP_DEFAULT_TIMEOUT } from './http/http-default-timeout.token';
 import { HttpErrorInterceptor } from './http/http-error.interceptor';
+import { HttpTimeoutInterceptor } from './http/http-timeout.interceptor';
 
 @NgModule({
   declarations: [],
@@ -33,6 +35,8 @@ export class CoreModule {
           useClass: HttpErrorInterceptor,
           multi: true
         },
+        { provide: HTTP_INTERCEPTORS, useClass: HttpTimeoutInterceptor, multi: true },
+        { provide: HTTP_DEFAULT_TIMEOUT, useValue: 180000 },
         { provide: EG_API_AUTH_SERVICE, useExisting: AuthenticationService },
         UserService
       ]

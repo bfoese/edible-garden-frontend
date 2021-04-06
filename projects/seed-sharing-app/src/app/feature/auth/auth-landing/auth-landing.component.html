@@ -52,7 +52,7 @@
     environment one seed at time.
   </p>
 
-  <a [routerLink]="['/' + SeedNav.SignUp.full]" i18n="link-label"
+  <a [routerLink]="[SeedNav.SignUp.full]" i18n="link-label"
     class="ant-btn ant-btn-background-ghost">Sign up</a>
 </ng-template>
 
@@ -60,6 +60,6 @@
 <ng-template #signupAside>
   <h3 i18n="title">One of us?</h3>
   <p i18n="desc xs">Follow this path if you already have an account.</p>
-  <a [routerLink]="['/' + SeedNav.SignIn.full]" i18n="link-label"
+  <a [routerLink]="[SeedNav.SignIn.full]" i18n="link-label"
     class="ant-btn ant-btn-background-ghost">Sign in</a>
 </ng-template>

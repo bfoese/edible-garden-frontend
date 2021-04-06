@@ -29,27 +29,23 @@ export class EgWindowSignoutService {
     }
   }
 
-  public signOut(): Observable<boolean> {
+  public signOut(): Observable<void> {
     return this.signOutImpl();
   }
 
   private signOutImpl(opts?: {
     skipSignoutOtherWindowTabs: boolean;
-  }): Observable<boolean> {
+  }): Observable<void> {
     const stream = this.authenticationService
       .authenticationControllerSignout()
       .pipe(share());
 
-    stream.subscribe((success: boolean) => {
-      if (success) {
+    stream.subscribe(() => {
         if (!opts || !opts.skipSignoutOtherWindowTabs) {
           this.signoutAllTabsInWindow();
         }
         this.navigateToAppRoot();
-      }
-      return false;
     });
-
     return stream;
   }
 

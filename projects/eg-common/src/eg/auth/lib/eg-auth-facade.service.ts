@@ -186,14 +186,12 @@ export class EgAuthFacadeService {
 
   public patchPassword(
     patchPasswordData: PatchPasswordDto
-  ): Observable<SigninResponseDto> {
+  ): Observable<void> {
     return this.authenticationService
       .authenticationControllerPatchPassword({ body: patchPasswordData })
       .pipe(
-        tap({
-          next: (authResult: SigninResponseDto) => {
-            this.setSession(authResult);
-          }
+        tap(() => {
+            this.setSession(null);
         }),
         shareReplay()
       );

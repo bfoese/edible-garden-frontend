@@ -333,19 +333,19 @@ export class AuthenticationService extends BaseService {
    * This method doesn't expect any request body.
    */
   authenticationControllerSignout$Response(params?: {
-  }): Observable<StrictHttpResponse<boolean>> {
+  }): Observable<StrictHttpResponse<void>> {
 
     const rb = new RequestBuilder(this.rootUrl, AuthenticationService.AuthenticationControllerSignoutPath, 'post');
     if (params) {
     }
 
     return this.http.request(rb.build({
-      responseType: 'json',
-      accept: 'application/json'
+      responseType: 'text',
+      accept: '*/*'
     })).pipe(
       filter((r: any) => r instanceof HttpResponse),
       map((r: HttpResponse<any>) => {
-        return (r as HttpResponse<any>).clone({ body: String((r as HttpResponse<any>).body) === 'true' }) as StrictHttpResponse<boolean>;
+        return (r as HttpResponse<any>).clone({ body: undefined }) as StrictHttpResponse<void>;
       })
     );
   }
@@ -357,10 +357,10 @@ export class AuthenticationService extends BaseService {
    * This method doesn't expect any request body.
    */
   authenticationControllerSignout(params?: {
-  }): Observable<boolean> {
+  }): Observable<void> {
 
     return this.authenticationControllerSignout$Response(params).pipe(
-      map((r: StrictHttpResponse<boolean>) => r.body as boolean)
+      map((r: StrictHttpResponse<void>) => r.body as void)
     );
   }
 
@@ -408,105 +408,6 @@ export class AuthenticationService extends BaseService {
   }
 
   /**
-   * Path part for operation authenticationControllerSigninWithGoogleCallback
-   */
-  static readonly AuthenticationControllerSigninWithGoogleCallbackPath = '/edible-garden/auth/google/redirect';
-
-  /**
-   * Injecting I18nLang here will just return the fallback language of
-   * i18nModule. Due to lack of ExecutionContext in the passport strategy, the
-   * frontend is required to make a separate call to propagate the preferred
-   * locale of the third party signin user.
-   *
-   * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `authenticationControllerSigninWithGoogleCallback()` instead.
-   *
-   * This method doesn't expect any request body.
-   */
-  authenticationControllerSigninWithGoogleCallback$Response(params?: {
-  }): Observable<StrictHttpResponse<{  }>> {
-
-    const rb = new RequestBuilder(this.rootUrl, AuthenticationService.AuthenticationControllerSigninWithGoogleCallbackPath, 'get');
-    if (params) {
-    }
-
-    return this.http.request(rb.build({
-      responseType: 'json',
-      accept: 'application/json'
-    })).pipe(
-      filter((r: any) => r instanceof HttpResponse),
-      map((r: HttpResponse<any>) => {
-        return r as StrictHttpResponse<{  }>;
-      })
-    );
-  }
-
-  /**
-   * Injecting I18nLang here will just return the fallback language of
-   * i18nModule. Due to lack of ExecutionContext in the passport strategy, the
-   * frontend is required to make a separate call to propagate the preferred
-   * locale of the third party signin user.
-   *
-   * This method provides access to only to the response body.
-   * To access the full response (for headers, for example), `authenticationControllerSigninWithGoogleCallback$Response()` instead.
-   *
-   * This method doesn't expect any request body.
-   */
-  authenticationControllerSigninWithGoogleCallback(params?: {
-  }): Observable<{  }> {
-
-    return this.authenticationControllerSigninWithGoogleCallback$Response(params).pipe(
-      map((r: StrictHttpResponse<{  }>) => r.body as {  })
-    );
-  }
-
-  /**
-   * Path part for operation authenticationControllerResetPassword
-   */
-  static readonly AuthenticationControllerResetPasswordPath = '/edible-garden/auth/reset-password';
-
-  /**
-   * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `authenticationControllerResetPassword()` instead.
-   *
-   * This method doesn't expect any request body.
-   */
-  authenticationControllerResetPassword$Response(params: {
-    token: string;
-  }): Observable<StrictHttpResponse<{  }>> {
-
-    const rb = new RequestBuilder(this.rootUrl, AuthenticationService.AuthenticationControllerResetPasswordPath, 'get');
-    if (params) {
-      rb.query('token', params.token, {});
-    }
-
-    return this.http.request(rb.build({
-      responseType: 'json',
-      accept: 'application/json'
-    })).pipe(
-      filter((r: any) => r instanceof HttpResponse),
-      map((r: HttpResponse<any>) => {
-        return r as StrictHttpResponse<{  }>;
-      })
-    );
-  }
-
-  /**
-   * This method provides access to only to the response body.
-   * To access the full response (for headers, for example), `authenticationControllerResetPassword$Response()` instead.
-   *
-   * This method doesn't expect any request body.
-   */
-  authenticationControllerResetPassword(params: {
-    token: string;
-  }): Observable<{  }> {
-
-    return this.authenticationControllerResetPassword$Response(params).pipe(
-      map((r: StrictHttpResponse<{  }>) => r.body as {  })
-    );
-  }
-
-  /**
    * Path part for operation authenticationControllerPatchPassword
    */
   static readonly AuthenticationControllerPatchPasswordPath = '/edible-garden/auth/password';
@@ -519,7 +420,7 @@ export class AuthenticationService extends BaseService {
    */
   authenticationControllerPatchPassword$Response(params: {
     body: PatchPasswordDto
-  }): Observable<StrictHttpResponse<SigninResponseDto>> {
+  }): Observable<StrictHttpResponse<void>> {
 
     const rb = new RequestBuilder(this.rootUrl, AuthenticationService.AuthenticationControllerPatchPasswordPath, 'patch');
     if (params) {
@@ -527,12 +428,12 @@ export class AuthenticationService extends BaseService {
     }
 
     return this.http.request(rb.build({
-      responseType: 'json',
-      accept: 'application/json'
+      responseType: 'text',
+      accept: '*/*'
     })).pipe(
       filter((r: any) => r instanceof HttpResponse),
       map((r: HttpResponse<any>) => {
-        return r as StrictHttpResponse<SigninResponseDto>;
+        return (r as HttpResponse<any>).clone({ body: undefined }) as StrictHttpResponse<void>;
       })
     );
   }
@@ -545,10 +446,10 @@ export class AuthenticationService extends BaseService {
    */
   authenticationControllerPatchPassword(params: {
     body: PatchPasswordDto
-  }): Observable<SigninResponseDto> {
+  }): Observable<void> {
 
     return this.authenticationControllerPatchPassword$Response(params).pipe(
-      map((r: StrictHttpResponse<SigninResponseDto>) => r.body as SigninResponseDto)
+      map((r: StrictHttpResponse<void>) => r.body as void)
     );
   }
 

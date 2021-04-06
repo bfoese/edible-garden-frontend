@@ -51,3 +51,7 @@ Thumbs.db
 debug.log
 
 .npmrc
+**/cypress/public/*
+**/cypress/results/*
+**/cypress/screenshots/*
+**/cypress/videos/*

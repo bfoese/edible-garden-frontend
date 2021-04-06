@@ -1,0 +1,9 @@
+{
+    "reporterEnabled": "mochawesome",
+    "mochawesomeReporterOptions": {
+        "reportDir": "projects/seed-sharing-app/cypress/results/json",
+        "overwrite": false,
+        "html": false,
+        "json": true
+    }
+}

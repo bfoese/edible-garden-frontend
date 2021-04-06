@@ -1,34 +1,34 @@
 <ng-container *ngIf="control.hasError('required')">
-  <div i18n="formfield-error|@@formfield-error.required">Required</div>
+  <div data-cy="form-errors-required" i18n="formfield-error|@@formfield-error.required">Required</div>
 </ng-container>
 <ng-container *ngIf="control.hasError('notUnique')">
-  <div i18n="formfield-error|@@formfield-error.system-unique">
+  <div data-cy="form-errors-system-unique" i18n="formfield-error|@@formfield-error.system-unique">
     Already taken, must be unique
   </div>
 </ng-container>
 <ng-container *ngIf="control.hasError('email')">
-  <div i18n="formfield-error|@@formfield-error.invalid-email">
+  <div data-cy="form-errors-invalid-email" i18n="formfield-error|@@formfield-error.invalid-email">
     Invalid email
   </div>
 </ng-container>
 <ng-container *ngIf="control.hasError('confirm')">
-  <div i18n="formfield-error|@@formfield-error.invalid-confirm">
+  <div data-cy="form-errors-invalid-confirm" i18n="formfield-error|@@formfield-error.invalid-confirm">
     Does not match with password
   </div>
 </ng-container>
 <ng-container *ngIf="control.hasError('pattern')">
-  <div i18n="formfield-error|@@formfield-error.regex">
+  <div data-cy="form-errors-regex" i18n="formfield-error|@@formfield-error.regex">
     Does not fulfill requirements
   </div>
 </ng-container>
 <ng-container *ngIf="control.hasError('minlength')">
-  <div i18n="formfield-error|@@formfield-error.min-length">Too short</div>
+  <div data-cy="form-errors-min-length" i18n="formfield-error|@@formfield-error.min-length">Too short</div>
 </ng-container>
 <ng-container *ngIf="control.hasError('maxlength')">
-  <div i18n="formfield-error|@@formfield-error.max-length">Too long</div>
+  <div data-cy="form-errors-max-length" i18n="formfield-error|@@formfield-error.max-length">Too long</div>
 </ng-container>
 <ng-container *ngIf="control.hasError('invalidCredentials')">
-  <div i18n="formfield-error|@@formfield-error.invalid-credentials">
+  <div data-cy="form-errors-invalid-credentials" i18n="formfield-error|@@formfield-error.invalid-credentials">
     Invalid username or password
   </div>
 </ng-container>

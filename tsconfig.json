@@ -28,6 +28,14 @@
         "dist/edible-garden-api/*",
         "dist/edible-garden-api"
       ],
+      "@eg/eg-e2e-api/*": [
+        "projects/eg-e2e-api/*",
+        "projects/eg-e2e-api"
+      ],
+      "@eg/eg-e2e-api": [
+        "dist/eg-e2e-api/*",
+        "dist/eg-e2e-api"
+      ],
       "@eg/common/*": [
         "projects/eg-common/*",
         "projects/eg-common"
@@ -87,6 +95,10 @@
       "@eg-seed/service": [
         "dist/projects/seed-sharing-app/src/app/service/*",
         "dist/projects/seed-sharing-app/src/app/service/"
+      ],
+      "eg-e2e-api": [
+        "dist/eg-e2e-api/eg-e2e-api",
+        "dist/eg-e2e-api"
       ],
       "eg-ui-components": [
         "dist/eg-ui-components/eg-ui-components",

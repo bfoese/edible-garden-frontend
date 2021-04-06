@@ -110,10 +110,38 @@
           }
         },
         "e2e": {
-          "builder": "@angular-devkit/build-angular:protractor",
+          "builder": "@briebug/cypress-schematic:cypress",
           "options": {
-            "protractorConfig": "projects/edible-garden-app/e2e/protractor.conf.js",
-            "devServerTarget": "edible-garden-app:serve"
+            "devServerTarget": "edible-garden-app:serve",
+            "watch": true,
+            "headless": false,
+            "configFile": "projects/edible-garden-app/cypress.json"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "edible-garden-app:serve:production"
+            }
+          }
+        },
+        "cypress-run": {
+          "builder": "@briebug/cypress-schematic:cypress",
+          "options": {
+            "devServerTarget": "edible-garden-app:serve",
+            "configFile": "projects/edible-garden-app/cypress.json"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "edible-garden-app:serve:production"
+            }
+          }
+        },
+        "cypress-open": {
+          "builder": "@briebug/cypress-schematic:cypress",
+          "options": {
+            "devServerTarget": "edible-garden-app:serve",
+            "watch": true,
+            "headless": false,
+            "configFile": "projects/edible-garden-app/cypress.json"
           },
           "configurations": {
             "production": {
@@ -157,6 +185,46 @@
               "projects/edible-garden-api/**/*.html"
             ]
           }
+        },
+        "cypress-run": {
+          "builder": "@briebug/cypress-schematic:cypress",
+          "options": {
+            "devServerTarget": "edible-garden-api:serve",
+            "configFile": "projects/edible-garden-api/cypress.json"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "edible-garden-api:serve:production"
+            }
+          }
+        },
+        "cypress-open": {
+          "builder": "@briebug/cypress-schematic:cypress",
+          "options": {
+            "devServerTarget": "edible-garden-api:serve",
+            "watch": true,
+            "headless": false,
+            "configFile": "projects/edible-garden-api/cypress.json"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "edible-garden-api:serve:production"
+            }
+          }
+        },
+        "e2e": {
+          "builder": "@briebug/cypress-schematic:cypress",
+          "options": {
+            "devServerTarget": "edible-garden-api:serve",
+            "watch": true,
+            "headless": false,
+            "configFile": "projects/edible-garden-api/cypress.json"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "edible-garden-api:serve:production"
+            }
+          }
         }
       }
     },
@@ -193,6 +261,46 @@
               "projects/eg-common/**/*.ts",
               "projects/eg-common/**/*.html"
             ]
+          }
+        },
+        "cypress-run": {
+          "builder": "@briebug/cypress-schematic:cypress",
+          "options": {
+            "devServerTarget": "eg-common:serve",
+            "configFile": "projects/eg-common/cypress.json"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "eg-common:serve:production"
+            }
+          }
+        },
+        "cypress-open": {
+          "builder": "@briebug/cypress-schematic:cypress",
+          "options": {
+            "devServerTarget": "eg-common:serve",
+            "watch": true,
+            "headless": false,
+            "configFile": "projects/eg-common/cypress.json"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "eg-common:serve:production"
+            }
+          }
+        },
+        "e2e": {
+          "builder": "@briebug/cypress-schematic:cypress",
+          "options": {
+            "devServerTarget": "eg-common:serve",
+            "watch": true,
+            "headless": false,
+            "configFile": "projects/eg-common/cypress.json"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "eg-common:serve:production"
+            }
           }
         }
       }
@@ -320,7 +428,7 @@
               },
               "outputHashing": "all",
               "sourceMap": false,
-              "namedChunks": false,
+              "namedChunks": true,
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
@@ -371,6 +479,16 @@
             }
           }
         },
+        "serve-e2e": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "seed-sharing-app:build:lang-en",
+            "ssl": true,
+            "sslCert": "C:\\dev\\certs\\localhost-fullchain.pem",
+            "sslKey": "C:\\dev\\certs\\localhost-key.pem",
+            "baseHref": "/en/"
+          }
+        },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
@@ -404,15 +522,45 @@
           }
         },
         "e2e": {
-          "builder": "@angular-devkit/build-angular:protractor",
+          "builder": "@briebug/cypress-schematic:cypress",
           "options": {
-            "protractorConfig": "projects/seed-sharing-app/e2e/protractor.conf.js",
-            "devServerTarget": "seed-sharing-app:serve"
+            "watch": true,
+            "headless": false,
+            "configFile": "projects/seed-sharing-app/cypress.json",
+            "baseUrl": "https://my-base-url.com"
           },
           "configurations": {
             "production": {
               "devServerTarget": "seed-sharing-app:serve:production"
             }
+          }
+        },
+        "cypress-run": {
+          "builder": "@briebug/cypress-schematic:cypress",
+          "options": {
+            "configFile": "projects/seed-sharing-app/cypress.json"
+          },
+          "configurations": {
+            "qa": {
+            }
+          }
+        },
+        "cypress-open": {
+          "builder": "@briebug/cypress-schematic:cypress",
+          "options": {
+            "watch": true,
+            "headless": false,
+            "configFile": "projects/seed-sharing-app/cypress.json"
+          },
+          "configurations": {
+            "qa": {
+            }
+          }
+        },
+        "analyze": {
+          "builder": "@ngx-builders/analyze:analyze",
+          "options": {
+            "outputPath": "dist/seed-sharing-app/en"
           }
         }
       }
@@ -450,6 +598,46 @@
               "projects/eg-ui-dynamic-icons/**/*.ts",
               "projects/eg-ui-dynamic-icons/**/*.html"
             ]
+          }
+        },
+        "cypress-run": {
+          "builder": "@briebug/cypress-schematic:cypress",
+          "options": {
+            "devServerTarget": "eg-ui-dynamic-icons:serve",
+            "configFile": "projects/eg-ui-dynamic-icons/cypress.json"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "eg-ui-dynamic-icons:serve:production"
+            }
+          }
+        },
+        "cypress-open": {
+          "builder": "@briebug/cypress-schematic:cypress",
+          "options": {
+            "devServerTarget": "eg-ui-dynamic-icons:serve",
+            "watch": true,
+            "headless": false,
+            "configFile": "projects/eg-ui-dynamic-icons/cypress.json"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "eg-ui-dynamic-icons:serve:production"
+            }
+          }
+        },
+        "e2e": {
+          "builder": "@briebug/cypress-schematic:cypress",
+          "options": {
+            "devServerTarget": "eg-ui-dynamic-icons:serve",
+            "watch": true,
+            "headless": false,
+            "configFile": "projects/eg-ui-dynamic-icons/cypress.json"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "eg-ui-dynamic-icons:serve:production"
+            }
           }
         }
       }
@@ -495,7 +683,128 @@
           "options": {
             "tsConfig": [
               "projects/eg-ui-components/tsconfig.lib.json",
-              "projects/eg-ui-components/tsconfig.spec.json"
+              "projects/eg-ui-components/tsconfig.spec.json",
+              "projects/eg-ui-components/cypress/tsconfig.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        },
+        "cypress-run": {
+          "builder": "@briebug/cypress-schematic:cypress",
+          "options": {
+            "devServerTarget": "eg-ui-components:serve",
+            "configFile": "projects/eg-ui-components/cypress.json"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "eg-ui-components:serve:production"
+            }
+          }
+        },
+        "cypress-open": {
+          "builder": "@briebug/cypress-schematic:cypress",
+          "options": {
+            "devServerTarget": "eg-ui-components:serve",
+            "watch": true,
+            "headless": false,
+            "configFile": "projects/eg-ui-components/cypress.json"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "eg-ui-components:serve:production"
+            }
+          }
+        },
+        "e2e": {
+          "builder": "@briebug/cypress-schematic:cypress",
+          "options": {
+            "devServerTarget": "eg-ui-components:serve",
+            "watch": true,
+            "headless": false,
+            "configFile": "projects/eg-ui-components/cypress.json"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "eg-ui-components:serve:production"
+            }
+          }
+        }
+      }
+    },
+    "cypress-mx-report": {
+      "projectType": "library",
+      "root": "projects/cypress-mx-report",
+      "sourceRoot": "projects/cypress-mx-report/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "tsConfig": "projects/cypress-mx-report/tsconfig.lib.json",
+            "project": "projects/cypress-mx-report/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/cypress-mx-report/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/cypress-mx-report/src/test.ts",
+            "tsConfig": "projects/cypress-mx-report/tsconfig.spec.json",
+            "karmaConfig": "projects/cypress-mx-report/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/cypress-mx-report/tsconfig.lib.json",
+              "projects/cypress-mx-report/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "eg-e2e-api": {
+      "projectType": "library",
+      "root": "projects/eg-e2e-api",
+      "sourceRoot": "projects/eg-e2e-api/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "tsConfig": "projects/eg-e2e-api/tsconfig.lib.json",
+            "project": "projects/eg-e2e-api/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/eg-e2e-api/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/eg-e2e-api/src/test.ts",
+            "tsConfig": "projects/eg-e2e-api/tsconfig.spec.json",
+            "karmaConfig": "projects/eg-e2e-api/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/eg-e2e-api/tsconfig.lib.json",
+              "projects/eg-e2e-api/tsconfig.spec.json"
             ],
             "exclude": [
               "**/node_modules/**"

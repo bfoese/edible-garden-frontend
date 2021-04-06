@@ -1,0 +1,19 @@
+{
+  "integrationFolder": "projects/seed-sharing-app/cypress/integration",
+  "supportFile": "projects/seed-sharing-app/cypress/support/index.ts",
+  "videosFolder": "projects/seed-sharing-app/cypress/videos",
+  "screenshotsFolder": "projects/seed-sharing-app/cypress/screenshots",
+  "pluginsFile": "projects/seed-sharing-app/cypress/plugins/index.ts",
+  "fixturesFolder": "projects/seed-sharing-app/cypress/fixtures",
+  "reporter": "cypress-multi-reporters",
+  "reporterOptions": {
+    "configFile": "projects/seed-sharing-app/cypress/reporter-config.json"
+  },
+  "baseUrl": "https://localhost:4200/en",
+  "env": {
+    "locale": "en",
+    "e2e-api-url": "https://localhost:3001"
+  },
+  "projectId": "obga6t",
+  "defaultCommandTimeout": 10000
+}

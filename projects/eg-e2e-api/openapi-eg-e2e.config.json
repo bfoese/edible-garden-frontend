@@ -1,0 +1,7 @@
+{
+    "$schema": "./../../node_modules/ng-openapi-gen/ng-openapi-gen-schema.json",
+    "input": "https://localhost:3001/api/e2e-json",
+    "ignoreUnusedModels": false,
+    "module": "EgE2EApiModule",
+    "enumStyle": "upper"
+}

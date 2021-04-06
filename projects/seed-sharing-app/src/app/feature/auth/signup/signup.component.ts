@@ -167,7 +167,7 @@ export class SignUpComponent implements OnInit, OnDestroy {
       .subscribe(
         (success: boolean) => {
           if (success) {
-            this.resetForm();
+            this.navigateToSignupSucessPage();
             void this.router.navigate([SeedNav.SignIn.full], {
               queryParams: {
                 emailVerificationLinkSent: 'true'
@@ -197,14 +197,12 @@ export class SignUpComponent implements OnInit, OnDestroy {
 
     if (
       NamedErrorUtil.isError(
-        'ActionDeniedConsultEmailAccount', // for duplicate email or soft deleted user
+        'ActionDeniedConsultEmailAccount',
         namedServerError
       )
     ) {
-      this.resetForm();
-      this.showRegistrationErrorMsg(
-        'Registration failed. An email has been sent to your address with further details.'
-      );
+      // Yes, we want to indicate success. User will get more information about the error in the email.
+      this.navigateToSignupSucessPage();
       return;
     }
 
@@ -215,6 +213,17 @@ export class SignUpComponent implements OnInit, OnDestroy {
   private showRegistrationErrorMsg(msg: string): void {
     this.messageService.error(msg, {
       nzDuration: 10000
+    });
+  }
+
+  private navigateToSignupSucessPage() {
+    this.resetForm();
+    void this.router.navigate([SeedNav.SignIn.full], {
+      queryParams: {
+        emailVerificationLinkSent: 'true'
+      } as SigninQueryParams,
+      queryParamsHandling: 'merge',
+      relativeTo: this.activatedRoute
     });
   }
 

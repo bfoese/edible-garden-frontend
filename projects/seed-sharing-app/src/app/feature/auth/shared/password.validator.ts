@@ -5,7 +5,7 @@ import { AbstractControl, ValidatorFn, Validators } from '@angular/forms';
  * call to get that pattern would be a good idea. Seems not to be exported by
  * openapi:gen
  */
-const passwordPattern = /^(?=.*[\S])(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zßA-Z\d"'|~+-@$!%*?&\\/§\[\]\{\}\(\)]{8,}$/;
+const passwordPattern = /^(?=.*[\S])(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zßA-Z\d"'|~_+-@$!%*?&\\/§\[\]\{\}\(\)]{8,}$/;
 
 export function EgPasswordValidator(): ValidatorFn {
   return (control: AbstractControl): { [key: string]: any } | null => {

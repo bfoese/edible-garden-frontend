@@ -1,0 +1,9 @@
+{
+  "integrationFolder": "projects/eg-ui-dynamic-icons/cypress/integration",
+  "supportFile": "projects/eg-ui-dynamic-icons/cypress/support/index.ts",
+  "videosFolder": "projects/eg-ui-dynamic-icons/cypress/videos",
+  "screenshotsFolder": "projects/eg-ui-dynamic-icons/cypress/screenshots",
+  "pluginsFile": "projects/eg-ui-dynamic-icons/cypress/plugins/index.js",
+  "fixturesFolder": "projects/eg-ui-dynamic-icons/cypress/fixtures",
+  "baseUrl": "http://localhost:4200"
+}

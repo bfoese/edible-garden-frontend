@@ -3,7 +3,7 @@
 <ng-template #titleTmpl i18n="title">Sign in</ng-template>
 
 <ng-template #signinTmpl>
-  <form nz-form [formGroup]="loginForm" class="seed-signin__form" (ngSubmit)="submitForm()">
+  <form nz-form [formGroup]="loginForm" class="seed-signin__form" (ngSubmit)="submitForm()" name="signin">
     <nz-form-item>
       <nz-form-control [nzErrorTip]="tmplFormFieldErrors">
         <nz-input-group [nzPrefix]="tmplUsernameIcon">
@@ -24,9 +24,9 @@
 
     <nz-row class="seed-signin__actions">
       <div nz-col class="password-reminder">
-        <a [routerLink]="['/' + SeedNav.RequestResetPassword.full]" i18n="checkbox">Forgot Password?</a>
+        <a [routerLink]="[SeedNav.RequestResetPassword.full]" i18n="checkbox">Forgot Password?</a>
       </div>
-      <button nz-col nz-button [disabled]="!loginForm.valid" [nzType]="'primary'" i18n="button">
+      <button type="submit" nz-col nz-button [disabled]="!loginForm.valid" [nzType]="'primary'" i18n="button">
         Sign in
       </button>
     </nz-row>
@@ -40,31 +40,33 @@
 
   <nz-alert *ngIf="showHint === 'EmailVerificationLinkSent'" class="seed-signin__alert" nzType="success"
     i18n-nzDescription="alert-msg"
-    nzDescription="We've sent you an email to verify your address. Please follow the instructions provided in there before you try to sign in.">
+    nzDescription="We've sent you an email to verify your address. Please follow the instructions provided in there before you try to sign in." role="alert"
+    data-cy="msg-email-verif-link-sent">
   </nz-alert>
 
   <nz-alert *ngIf="showHint === 'EmailVerificationSuccess'" class="seed-signin__alert" nzType="success"
     i18n-nzMessage="alert-title" nzMessage="Email address verified" i18n-nzDescription="alert-msg"
-    nzDescription="Your email address was successfully verified. You can now sign in with your credentials.">
+    nzDescription="Your email address was successfully verified. You can now sign in with your credentials." role="alert"
+    data-cy="msg-email-verification-success">
   </nz-alert>
 
   <nz-alert *ngIf="showHint === 'EmailVerificationError'" class="seed-signin__alert" nzType="error"
     i18n-nzMessage="alert-title" nzMessage="Email address verification failed" i18n-nzDescription="alert-msg"
-    nzDescription="Your email address could not be verified.">
+    nzDescription="Your email address could not be verified." role="alert">
   </nz-alert>
 
   <nz-alert *ngIf="showHint === 'PasswordChanged'" class="seed-signin__alert" nzType="success"
     i18n-nzMessage="alert-title" nzMessage="Password changed" i18n-nzDescription="alert-msg"
-    nzDescription="You can now signin with your new password.">
+    nzDescription="You can now signin with your new password." role="alert">
   </nz-alert>
 
   <nz-alert *ngIf="showHint === 'InactiveAccountError'" class="seed-signin__alert" nzType="error"
     i18n-nzMessage="alert-title" nzMessage="Account activation required"
-    nzDescription="Your account is inactive. Please contact the team.">
+    nzDescription="Your account is inactive. Please contact the team." role="alert">
   </nz-alert>
 
   <nz-alert *ngIf="showHint === 'EmailVerificationRequired'" class="seed-signin__alert" nzType="error"
-    i18n-nzMessage="alert-title" nzMessage="Email verification required" [nzDescription]="tmplVerifyEmailErrorDesc">
+    i18n-nzMessage="alert-title" nzMessage="Email verification required" [nzDescription]="tmplVerifyEmailErrorDesc" role="alert" data-cy="msg-email-verif-required">
   </nz-alert>
 
 </ng-template>

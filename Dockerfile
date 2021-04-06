@@ -12,11 +12,14 @@ ARG NG_BUILD_CONFIG
 # in the tarball of this command layer. Careful: the build argument
 # $GH_PKG_TOKEN would show up in docker commit history of the image if the build
 # would consist only of one stage, because the build steps of the  final stage
-# will show up in the commit history.
-RUN echo "//npm.pkg.github.com/:_authToken=${GH_PKG_TOKEN}" > .npmrc && \
+# will show up in the commit history. // fsevents is being installed, because on
+# Heroku it seems not to be installed. There was an error being thrown
+# indicating fsevents not available. But the real issue, a non published
+# library, was hidden by that.
+RUN npm config set @bfoese:registry https://npm.pkg.github.com/ && npm config set '//npm.pkg.github.com/:_authToken' ${GH_PKG_TOKEN} && npm i fsevents@latest -f --save-optional && echo "//npm.pkg.github.com/:_authToken=${GH_PKG_TOKEN}" > .npmrc && \
     echo "@bfoese:registry=https://npm.pkg.github.com/" >> .npmrc && \
     echo "always-auth = true" >> .npmrc && \
-    npm ci && rm -f .npmrc
+    npm ci && rm -f .npmrc && npm config set '//npm.pkg.github.com/:_authToken' 'undefined'
 
 # Copy the rest of the files
 COPY . ./

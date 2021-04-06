@@ -1,0 +1,9 @@
+{
+  "integrationFolder": "projects/edible-garden-app/cypress/integration",
+  "supportFile": "projects/edible-garden-app/cypress/support/index.ts",
+  "videosFolder": "projects/edible-garden-app/cypress/videos",
+  "screenshotsFolder": "projects/edible-garden-app/cypress/screenshots",
+  "pluginsFile": "projects/edible-garden-app/cypress/plugins/index.js",
+  "fixturesFolder": "projects/edible-garden-app/cypress/fixtures",
+  "baseUrl": "http://localhost:4200"
+}

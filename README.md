@@ -15,32 +15,43 @@ Run `ng build` to build the project. The build artifacts will be stored in the
 Run `ng test` to execute the unit tests via
 [Karma](https://karma-runner.github.io).
 
-## Running end-to-end tests
+## Running E2E tests
 
-Run `ng e2e` to execute the end-to-end tests via
-[Protractor](http://www.protractortest.org/).
+Run `ng e2e` to execute the end-to-end tests via Cypress
 
+E2E test report: https://bfoese.github.io/edible-garden-frontend/e2e-report.html
 
-## Notes
-### Handling Connection to Backend APi
+### E2E Implementation
 
-OpenApi generated a class AppConfiguration having a field "rootUrl". This field
-is undefined. OpenApi Generator team suggests, that the rootUrl field should be
-overridden before making the first call.
+E2E is implemented with Cypress. Cypress test runner can be used for free but if
+you want to use any of these flags `--ci-build-id, --group, --tag, or
+--parallel`, you need to also provide your `--record key` which links the test
+runs to your Cypress Dashboard account. Cypress Dashboard is a service that
+offers a free plan, but depending on your test strategy you will quickly outrun
+the free plan boundaries.
 
-Another option is to have a proxy.conf.json (or multiple for dev/prod) which
-would rewrite the URL on the fly based on URL patterns. You can tell
-angular.json which proxy.conf.json should be used for normal build and which one
-for production build. Solution is described here:
-https://stackoverflow.com/a/60601353 What I personally don't like about this
-approach: When debugging the frontend, you see the the original URL in Chrome
-developer console. It is not transparent that there was an URL rewrite from the
-frontend to a different location, this information is only printed out in the
-logs.
+As an alternative to Cypress Dashboard you can integrate third-party reporters
+with Cypress. One example is Mochawesome in combination with Mochawesome-Merge
+and Mochawesome-Report-Generator, which are used by this repo to automate E2E
+testing and report generation. It requires own work though to come anywhere near
+the possibilities that Cypress Dashboard offers.
 
-### NgZorro
+### E2E Strategy
+The strategy is to mock as little as possible, preferebly nothing, and instead
+perform realistic E2E tests in a deployed staging environment which mirrors the
+production environment. Another constraint is to keep things frugal, which means
+not to rely on external services which need to be paid.
 
-Use values of less variables in scss: https://github.com/NG-ZORRO/ng-zorro-antd/discussions/2243#discussioncomment-108865
+Since the App workflows include emails being sent to the users which
+require user interaction, you need to find a way to cover this as realistic as
+possible. The approach for this is the following:
+
+<ul>
+<li>Setup new Gmail Account for the sole purpose of Cypress testing the App</li>
+<li>Gmail allows you to generate an unlimited number of aliases for you email address (e.g. my-address+somealias@gmail.com) which can be leveraged to sign up an unlimited number of different users</li>
+<li>Gmail provides an OAuth protected Gmail API to fetch emails from the inbox via REST. This API can be consumed via Frontend or Backend. The drawback of this approach is the need for manual interaction at least once, to grant permissions by acknowledging the Google OAuth consent screen. One cypress plugin that is making use of the OAuth Gmail API is https://github.com/levz0r/gmail-tester.</li>
+<li>Another, I think more flexible, solution is to use plain old IMAP to fetch the emails from the test account. The benefit compared to the OAuth solution is, that you can code the solution and it can be integrated into the CI pipeline without requiring manual interaction to grant permissions in an OAuth consent screen.</li>
+</ul>
 
 ### Nginx
 
@@ -56,16 +67,6 @@ Heroku Nginx Docker example: https://github.com/rjoonas/heroku-docker-nginx-exam
 
 TODO Brotli: https://github.com/google/ngx_brotli/issues/89#issuecomment-761929582
 
-
-### Heroku
-
-<ul>
-<li>heroku.yaml,app.json and .Procfile are not necessarily needed in this docker container setup.</li>
-<li>This  repo https://github.com/rjoonas/heroku-docker-nginx-example has a 'Deploy to Heroku' button which upon click will redirect to Heroku where you just type in a name for the app and everything will be setup based on the source code from the repo. To orchestrate this setup, the file 'app.json' is needed. This is the manifest of a Heroku app.
-<ul><li>https://devcenter.heroku.com/articles/setting-up-apps-using-the-heroku-platform-api</li>
-<li>https://devcenter.heroku.com/articles/app-json-schema</li></ul></li>
-<li>Get Heroku app name as variables: https://stackoverflow.com/questions/38087125/set-host-name-as-an-environment-variable-in-heroku-review-app and https://github.com/heroku/heroku-buildpack-cli</li>
-</ul>
 
 ### i18n Localization
 
@@ -90,122 +91,4 @@ Adding a new language
 Library i18n example:
 https://github.com/michaelhunziker/angular-i18n-library
 
-### SVG
 
-#### ClipPath
-
-In order to scale the SVG to the size of its bounding box, 'objectBoundingBox' must be used:
-
-```html
-// objectBoundingBox indicates that SVG should be scaled to size of its bounding
-box <clipPath id="mapClipPath" clipPathUnits="objectBoundingBox"></clipPath>
-```
-
-But pay attention that 'objectBoundingBox' units requires the SVG coordinates to
-be between 0 and 1, because (0,0) represents the top left of the outer bounding
-box and (1,1) the bottom right. The clip path must either be within this
-coordinate system, which would look like this:
-
-```html
-// all coordinates within the path must be between 0 and 1 and viewBox as
-presendet
-<svg viewBox="0 0 1 1" width="1pt" height="1pt">
-  <clipPath id="mapClipPath" clipPathUnits="objectBoundingBox">
-    <path d=" M 0.012 0.545 C 0.07 0.38 0.341 0.326 0.506 ..." />
-  </clipPath>
-</svg>
-```
-
-Or the second option, if the path is much bigger and you don't want to use a
-graphic tool, you can apply a scale transformation to the paths:
-
-```html
-// instead of 300*200 we apply a transform and scale it by x=1/300 and y=1/200
-
-<svg viewBox="0 0 300 200">
-  <clipPath id="mapClipPath" clipPathUnits="objectBoundingBox">
-    <path
-      transform="scale(0.003333, 0.005)"
-      d=" M 162.3 216.9 C 162.3 214.5 160.2 212.4 157.8 212.4 C 152.1 212.1 141.9 213 135.6 219.3 C 129.3 225.6 ..."
-    />
-    <path
-      transform="scale(0.003333, 0.005)"
-      d=" M 203.7 212.4 C 198 212.1 187.8 213 181.5 219.3 C 175.2 225.6 174.6 235.8 174.6 241.5 C 174.6 243.9 ... "
-    />
-  </clipPath>
-</svg>
-
-<seed-map style="clip-path: url(#mapClipPath)"></seed-map>
-```
-
-One problem left at this point: The SVG is being stretched to the size of the
-bounding box and does not keep its aspect ratio. Played with
-"preserveAspectRatio", but couldn't figure it out yet.
-
-#### Animation
-
-To animate an object along a path, the object to be animated must not be a path
-but a simple object like a polygon, circle etc. A path can be converted into a
-polygon. Didn't found a way in illustrator, but it can be done via script:
-https://stackblitz.com/edit/typescript-ugdczs
-
-https://www.sarasoueidan.com/blog/css-svg-clipping/
-https://codepen.io/yshlin/pen/dxGlH
-
-SVG Path Modification via CSS
-https://codepen.io/chriscoyier/pen/NRwANp
-
-
-#### Other SVG related content
-Different ways of including SVG, also in combination with second link concerning
-the cascade of the different solutions
-https://www.mediaevent.de/svg-in-html-seiten/
-https://wiki.selfhtml.org/wiki/SVG/Tutorials/Einstieg/SVG_mit_CSS_stylen#XML_vs._CSS
-
-Responsive SVG, which I used as inspiration to create the concave corners
-https://codepen.io/ND44/pen/oRReWR
-
-Rotate around own center:
-<g transform = "translate(100, 100) rotate(45 $halfOfSvgWidth $halfOfSvgHeight)">
-
-
-### Angular Specifics
-
-#### Auxiliary Routes
-
-Auxiliary routes must be children to a parent route with path not being ''. They
-won't work as children of empty path route. They are isolated within the parent
-route. Their matching rule is completely different from standard Angular routing
-rule.
-
-```
-// URL
-/parent/(primaryOutletPath//auxOutletName:auxOutletPath)
-https://localhost:4200/en/sharing/(offer//secondary:offer-preview)
-
-// Router Link HTML
-[routerLink]="['parentRoutes',{outlets: {outletName:['outletPath', param]}}]"
-[routerLink]="[{outlets: {'primary': ['offer'],  'secondary': ['offer-preview']}}]"
-// Router Link TS
-this.router.navigate(['parentRoutes',{outlets: {outletName:['outletPath', param]}}]
-
-// Remove outlet: specify 'null' in url or router link
- {outletName: null}
-```
-
-The ugly URL can be modified by implementing a custom URL serializer which
-extends DefaultUrlSerializer. This serializer must be listed in the providers
-array of the main app routing module.
-
-```
-class CustomUrlSerializer extends DefaultUrlSerializer {}
-
-@NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule],
-  providers: [
-    { provide: UrlSerializer, useClass: CustomUrlSerializer }
-  ]
-})
-export class AppRoutingModule {}
-```

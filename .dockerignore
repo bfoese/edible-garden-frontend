@@ -3,3 +3,8 @@
 *.md
 *.yml
 app.json
+.npmrc
+**/cypress/public/*
+**/cypress/results/*
+**/cypress/screenshots/*
+**/cypress/videos/*

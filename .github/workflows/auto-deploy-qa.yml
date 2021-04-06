@@ -4,20 +4,22 @@ on:
   push:
     branches:
       - main
+      - 'feat-*'
   pull_request:
     branches:
       - main
 
 env:
-  BRANCH: main
+  # Extracting the branch name:
+  # For GITHUB_REF=refs/heads/feature-branch-1
+  # ${GITHUB_REF##*/} will be 'feature-branch-1'
+  BRANCH: ${GITHUB_REF##*/}
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-        with:
-          ref: main # Couldn't use $BRANCH here!?
       # akhileshns/heroku-deploy@v3.12.12
       - uses: akhileshns/heroku-deploy@79ef2ae4ff9b897010907016b268fd0f88561820
         with:
@@ -37,5 +39,60 @@ jobs:
           GH_PKG_TOKEN: ${{secrets.GH_PKG_TOKEN}}
           HD_NGINX_PROXY_PASS: ${{secrets.QA_NGINX_PROXY_PASS}}
 
-
-
+  cypress-run:
+    needs: deploy
+    name: E2E Chrome & Firefox & Report Generation
+    runs-on: ubuntu-18.04
+    # Cypress Docker image with Chrome v89 & Firefox v86 pre-installed
+    container:
+      image: cypress/browsers:node14.16.0-chrome89-ff86
+      # In order to run Firefox, you need to use non-root user (Firefox security restriction)
+      # magical user id 1001 matches permissions settings on the home folder
+      options: --user 1001
+    steps:
+      - uses: actions/checkout@v2
+      - name: Cache node modules
+        uses: actions/cache@v2
+        env:
+          cache-name: cache-node-modules
+        with:
+          # Maybe replace caching by action: https://github.com/bahmutov/npm-install
+          # npm cache files are stored in `~/.npm` on Linux/macOS
+          path: ~/.npm
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-build-${{ env.cache-name }}-
+            ${{ runner.os }}-build-
+            ${{ runner.os }}-
+      - uses: actions/setup-node@v2.1.2
+        with:
+          node-version: '14.15.x'
+          always-auth: true
+          registry-url: "https://npm.pkg.github.com"
+          scope: '@bfoese'
+      - name: Install Packages & Verify Cypress
+        run: |
+          npm i fsevents@latest -f --save-optional
+          npm ci
+          $(npm bin)/cypress cache path
+          $(npm bin)/cypress cache list
+          $(npm bin)/cypress verify
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GH_PKG_TOKEN }}
+      - name: E2E Chrome
+        run: npm run seed:e2e:mx-report:run -- --config baseUrl=${{ secrets.E2E_FRONTEND_URL }}/en --env locale=en,e2e-api-url=${{ secrets.E2E_API_URL }} --browser chrome
+        continue-on-error: true
+      - name: E2E Firefox
+        run: npm run seed:e2e:mx-report:run -- --config baseUrl=${{ secrets.E2E_FRONTEND_URL }}/de --env locale=de,e2e-api-url=${{ secrets.E2E_API_URL }} --browser firefox
+        continue-on-error: true
+      - name: Generate report
+        run: npm run seed:e2e:mx-report:gen
+      - name: Deploy report page
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          publish_branch: gh-pages
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./projects/seed-sharing-app/cypress/public
+          destination_dir: auto-deploy
+          user_name: 'github-actions[bot]'
+          user_email: 'github-actions[bot]@users.noreply.github.com'
