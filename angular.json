@@ -346,7 +346,7 @@
                 "glob": "**/*",
                 "input": "./node_modules/@bfoese/eg-ui-fonts/dist/assets",
                 "output": "/assets"
-              }
+              },
             ],
             "styles": [
               "projects/seed-sharing-app/src/app/style/reset/_global.styles.scss",
@@ -447,7 +447,9 @@
                   "maximumWarning": "6kb",
                   "maximumError": "10kb"
                 }
-              ]
+              ],
+              "serviceWorker": true,
+              "ngswConfigPath": "projects/seed-sharing-app/ngsw-config.json"
             }
           }
         },
@@ -508,7 +510,7 @@
             "karmaConfig": "projects/seed-sharing-app/karma.conf.js",
             "assets": [
               "projects/seed-sharing-app/src/favicon.ico",
-              "projects/seed-sharing-app/src/assets"
+              "projects/seed-sharing-app/src/assets",
             ],
             "styles": [
               "projects/seed-sharing-app/src/styles.scss"
