@@ -739,46 +739,6 @@
         }
       }
     },
-    "cypress-mx-report": {
-      "projectType": "library",
-      "root": "projects/cypress-mx-report",
-      "sourceRoot": "projects/cypress-mx-report/src",
-      "prefix": "lib",
-      "architect": {
-        "build": {
-          "builder": "@angular-devkit/build-angular:ng-packagr",
-          "options": {
-            "tsConfig": "projects/cypress-mx-report/tsconfig.lib.json",
-            "project": "projects/cypress-mx-report/ng-package.json"
-          },
-          "configurations": {
-            "production": {
-              "tsConfig": "projects/cypress-mx-report/tsconfig.lib.prod.json"
-            }
-          }
-        },
-        "test": {
-          "builder": "@angular-devkit/build-angular:karma",
-          "options": {
-            "main": "projects/cypress-mx-report/src/test.ts",
-            "tsConfig": "projects/cypress-mx-report/tsconfig.spec.json",
-            "karmaConfig": "projects/cypress-mx-report/karma.conf.js"
-          }
-        },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": [
-              "projects/cypress-mx-report/tsconfig.lib.json",
-              "projects/cypress-mx-report/tsconfig.spec.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
-          }
-        }
-      }
-    },
     "eg-e2e-api": {
       "projectType": "library",
       "root": "projects/eg-e2e-api",
