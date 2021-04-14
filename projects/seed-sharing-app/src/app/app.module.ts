@@ -2,6 +2,7 @@ import { Inject, LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ServiceWorkerModule } from '@angular/service-worker';
+import { InMemoryCache } from '@apollo/client/core';
 import { EG_I18N_CONFIG } from '@eg/common/src/eg/i18n';
 import { EG_PRODUCT, EgProduct } from '@eg/common/src/eg/injectors/eg-product';
 import { AntdI18nModule, AntdI18nService } from '@eg/common/src/lib/antd';
@@ -9,6 +10,9 @@ import {
   ApiConfigurationParams,
   EdibleGardenApiModule
 } from '@eg/edible-garden-api/src/public-api';
+
+import { APOLLO_OPTIONS } from 'apollo-angular';
+import { HttpLink } from 'apollo-angular/http';
 
 import { environment } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
@@ -37,9 +41,22 @@ import { CountryCodeDataService } from './service/country-code-data.service';
     AntdI18nModule, // must be the last entry,
   ],
   providers: [
+    CountryCodeDataService,
     { provide: EG_PRODUCT, useValue: { brandName: 'Krautland', productName: 'Keimgut' } as EgProduct },
     { provide: EG_I18N_CONFIG, useValue: SEED_I18N_CONFIG },
-    CountryCodeDataService
+    {
+      provide: APOLLO_OPTIONS,
+      useFactory: (httpLink: HttpLink) => {
+        return {
+          cache: new InMemoryCache({
+          }),
+          link: httpLink.create({
+            uri: ` ${environment.apiRootUrlEdibleGarden}/edible-garden/graphql`,
+          }),
+        };
+      },
+      deps: [HttpLink],
+    },
 
   ],
   bootstrap: [AppComponent]

@@ -53,6 +53,17 @@ possible. The approach for this is the following:
 <li>Another, I think more flexible, solution is to use plain old IMAP to fetch the emails from the test account. The benefit compared to the OAuth solution is, that you can code the solution and it can be integrated into the CI pipeline without requiring manual interaction to grant permissions in an OAuth consent screen.</li>
 </ul>
 
+### GraphQL
+
+#### Add GraphQL support to Angular workspace
+<ul>
+<li>Install Apollo Angular: https://apollo-angular.com/docs/get-started - Using the Angular Schematic was not possible. Error said that `tsconfig.base.json` is missing, which was removed from Angular in version 11. In the end I followed the guide to install without Angular Schematics.</li>
+<li>Install GraphQL Codegen Tools: https://www.graphql-code-generator.com/docs/getting-started/installation</li>
+<li>Run `npx graphql-codegen init` - This will start an interactive dialog to help you set everything up. In a multi-project Angular workspace you need to slightly adapt the changes afterwards according to your workspace structure.</li>
+<li>Define a script in `package.json` to concurrently start the Angular app and the GQL codegen tool</li>
+<li>Based on the path of the GraphQL endpoint, adaptions may be necessary to ensure that the authorization header will be sent to that endpoint too and NGINX reverse proxy is configured to handle the endpoint.</li>
+</ul>
+
 ### Nginx
 
 This project uses Nginx server in production. Main reason is, that a reverse

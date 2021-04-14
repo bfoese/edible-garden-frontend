@@ -13,6 +13,7 @@
     "experimentalDecorators": true,
     "moduleResolution": "node",
     "importHelpers": true,
+    "allowSyntheticDefaultImports": true,
     "target": "es2015",
     "module": "es2020",
     "lib": [
@@ -47,6 +48,10 @@
       "@eg-ui-dynamic-icons": [
         "dist/eg-ui-dynamic-icons/eg-ui-dynamic-icons",
         "dist/eg-ui-dynamic-icons"
+      ],
+      "@eg-seed/gql/*": [
+        "projects/seed-sharing-app/src/app/graphql-gen/*",
+        "projects/seed-sharing-app/src/app/graphql-gen/"
       ],
       "@eg-seed/core/*": [
         "projects/seed-sharing-app/src/app/core/*",
