@@ -26,11 +26,6 @@
             "assets": [
               "projects/edible-garden-app/src/favicon.ico",
               "projects/edible-garden-app/src/assets/**/*",
-              {
-                "glob": "**/*",
-                "input": "./node_modules/@ant-design/icons-angular/src/inline-svg/",
-                "output": "/assets/"
-              }
             ],
             "styles": [
               "projects/edible-garden-app/src/theme.less",
