@@ -24,7 +24,7 @@ RUN npm config set @bfoese:registry https://npm.pkg.github.com/ && npm config se
 # Copy the rest of the files
 COPY . ./
 # If --prod is present, Angular will apply it first
-RUN node_modules/.bin/ng build --configuration=${NG_BUILD_CONFIG} --prod && npm prune --production
+RUN node_modules/.bin/ng build --configuration=${NG_BUILD_CONFIG} --prod && npm run preload:fonts -- --dist /usr/src/app/dist/seed-sharing-app && npm prune --production
 
 
 # Create a second stage to make this a multi stage build: only the final build
