@@ -15,6 +15,7 @@
   },
   "scripts": {
     "ng": "ng",
+    "preload:fonts": "node ./projects/scripts/preload-fonts.js",
     "start:dev:http": "ng serve --configuration=lang-en,http",
     "start:dev": "ng serve --configuration=lang-en --hmr",
     "start:dev:gql": "run-p start:dev seed:gql:gen:watch",
@@ -23,6 +24,7 @@
     "start:prod": "ng serve --configuration=production",
     "start:dev:nginx": "ng serve --configuration=dev-nginx",
     "build": "ng build",
+    "postbuild": "npm run preload:fonts -- --dist dist/seed-sharing-app",
     "test": "ng test",
     "lint": "ng lint && npm run style:lint",
     "e2e": "ng e2e",
@@ -109,6 +111,7 @@
     "@typescript-eslint/eslint-plugin": "4.3.0",
     "@typescript-eslint/parser": "4.3.0",
     "codelyzer": "^6.0.0",
+    "commander": "^2.20.3",
     "commitizen": "^4.2.2",
     "cross-env": "^7.0.3",
     "cypress": "6.7.0",

@@ -25,7 +25,7 @@
             "aot": true,
             "assets": [
               "projects/edible-garden-app/src/favicon.ico",
-              "projects/edible-garden-app/src/assets/**/*",
+              "projects/edible-garden-app/src/assets/**/*"
             ],
             "styles": [
               "projects/edible-garden-app/src/theme.less",
@@ -335,13 +335,9 @@
             "i18nMissingTranslation": "warning",
             "assets": [
               "projects/seed-sharing-app/src/favicon.ico",
-              {"glob": "**/*", "input": "projects/seed-sharing-app/src/assets", "output": "/assets/"},
-              "projects/seed-sharing-app/src/manifests",
-              {
-                "glob": "**/*",
-                "input": "./node_modules/@bfoese/eg-ui-fonts/dist/assets",
-                "output": "/assets"
-              },
+              "projects/seed-sharing-app/src/assets",
+              "projects/seed-sharing-app/src/manifests"
+
             ],
             "styles": [
               "projects/seed-sharing-app/src/app/style/reset/_global.styles.scss",
@@ -505,7 +501,7 @@
             "karmaConfig": "projects/seed-sharing-app/karma.conf.js",
             "assets": [
               "projects/seed-sharing-app/src/favicon.ico",
-              "projects/seed-sharing-app/src/assets",
+              "projects/seed-sharing-app/src/assets"
             ],
             "styles": [
               "projects/seed-sharing-app/src/styles.scss"
