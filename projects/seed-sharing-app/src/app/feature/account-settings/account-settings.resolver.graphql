@@ -1,0 +1,12 @@
+query AccountSettingsResolver {
+  accountSettings {
+    userId
+    username
+    email
+    preferredLocale
+    address {
+      line1
+      city
+    }
+  }
+}

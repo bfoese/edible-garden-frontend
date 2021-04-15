@@ -1,0 +1,12 @@
+overwrite: true
+schema: "https://localhost:3001/graphql"
+documents: "C:/workspace/edible-garden-frontend/projects/seed-sharing-app/src/**/*.graphql"
+generates:
+  projects/seed-sharing-app/src/app/graphql-gen/eg-graphql.ts:
+    plugins:
+      - "typescript"
+      - "typescript-operations"
+      - "typescript-apollo-angular"
+  ./projects/seed-sharing-app/src/app/graphql-gen/eg-graphql.schema.json:
+    plugins:
+      - "introspection"
