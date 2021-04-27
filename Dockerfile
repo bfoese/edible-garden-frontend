@@ -24,7 +24,7 @@ RUN npm config set @bfoese:registry https://npm.pkg.github.com/ && npm config se
 # Copy the rest of the files
 COPY . ./
 # If --prod is present, Angular will apply it first
-RUN node_modules/.bin/ng build --configuration=${NG_BUILD_CONFIG} --prod && npm run preload:fonts -- --dist /usr/src/app/dist/seed-sharing-app && npm prune --production
+RUN npm run build -- --configuration=${NG_BUILD_CONFIG} --prod && npm prune --production
 
 
 # Create a second stage to make this a multi stage build: only the final build
@@ -42,6 +42,7 @@ FROM nginx:1.19.6
 # directory (see nginx/default.conf file)
 COPY --from=builder /usr/src/app/dist/seed-sharing-app /usr/share/nginx/html
 
+COPY nginx/prod/default.conf /etc/nginx/conf.d/security_headers.conf
 COPY nginx/prod/default.conf /etc/nginx/conf.d/default.conf
 COPY nginx/prod/nginx.conf /etc/nginx/nginx.conf
 COPY projects/seed-sharing-app/src/static/html /usr/share/nginx/html

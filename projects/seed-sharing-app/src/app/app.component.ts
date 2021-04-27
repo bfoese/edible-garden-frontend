@@ -91,6 +91,6 @@ export class AppComponent implements OnInit {
    * configuration.
    */
   private addWebManifestLink(): void {
-    document.head.innerHTML += `<link rel="manifest" href="manifests/manifest.${this.localeId}.json">`;
+    document.head.innerHTML += `<link rel="manifest" href="manifests/manifest.${this.localeId}.webmanifest">`;
   }
 }

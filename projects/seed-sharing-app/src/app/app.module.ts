@@ -1,7 +1,6 @@
 import { Inject, LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ServiceWorkerModule } from '@angular/service-worker';
 import { InMemoryCache } from '@apollo/client/core';
 import { EG_I18N_CONFIG } from '@eg/common/src/eg/i18n';
 import { EG_PRODUCT, EgProduct } from '@eg/common/src/eg/injectors/eg-product';
@@ -32,12 +31,12 @@ import { CountryCodeDataService } from './service/country-code-data.service';
 
     CoreModule.forRoot(),
     AppRoutingModule,
-    ServiceWorkerModule.register('./ngsw-worker.js', {
-      enabled: environment.production,
-      // Register the ServiceWorker as soon as the app is stable
-      // or after 30 seconds (whichever comes first).
-      registrationStrategy: 'registerWhenStable:30000'
-    }),
+    // ServiceWorkerModule.register('./ngsw-worker.js', {
+    //   enabled: environment.production,
+    //   // Register the ServiceWorker as soon as the app is stable
+    //   // or after 30 seconds (whichever comes first).
+    //   registrationStrategy: 'registerWhenStable:30000'
+    // }),
     AntdI18nModule, // must be the last entry,
   ],
   providers: [

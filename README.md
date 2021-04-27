@@ -79,6 +79,20 @@ Heroku Nginx Docker example: https://github.com/rjoonas/heroku-docker-nginx-exam
 TODO Brotli: https://github.com/google/ngx_brotli/issues/89#issuecomment-761929582
 
 
+#### NGINX add-header Gotcha
+We usually add the headers which we want to be common for all the location
+blocks in the server block of the config. But beware that these headers will not
+get applied when you add any header inside a location block.
+> http://nginx.org/en/docs/http/ngx_http_headers_module.html#add_header There
+> could be several add_header directives. These directives are inherited from
+> the previous level if and only if there are no add_header directives defined
+> on the current level.
+
+Make sure you either duplicate the necessary header blocks or have them written
+in a separate `.conf` file and import it in every location block.
+
+
+
 ### i18n Localization
 
 To be able to use AOT, we use one build per language. The languages to be built
