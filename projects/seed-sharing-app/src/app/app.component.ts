@@ -4,13 +4,14 @@ import {
   HostBinding,
   Inject,
   LOCALE_ID,
+  OnDestroy,
   OnInit
 } from '@angular/core';
 import { BREAKPOINT } from '@bfoese/eg-ui-models';
 import { EgAuthFacadeService } from '@eg/common/src/eg/auth';
 import { EnumUtils } from '@eg/common/src/lib/utils/enum/enum.utils';
 
-import { combineLatest } from 'rxjs';
+import { combineLatest, Subscription } from 'rxjs';
 
 import { AuthenticatedUserGuard } from './core/auth/authenticated-user.guard';
 import { ConfigurationService } from './core/configuration.service';
@@ -24,11 +25,13 @@ import { UrlResolver } from './core/url.resolver';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit, OnDestroy {
   @HostBinding('class') classBinding = '';
 
   // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
   private element: HTMLElement = this.elementRef.nativeElement;
+
+  private subscription$ = new Subscription();
 
   public constructor(
     private elementRef: ElementRef,
@@ -44,14 +47,18 @@ export class AppComponent implements OnInit {
   public ngOnInit(): void {
     this.urlResolver.resolve();
 
-    combineLatest([
+    this.subscription$.add(combineLatest([
       this.configurationService.app$,
       this.breakpointService.active$
-    ]).subscribe(([app, breakpoint]) => this.updateAppStyles(app, breakpoint));
+    ]).subscribe(([app, breakpoint]) => this.updateAppStyles(app, breakpoint)));
 
     this.breakpointService.init(this.element);
-    this.authService.refreshAuthToken().subscribe();
+    this.subscription$.add(this.authService.refreshAuthToken().subscribe());
     this.addWebManifestLink();
+  }
+
+  public ngOnDestroy(): void {
+    this.subscription$.unsubscribe();
   }
 
   private updateAppStyles(
